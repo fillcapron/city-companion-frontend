@@ -1,3 +1,4 @@
 export const environment = {
-    production: true
+    production: true,
+    authApi: 'https://city-companion.herokuapp.com/auth/'
   };
