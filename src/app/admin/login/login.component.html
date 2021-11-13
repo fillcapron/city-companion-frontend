@@ -1,0 +1,36 @@
+<div class="login-field mt-5">
+  <mat-card>
+    <h3>Войти в панель администратора</h3>
+    <form class="example-form" [formGroup]="authForm">
+
+      <mat-form-field class="login-field__email" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email" placeholder="Введите email">
+        <mat-error
+          *ngIf="authForm.controls['email'].hasError('email') && !authForm.controls['email'].hasError('required')">
+          Пожалуйста введите правильный email
+        </mat-error>
+        <mat-error *ngIf="authForm.controls['email'].hasError('required')">
+          Email <strong>обязателен</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="login-field__password" appearance="fill">
+        <mat-label>Password</mat-label>
+        <input [type]="hide ? 'password' : 'text' " matInput formControlName="password" placeholder="Введите пароль">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error
+          *ngIf="authForm.controls['password'].hasError('minlength') && !authForm.controls['password'].hasError('required')">
+          Пароль не может быть менее {{authForm.controls['password'].errors?.minlength.requiredLength }} символов
+        </mat-error>
+        <mat-error *ngIf="authForm.controls['password'].hasError('required')">
+          Password <strong>обязателен</strong>
+        </mat-error>
+      </mat-form-field>
+    </form>
+    <button [disabled]="authForm.invalid" mat-raised-button color="warn" (click)="login()">Войти</button>
+  </mat-card>
+</div>

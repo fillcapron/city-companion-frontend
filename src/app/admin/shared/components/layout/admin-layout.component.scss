@@ -1,0 +1,14 @@
+.header-toolbar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    a {
+        color: white;
+    }
+    @media (max-width: 320px) {
+        align-items: center;
+        justify-content: center;
+        height: 100px;
+        flex-direction: column;
+    }
+}

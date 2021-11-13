@@ -1,0 +1,13 @@
+<mat-toolbar color="primary" class="header-toolbar">
+  <span>Административная панель</span>
+  <div>
+  <a routerLink="" routerLinkActive="active">
+    <button mat-button><span>Перейти на сайт</span>
+    </button>
+  </a>
+  <ng-container *ngIf="authService.isAuthenticated()">
+  <button mat-raised-button color="warn" (click)="logout()">Выйти</button>
+</ng-container>
+</div>
+</mat-toolbar>
+<router-outlet></router-outlet>

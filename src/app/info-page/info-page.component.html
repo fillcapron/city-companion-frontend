@@ -1,0 +1,18 @@
+<div class="container">
+    <ya-map 
+    [center]="[56.2414, 43.4554]"
+    (ready)="onMapReady($event)"
+    [state]="mapState"
+    >
+    <ya-placemark
+      *ngFor="let placemark of placemarks"
+      [geometry]="placemark.geometry"
+      [properties]="placemark.properties"
+      [options]="placemark.options"
+    ></ya-placemark>
+    </ya-map>
+</div>
+<ng-container *ngIf="map">
+    <button (click)="setMarks()">Change center</button>
+    <button (click)="setZoom()">Change zoom</button>
+</ng-container>

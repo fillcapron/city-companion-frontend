@@ -1,0 +1,9 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" opened>
+    <app-menu-list [menu]="menu"></app-menu-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="container">
+    <router-outlet>
+    </router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

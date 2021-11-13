@@ -1,0 +1,25 @@
+<div>
+  <div class="button-close">
+    <button mat-icon-button (click)="close()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+  <form #formCategory="ngForm">
+    <div class="input-group" name="category">
+      <mat-form-field appearance="fill">
+        <mat-label>Название</mat-label>
+        <input matInput name="name" [(ngModel)]="category.name" [disabled]="isDisabledField">
+      </mat-form-field>
+    </div>
+  </form>
+  <div class="button-group">
+    <ng-container *ngIf="isReading && isDisabledField else read">
+      <button mat-stroked-button color="basic" (click)="reading()">Изменить</button>
+      <button mat-raised-button color="warn" (click)="deleting()">Удалить</button>
+    </ng-container>
+  </div>
+  <ng-template #read>
+    <button [disabled]="formCategory.invalid" mat-raised-button color="accent"
+      (click)="submit(formCategory)">Отправить</button>
+  </ng-template>
+</div>

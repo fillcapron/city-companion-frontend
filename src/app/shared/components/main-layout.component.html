@@ -1,0 +1,10 @@
+<mat-toolbar color="warn" class="toolbar">
+    <a routerLink="" routerLinkActive="active"><button mat-button>Главная</button></a>
+    <button mat-button [matMenuTriggerFor]="belowMenu">Категории</button>
+    <mat-menu #belowMenu="matMenu" yPosition="below">
+      <button mat-menu-item><a routerLink="/info">Категория 1</a></button>
+      <button mat-menu-item><a routerLink="/admin">Адмминка</a></button>
+    </mat-menu>
+    <span class="example-spacer"></span>
+</mat-toolbar>
+<router-outlet></router-outlet>

@@ -1,0 +1,9 @@
+.nav-menu {
+  width: 240px;
+  &__text {
+      margin-left: 10px;
+  }
+}
+.active {
+    background-color: #3f51b526;
+}

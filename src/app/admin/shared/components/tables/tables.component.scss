@@ -1,0 +1,15 @@
+table {
+  width: 100%;
+}
+.table-row:hover {
+  background: whitesmoke;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:0 10px 0 10px;
+  & .filter {
+    width: 300px;
+  }
+}

@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.main-input {
+    width: 100%;
+}
+
+.mt-5 {
+    margin-top: 50px;
+}

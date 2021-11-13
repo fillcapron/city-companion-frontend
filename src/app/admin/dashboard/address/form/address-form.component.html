@@ -1,0 +1,49 @@
+<div>
+  <div class="button-close">
+    <button mat-icon-button (click)="close()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+  <form #formAddress="ngForm">
+    <div class="input-group" name="address">
+      <mat-form-field appearance="fill">
+        <mat-label>Страна</mat-label>
+        <input matInput name="country" [(ngModel)]="address.country" [disabled]="isDisabledField">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Регион</mat-label>
+        <input matInput name="region" [(ngModel)]="address.region" [disabled]="isDisabledField">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Город</mat-label>
+        <input matInput name="city" [(ngModel)]="address.city" [disabled]="isDisabledField">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Улица</mat-label>
+        <input matInput name="street" [(ngModel)]="address.street" [disabled]="isDisabledField">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Дом</mat-label>
+        <input matInput name="house" [(ngModel)]="address.house" [disabled]="isDisabledField">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Долгота</mat-label>
+        <input matInput name="latitude" [(ngModel)]="address.latitude" [disabled]="isDisabledField">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Широта</mat-label>
+        <input matInput name="longitude" [(ngModel)]="address.longitude" [disabled]="isDisabledField">
+      </mat-form-field>
+    </div>
+  </form>
+  <div class="button-group">
+    <ng-container *ngIf="isReading && isDisabledField else read">
+      <button mat-stroked-button color="basic" (click)="reading()">Изменить</button>
+      <button mat-raised-button color="warn" (click)="deleting()">Удалить</button>
+    </ng-container>
+  </div>
+  <ng-template #read>
+    <button [disabled]="formAddress.invalid" mat-raised-button color="accent"
+      (click)="submit(formAddress)">Отправить</button>
+  </ng-template>
+</div>

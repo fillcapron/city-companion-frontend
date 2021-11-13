@@ -1,0 +1,11 @@
+
+.search-block{
+    margin-top: 50px;
+    &__input {
+        display: flex;
+    }
+}
+.search-button {
+    width: 100px;
+    height: 50px;
+}
