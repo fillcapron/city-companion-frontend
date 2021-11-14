@@ -19,5 +19,10 @@ export interface EventsForm {
     submit: (T: any, R?: any) => void,
     deleting: () => void,
     reading: () => void,
-    close: () => void
+    close: (T: any) => void
+}
+
+export interface IMessage {
+    message: string,
+    error?: boolean
 }

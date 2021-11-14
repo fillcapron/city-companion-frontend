@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Categories } from '../interface';
+import { IMessage } from 'src/app/admin/shared/interface';
 
 @Injectable({
     providedIn: 'root',
@@ -15,15 +16,15 @@ export class CategoryService {
         return this.http.get<Categories[]>(this.url);
     }
 
-    public createCategory(cat_name: string): Observable<Categories> {
-        return this.http.post<Categories>(this.url, cat_name )
+    public createCategory(cat_name: string): Observable<IMessage> {
+        return this.http.post<IMessage>(this.url, cat_name )
     }
 
-    public deleteCategory(id: number | null): Observable<{}> {
-        return this.http.delete(this.url + id );
+    public deleteCategory(id: number | null): Observable<IMessage> {
+        return this.http.delete<IMessage>(this.url + id );
     }
 
-    public updateCategory(dto: Categories): Observable<Categories> {
-        return this.http.patch<Categories>(this.url, dto);
+    public updateCategory(dto: Categories): Observable<IMessage> {
+        return this.http.patch<IMessage>(this.url, dto);
     }
 }

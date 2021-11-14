@@ -40,27 +40,24 @@ export class DialogCategoryComponent implements OnInit, EventsForm {
         if (this.isReading) {
             this.serviceCategory.updateCategory({ id: this.category.id, name: formCategory.value.name }).subscribe(
                 (res) => {
-                    console.log(res);
-                    this.close();
+                    this.dialogRef.close(res?.message);
                 },
-                (err) => console.log(err));
+                (err) => this.dialogRef.close(err));
         } else {
             this.serviceCategory.createCategory(formCategory.value).subscribe(
                 (category) => {
-                    console.log(category);
-                    this.close();
+                    this.dialogRef.close(category?.message);
                 },
-                (err) => console.log(err)
+                (err) => this.dialogRef.close(err)
             );
         }
     }
 
     deleting(): void {
         this.serviceCategory.deleteCategory(this.category.id).subscribe((res) => {
-            console.log(res);
-            this.close();
+            this.dialogRef.close(res?.message);
         },
-            (err) => console.log(err));
+            (err) => this.dialogRef.close(err));
     }
 
     close(): void {

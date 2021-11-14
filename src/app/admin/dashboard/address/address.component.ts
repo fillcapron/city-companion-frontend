@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { AddressService } from 'src/app/shared/services/address.service';
 import { Address } from 'src/app/shared/interface';
 import { DialogAddressComponent } from './form/address-form.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
     selector: 'app-table-address',
@@ -54,6 +55,12 @@ export class TableGeneratedColumnsAddress implements OnInit {
             cell: (element: Address) => `${element.longitude}`,
         },
     ];
+
+    @ViewChild(MatPaginator, { static: false }) set paginator(value: MatPaginator) {
+        if (this.data) {
+            this.data.paginator = value;
+        }
+    }
 
     data = new MatTableDataSource();
     displayedColumns = this.columns.map(c => c.columnDef);

@@ -8,7 +8,8 @@ import { MatInputModule } from "@angular/material/input";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSelectModule } from "@angular/material/select";
 import { MatTableModule } from "@angular/material/table";
-import { RouterModule, Routes } from "@angular/router";
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 import { DialogUserComponent } from "./form/user-form.component";
 import { TableGeneratedColumnsUsers } from "./users.component";
 
@@ -28,7 +29,8 @@ import { TableGeneratedColumnsUsers } from "./users.component";
         MatProgressSpinnerModule,
         MatTableModule,
         MatIconModule,
-        MatSelectModule
+        MatSelectModule,
+        MatPaginatorModule
     ],
 })
 export class UsersModule { }

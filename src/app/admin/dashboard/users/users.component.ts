@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { User } from '../../shared/interface';
 import { UserService } from '../../shared/services/user.service';
@@ -29,6 +30,12 @@ export class TableGeneratedColumnsUsers implements OnInit {
             cell: (element: User) => `${element.email}`,
         }
     ];
+
+    @ViewChild(MatPaginator, { static: false }) set paginator(value: MatPaginator) {
+        if (this.data) {
+            this.data.paginator = value;
+        }
+    }
 
     data = new MatTableDataSource<User>();
     displayedColumns = this.columns.map(c => c.columnDef);

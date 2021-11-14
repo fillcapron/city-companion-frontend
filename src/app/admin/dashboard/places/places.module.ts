@@ -9,6 +9,8 @@ import { MatInputModule } from "@angular/material/input";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSelectModule } from "@angular/material/select";
 import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 import { DialogPlaceComponent } from "./form/place-form.component";
 import { TableGeneratedColumnsPlaces } from "./places.component";
 
@@ -29,7 +31,8 @@ import { TableGeneratedColumnsPlaces } from "./places.component";
         MatProgressSpinnerModule,
         MatTableModule,
         MatIconModule,
-        MatSelectModule
+        MatSelectModule,
+        MatPaginatorModule
     ],
 })
 export class PlacesModule { }

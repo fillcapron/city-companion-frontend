@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Place } from 'src/app/shared/interface';
 import { PlaceService } from 'src/app/shared/services/places.service';
@@ -39,11 +40,6 @@ export class TableGeneratedColumnsPlaces implements OnInit {
             cell: (element: any) => `${element.address?.city + ' ' + element.address?.street + ' ' + element.address?.house}`,
         },
         {
-            columnDef: 'rating',
-            header: 'Рейтинг',
-            cell: (element: Place) => `${element.rating}`,
-        },
-        {
             columnDef: 'images',
             header: 'Изображения',
             cell: (element: Place) => `${element.images}`,
@@ -59,6 +55,13 @@ export class TableGeneratedColumnsPlaces implements OnInit {
             cell: (element: Place) => `${element.website}`,
         }
     ];
+
+    @ViewChild(MatPaginator, { static: false }) set paginator(value: MatPaginator) {
+        if (this.data) {
+            this.data.paginator = value;
+        }
+    }
+
     data = new MatTableDataSource<Place>();
     displayedColumns = this.columns.map(c => c.columnDef);
 

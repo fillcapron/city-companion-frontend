@@ -1,9 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { Categories } from 'src/app/shared/interface';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogCategoryComponent } from './form/category-form.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
     selector: 'app-table-categories',
@@ -30,14 +33,21 @@ export class TableGeneratedColumnsCategories implements OnInit {
         }
     ];
 
-    data = new MatTableDataSource();
+    @ViewChild(MatPaginator, { static: false }) set paginator(value: MatPaginator) {
+        if (this.data) {
+            this.data.paginator = value;
+        }
+    }
+
+    data = new MatTableDataSource<Categories>();
     displayedColumns = this.columns.map(c => c.columnDef);
 
     constructor(private categoryService: CategoryService,
-        private dialog: MatDialog) { }
+        private dialog: MatDialog,
+        private _snackBar: MatSnackBar) { }
 
     ngOnInit() {
-        this.categoryService.getCategories().subscribe(categories => {
+        this.categoryService.getCategories().subscribe((categories) => {
             this.data.data = categories;
         });
     }
@@ -53,7 +63,13 @@ export class TableGeneratedColumnsCategories implements OnInit {
             data: elem === 'add' ? {} : elem
         });
 
-        dialogRef.afterClosed().subscribe(() => {
+        dialogRef.afterClosed().subscribe((message) => {
+
+            if (message) {
+                this._snackBar.open(message, 'Закрыть', {
+                    duration: 3000,
+                });
+            }
             const res = this.categoryService.getCategories().subscribe((categories) => {
                 this.data.data = categories;
             });
