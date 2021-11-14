@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { User } from '../../shared/interface';
 import { UserService } from '../../shared/services/user.service';
@@ -40,7 +41,7 @@ export class TableGeneratedColumnsUsers implements OnInit {
     data = new MatTableDataSource<User>();
     displayedColumns = this.columns.map(c => c.columnDef);
 
-    constructor(private userService: UserService, private dialog: MatDialog) { }
+    constructor(private userService: UserService, private dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
     ngOnInit() {
         this.userService.getUsers().subscribe(users => {
@@ -59,7 +60,14 @@ export class TableGeneratedColumnsUsers implements OnInit {
             data: elem === 'add' ? {} : elem
         });
 
-        dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe(message => {
+
+            if (message) {
+                this._snackBar.open(message, 'Закрыть', {
+                    duration: 3000,
+                });
+            }
+
             this.userService.getUsers().subscribe(users => {
                 this.data.data = users;
             });

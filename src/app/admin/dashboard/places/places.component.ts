@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Place } from 'src/app/shared/interface';
 import { PlaceService } from 'src/app/shared/services/places.service';
@@ -67,7 +68,8 @@ export class TableGeneratedColumnsPlaces implements OnInit {
 
     constructor(
         private placeService: PlaceService,
-        public dialog: MatDialog) { }
+        public dialog: MatDialog,
+        private _snackBar: MatSnackBar) { }
 
     ngOnInit() {
         this.placeService.getPlaces().subscribe(places => {
@@ -87,7 +89,14 @@ export class TableGeneratedColumnsPlaces implements OnInit {
             data: elem === 'add' ? {} : elem
         });
 
-        dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe(message => {
+
+            if (message) {
+                this._snackBar.open(message, 'Закрыть', {
+                    duration: 3000,
+                });
+            }
+
             this.placeService.getPlaces().subscribe(places => {
                 this.data.data = places;
             });

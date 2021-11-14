@@ -5,11 +5,12 @@ import { Address } from 'src/app/shared/interface';
 import { DialogAddressComponent } from './form/address-form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-table-address',
-      styleUrls: ['../../shared/components/tables/tables.component.scss'],
-      templateUrl: '../../shared/components/tables/tables.component.html'
+    styleUrls: ['../../shared/components/tables/tables.component.scss'],
+    templateUrl: '../../shared/components/tables/tables.component.html'
 })
 export class TableGeneratedColumnsAddress implements OnInit {
 
@@ -65,7 +66,7 @@ export class TableGeneratedColumnsAddress implements OnInit {
     data = new MatTableDataSource();
     displayedColumns = this.columns.map(c => c.columnDef);
 
-    constructor(private addressService: AddressService, public dialog: MatDialog) { }
+    constructor(private addressService: AddressService, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
     ngOnInit() {
         this.addressService.getAllAddress().subscribe(result => {
@@ -86,8 +87,17 @@ export class TableGeneratedColumnsAddress implements OnInit {
             data: elem === 'add' ? {} : elem
         });
 
-        dialogRef.afterClosed().subscribe(result => {
-            this.addressService.getAllAddress();
+        dialogRef.afterClosed().subscribe(message => {
+
+            if (message) {
+                this._snackBar.open(message, 'Закрыть', {
+                    duration: 3000,
+                });
+            }
+
+            this.addressService.getAllAddress().subscribe(result => {
+                this.data.data = result;
+            });
         });
     }
 }

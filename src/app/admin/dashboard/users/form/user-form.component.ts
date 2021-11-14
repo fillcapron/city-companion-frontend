@@ -41,24 +41,20 @@ export class DialogUserComponent implements OnInit, EventsForm {
         if (this.isReading) {
             this.serviceUser.updateUser({ ...formUser.value, id: this.user.id }).subscribe(
                 (user) => {
-                    console.log(user);
-                    this.close();
+                    this.dialogRef.close(user?.message);
                 },
                 (err) => {
-                    console.log(err);
-                    this.close();
+                    this.dialogRef.close(err);
                 }
             )
         } else {
             this.serviceUser.createUser(formUser.value)
                 .subscribe(
                     (user) => {
-                        console.log(user);
-                        this.close();
+                        this.dialogRef.close('Пользователь создан');
                     },
                     (err) => {
-                        console.log(err);
-                        this.close();
+                        this.dialogRef.close(err);
                     }
                 );
         }
@@ -67,12 +63,10 @@ export class DialogUserComponent implements OnInit, EventsForm {
     deleting(): void {
         this.serviceUser.deleteUser(this.user.id || null).subscribe(
             (user) => {
-                console.log(user);
-                this.close();
+                this.dialogRef.close(user?.message);
             },
             (err) => {
-                console.log(err);
-                this.close();
+                this.dialogRef.close(err);
             }
         )
     }

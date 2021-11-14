@@ -69,12 +69,10 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
         if (this.isReading) {
             this.servicePlace.updatePlace({...formPlace.value, id: this.place.id}).subscribe(
                 (place) => {
-                    console.log(place);
-                    this.close();
+                    this.dialogRef.close(place?.message);
                 },
                 (err) => {
-                    console.log(err);
-                    this.close();
+                    this.dialogRef.close(err);
                 }
             );
         } else {
@@ -84,12 +82,10 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
                 )
                 .subscribe(
                     (place) => {
-                        console.log(place);
-                        this.close();
+                        this.dialogRef.close(place?.message);
                     },
                     (err) => {
-                        console.log(err);
-                        this.close();
+                        this.dialogRef.close(err);
                     }
                 );
         }
@@ -102,12 +98,10 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
     deleting(): void {
         this.servicePlace.deletePlace(this.place.id).subscribe(
             (place) => {
-                console.log(place);
-                this.close();
+                this.dialogRef.close(place?.message);
             },
             (err) => {
-                console.log(err);
-                this.close();
+                this.dialogRef.close(err);
             }
         );
     }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Address, Place } from '../interface';
+import { IMessage } from 'src/app/admin/shared/interface';
 
 @Injectable({
     providedIn: 'root',
@@ -11,9 +12,9 @@ export class PlaceService {
 
     constructor(private http: HttpClient) { }
 
-    createPlaces(place: Place, address: Address): Observable<Place> {
+    createPlaces(place: Place, address: Address): Observable<IMessage> {
         place.address = address;
-        return this.http.post<Place>(this.url, place);
+        return this.http.post<IMessage>(this.url, place);
     }
 
     getPlaces(): Observable<Place[]> {
@@ -24,11 +25,11 @@ export class PlaceService {
         return this.http.get<Place>(this.url);
     }
 
-    updatePlace(place: Place): Observable<Place> {
-        return this.http.patch<Place>(this.url, place);
+    updatePlace(place: Place): Observable<IMessage> {
+        return this.http.patch<IMessage>(this.url, place);
     }
 
-    deletePlace(id: number | null): Observable<Place>  {
-        return this.http.delete<Place>(this.url + id);
+    deletePlace(id: number | null): Observable<IMessage>  {
+        return this.http.delete<IMessage>(this.url + id);
     }
 }
