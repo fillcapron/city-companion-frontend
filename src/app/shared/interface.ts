@@ -3,7 +3,8 @@ export interface Tags {
 }
 export interface Categories {
     id: number | null,
-    name: string
+    name: string,
+    tags?: any[]
 }
 
 export interface Place {

@@ -9,6 +9,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSelectModule } from "@angular/material/select";
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { TableGeneratedColumnsCategories } from "./categories.component";
 import { DialogCategoryComponent } from "./form/category-form.component";
@@ -31,7 +32,8 @@ import { DialogCategoryComponent } from "./form/category-form.component";
         MatTableModule,
         MatIconModule,
         MatSelectModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatChipsModule
     ],
 })
 export class CategoriesModule { }

@@ -11,8 +11,22 @@
         <input matInput name="name" [(ngModel)]="category.name" [disabled]="isDisabledField">
       </mat-form-field>
     </div>
+    <mat-chip-list #chipList>
+      <mat-chip *ngFor="let tag of category.tags" [selectable]="selectable"
+               [removable]="removable" (removed)="remove(tag)">
+        {{tag.name}}
+        <button matChipRemove *ngIf="removable">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+      <input placeholder="Добавить теги"
+             [matChipInputFor]="chipList"
+             [disabled]="isDisabledField"
+             [matChipInputAddOnBlur]="addOnBlur"
+             (matChipInputTokenEnd)="addTag($event)">
+    </mat-chip-list>
   </form>
-  <div class="button-group">
+  <div class="button-group mt-5">
     <ng-container *ngIf="isReading && isDisabledField else read">
       <button mat-stroked-button color="basic" (click)="reading()">Изменить</button>
       <button mat-raised-button color="warn" (click)="deleting()">Удалить</button>

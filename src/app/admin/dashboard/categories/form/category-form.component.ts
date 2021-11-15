@@ -3,8 +3,10 @@ import { NgForm } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CategoryService } from "src/app/shared/services/category.service";
 import { Categories } from "src/app/shared/interface";
-import { EventsForm } from "src/app/admin/shared/interface";
+import { EventsForm, Tag } from "src/app/admin/shared/interface";
 import { isEmptyObject } from "src/app/admin/shared/utils";
+import { MatChipInputEvent } from "@angular/material/chips";
+import { TagService } from "src/app/admin/shared/services/tag.service";
 
 @Component({
     selector: 'dialog-categories',
@@ -15,22 +17,28 @@ export class DialogCategoryComponent implements OnInit, EventsForm {
 
     isReading!: boolean;
     isDisabledField!: boolean;
+    selectable = true;
+    removable!: boolean;
+    addOnBlur = true;
 
     category: Categories = {
         id: null,
-        name: ''
+        name: '',
+        tags: []
     };
 
     constructor(
         public dialogRef: MatDialogRef<DialogCategoryComponent>,
         @Inject(MAT_DIALOG_DATA) public data: Categories,
         private serviceCategory: CategoryService,
+        private serviceTag: TagService
     ) { }
 
     ngOnInit(): void {
         this.category = Object.assign(this.category, this.data);
         if (!isEmptyObject(this.data)) {
             this.isReading = true;
+            this.removable = false;
             this.isDisabledField = true;
         }
     }
@@ -61,10 +69,32 @@ export class DialogCategoryComponent implements OnInit, EventsForm {
     }
 
     close(): void {
-        this.dialogRef.close()
+        this.dialogRef.close();
     }
 
     reading(): void {
         this.isDisabledField = false;
+        this.removable = true;
     }
+
+    addTag(event: MatChipInputEvent): void {
+        const value = (event.value || '').trim();
+        if (this.category.id && value) {
+            this.serviceTag.createTag({ name: value, categoryId: this.category.id }).subscribe(
+                (tag) => this.category.tags!.push(tag),
+                (err) => alert(err)
+            );
+        } else if(value){
+            this.category.tags!.push({name: value});
+        }
+        event.chipInput!.clear();
+    }
+
+    remove(tag: Tag): void {
+        this.serviceTag.deleteTag(tag.id).subscribe(
+            (tag) => console.log(tag?.message),
+            (err) => alert(err)
+        )
+    }
+
 }

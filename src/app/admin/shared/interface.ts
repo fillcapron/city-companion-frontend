@@ -26,3 +26,10 @@ export interface IMessage {
     message: string,
     error?: boolean
 }
+
+export interface Tag {
+    id?: number,
+    name: string,
+    categoryId?: number | null,
+    placeId?: number | null 
+}

@@ -82,8 +82,6 @@ export class TableGeneratedColumnsAddress implements OnInit {
     openFormDialog(elem: string) {
         const dialogRef = this.dialog.open(DialogAddressComponent, {
             width: '700px',
-            // height: '100%',
-            // position: { right: '0px' },
             data: elem === 'add' ? {} : elem
         });
 
