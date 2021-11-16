@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import {  Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { IMessage, Tag } from "../interface";
 
@@ -8,7 +8,7 @@ export class TagService {
 
     url: string = 'https://city-companion.herokuapp.com/tags/'
 
-    constructor(private http: HttpClient ) { }
+    constructor(private http: HttpClient) { }
 
     createTag(tag: Tag): Observable<IMessage> {
         return this.http.post<IMessage>(this.url, tag);
@@ -16,5 +16,9 @@ export class TagService {
 
     deleteTag(id: number | undefined): Observable<IMessage> {
         return this.http.delete<IMessage>(this.url + id);
+    }
+
+    createTags(tags: Tag[] | undefined): Observable<any> {
+        return this.http.post<any>(this.url + 'all', tags);
     }
 }

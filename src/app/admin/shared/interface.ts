@@ -24,12 +24,13 @@ export interface EventsForm {
 
 export interface IMessage {
     message: string,
-    error?: boolean
+    error?: boolean,
+    meta?: any
 }
 
 export interface Tag {
     id?: number,
     name: string,
-    categoryId?: number | null,
-    placeId?: number | null 
+    category?: number | null,
+    place?: number | null
 }

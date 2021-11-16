@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CategoryService } from "src/app/shared/services/category.service";
@@ -7,6 +7,7 @@ import { EventsForm, Tag } from "src/app/admin/shared/interface";
 import { isEmptyObject } from "src/app/admin/shared/utils";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { TagService } from "src/app/admin/shared/services/tag.service";
+import { switchMap } from "rxjs/operators";
 
 @Component({
     selector: 'dialog-categories',
@@ -54,6 +55,15 @@ export class DialogCategoryComponent implements OnInit, EventsForm {
         } else {
             this.serviceCategory.createCategory(formCategory.value).subscribe(
                 (category) => {
+                    if (this.category.tags?.length) {
+                        this.category.tags.map(elem => {
+                            elem.category = category.meta.id;
+                        })
+                    }
+                    this.serviceTag.createTags(this.category.tags).subscribe(
+                        (message) => console.log(message),
+                        (err) => console.log(err)
+                    )
                     this.dialogRef.close(category?.message);
                 },
                 (err) => this.dialogRef.close(err)
@@ -62,9 +72,8 @@ export class DialogCategoryComponent implements OnInit, EventsForm {
     }
 
     deleting(): void {
-        this.serviceCategory.deleteCategory(this.category.id).subscribe((res) => {
-            this.dialogRef.close(res?.message);
-        },
+        this.serviceCategory.deleteCategory(this.category.id).subscribe(
+            (res) =>  this.dialogRef.close(res?.message),
             (err) => this.dialogRef.close(err));
     }
 
@@ -80,12 +89,12 @@ export class DialogCategoryComponent implements OnInit, EventsForm {
     addTag(event: MatChipInputEvent): void {
         const value = (event.value || '').trim();
         if (this.category.id && value) {
-            this.serviceTag.createTag({ name: value, categoryId: this.category.id }).subscribe(
+            this.serviceTag.createTag({ name: value, category: this.category.id }).subscribe(
                 (tag) => this.category.tags!.push(tag),
                 (err) => alert(err)
             );
-        } else if(value){
-            this.category.tags!.push({name: value});
+        } else if (value) {
+            this.category.tags!.push({ name: value });
         }
         event.chipInput!.clear();
     }
@@ -95,6 +104,7 @@ export class DialogCategoryComponent implements OnInit, EventsForm {
             (tag) => console.log(tag?.message),
             (err) => alert(err)
         )
+        this.category.tags = this.category.tags?.filter(elem => elem.id !== tag.id);
     }
 
 }
