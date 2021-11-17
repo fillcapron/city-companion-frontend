@@ -24,5 +24,7 @@
   <ng-template #read>
     <button [disabled]="formUser.invalid" mat-raised-button color="accent"
       (click)="submit(formUser)">Отправить</button>
+      <button mat-raised-button color="warn"
+      (click)="cancel()">Отмена</button>
   </ng-template>
 </div>

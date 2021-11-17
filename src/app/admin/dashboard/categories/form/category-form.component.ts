@@ -7,7 +7,7 @@ import { EventsForm, Tag } from "src/app/admin/shared/interface";
 import { isEmptyObject } from "src/app/admin/shared/utils";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { TagService } from "src/app/admin/shared/services/tag.service";
-import { switchMap } from "rxjs/operators";
+import { map, switchMap } from "rxjs/operators";
 
 @Component({
     selector: 'dialog-categories',
@@ -18,7 +18,7 @@ export class DialogCategoryComponent implements OnInit, EventsForm {
 
     isReading!: boolean;
     isDisabledField!: boolean;
-    selectable = true;
+    selectable = false;
     removable!: boolean;
     addOnBlur = true;
 
@@ -53,27 +53,31 @@ export class DialogCategoryComponent implements OnInit, EventsForm {
                 },
                 (err) => this.dialogRef.close(err));
         } else {
-            this.serviceCategory.createCategory(formCategory.value).subscribe(
-                (category) => {
+            this.serviceCategory.createCategory(formCategory.value).pipe(
+                map((category) => {
                     if (this.category.tags?.length) {
                         this.category.tags.map(elem => {
                             elem.category = category.meta.id;
-                        })
+                        });
                     }
-                    this.serviceTag.createTags(this.category.tags).subscribe(
-                        (message) => console.log(message),
-                        (err) => console.log(err)
-                    )
-                    this.dialogRef.close(category?.message);
-                },
+                    return category;
+                }),
+                switchMap(category => {
+                    if (this.category.tags?.length) {
+                        return this.serviceTag.createTags(this.category.tags);
+                    }
+                    return category.message;
+                })
+            ).subscribe(
+                (res) => this.dialogRef.close(res),
                 (err) => this.dialogRef.close(err)
-            );
+            )
         }
     }
 
     deleting(): void {
         this.serviceCategory.deleteCategory(this.category.id).subscribe(
-            (res) =>  this.dialogRef.close(res?.message),
+            (res) => this.dialogRef.close(res?.message),
             (err) => this.dialogRef.close(err));
     }
 
@@ -107,4 +111,8 @@ export class DialogCategoryComponent implements OnInit, EventsForm {
         this.category.tags = this.category.tags?.filter(elem => elem.id !== tag.id);
     }
 
+    cancel(): void {
+        this.isDisabledField = true;
+        this.removable = false;
+    }
 }

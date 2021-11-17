@@ -64,7 +64,7 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
         }
     }
 
-    submit(formPlace: NgForm, formAddress: NgForm) {
+    submit(formPlace: NgForm, formAddress?: NgForm) {
 
         if (this.isReading) {
             this.servicePlace.updatePlace({...formPlace.value, id: this.place.id}).subscribe(
@@ -76,7 +76,7 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
                 }
             );
         } else {
-            this.serviceAddress.createAddress(formAddress.value)
+            this.serviceAddress.createAddress(formAddress?.value)
                 .pipe(
                     switchMap((value: any) => this.servicePlace.createPlaces(formPlace.value, value))
                 )
@@ -108,5 +108,9 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
 
     close(): void {
         this.dialogRef.close();
+    }
+
+    cancel(): void {
+        this.isDisabledField = true;
     }
 }

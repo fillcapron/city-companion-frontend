@@ -1,3 +1,5 @@
+import { NgForm } from "@angular/forms";
+
 export interface User {
     id?: number | null,
     name?: string,
@@ -16,10 +18,11 @@ export interface NavMenu {
 }
 
 export interface EventsForm {
-    submit: (T: any, R?: any) => void,
+    submit: (A: NgForm, B?: NgForm) => void,
     deleting: () => void,
     reading: () => void,
-    close: (T: any) => void
+    close: () => void,
+    cancel: () => void
 }
 
 export interface IMessage {

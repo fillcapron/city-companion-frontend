@@ -69,4 +69,8 @@ export class DialogAddressComponent implements OnInit, EventsForm {
     close(): void {
         this.dialogRef.close();
     }
+
+    cancel(): void {
+        this.isDisabledField = true;
+    }
 }

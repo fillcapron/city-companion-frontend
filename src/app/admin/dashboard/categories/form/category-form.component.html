@@ -13,7 +13,7 @@
     </div>
     <mat-chip-list #chipList>
       <mat-chip *ngFor="let tag of category.tags" [selectable]="selectable"
-               [removable]="removable" (removed)="remove(tag)">
+               [removable]="removable" [disabled]="isDisabledField" (removed)="remove(tag)">
         {{tag.name}}
         <button matChipRemove *ngIf="removable">
           <mat-icon>cancel</mat-icon>
@@ -35,5 +35,7 @@
   <ng-template #read>
     <button [disabled]="formCategory.invalid" mat-raised-button color="accent"
       (click)="submit(formCategory)">Отправить</button>
+      <button mat-raised-button color="warn"
+      (click)="cancel()">Отмена</button>
   </ng-template>
 </div>

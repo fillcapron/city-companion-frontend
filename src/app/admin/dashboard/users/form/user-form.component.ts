@@ -78,4 +78,8 @@ export class DialogUserComponent implements OnInit, EventsForm {
     close(): void {
         this.dialogRef.close();
     }
+
+    cancel(): void {
+        this.isDisabledField = true;
+    }
 }

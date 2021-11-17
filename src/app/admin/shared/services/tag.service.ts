@@ -6,7 +6,7 @@ import { IMessage, Tag } from "../interface";
 @Injectable({ providedIn: 'root' })
 export class TagService {
 
-    url: string = 'https://city-companion.herokuapp.com/tags/'
+    url: string = 'https://city-companion.herokuapp.com/tags'
 
     constructor(private http: HttpClient) { }
 
@@ -15,10 +15,10 @@ export class TagService {
     }
 
     deleteTag(id: number | undefined): Observable<IMessage> {
-        return this.http.delete<IMessage>(this.url + id);
+        return this.http.delete<IMessage>(`${this.url}/${id}`);
     }
 
-    createTags(tags: Tag[] | undefined): Observable<any> {
-        return this.http.post<any>(this.url + 'all', tags);
+    createTags(tags: Tag[]): Observable<any> {
+        return this.http.post<any>(`${this.url}/all/`, tags);
     }
 }
