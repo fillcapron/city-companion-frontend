@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Address } from '../interface';
-import { IMessage } from 'src/app/admin/shared/interface';
+import { ApiResponse } from 'src/app/admin/shared/interface';
 
 @Injectable({
     providedIn: 'root',
@@ -12,8 +12,8 @@ export class AddressService {
     
     constructor(private http: HttpClient) { }
 
-    createAddress(address: Address): Observable<IMessage> {
-        return this.http.post<IMessage>(this.url, address);
+    createAddress(address: Address): Observable<ApiResponse> {
+        return this.http.post<ApiResponse>(this.url, address);
     }
 
     getAddressId(address: Address): Observable<Address>{
@@ -24,11 +24,11 @@ export class AddressService {
         return this.http.get<Address[]>(this.url)
     }
 
-    deleteAddress(id: number | null): Observable<IMessage>{
-        return this.http.delete<IMessage>(this.url + id);
+    deleteAddress(id: number | null): Observable<ApiResponse>{
+        return this.http.delete<ApiResponse>(this.url + id);
     } 
 
-    updateAddress(address: Address): Observable<IMessage>{
-        return this.http.patch<IMessage>(this.url, address);
+    updateAddress(address: Address): Observable<ApiResponse>{
+        return this.http.patch<ApiResponse>(this.url, address);
     }
 }

@@ -13,14 +13,17 @@ import { MatChipsModule } from '@angular/material/chips';
 
 import { TableGeneratedColumnsCategories } from "./categories.component";
 import { DialogCategoryComponent } from "./form/category-form.component";
+import { ConfirmComponent } from "../../shared/components/confirm/confirm.component";
+import { MatDialogModule } from "@angular/material/dialog";
 
 
 @NgModule({
     declarations: [
         DialogCategoryComponent,
-        TableGeneratedColumnsCategories
+        TableGeneratedColumnsCategories,
+        ConfirmComponent
     ],
-    entryComponents: [DialogCategoryComponent],
+    entryComponents: [DialogCategoryComponent, ConfirmComponent],
     imports: [
         MatButtonModule,
         MatInputModule,
@@ -33,7 +36,8 @@ import { DialogCategoryComponent } from "./form/category-form.component";
         MatIconModule,
         MatSelectModule,
         MatPaginatorModule,
-        MatChipsModule
-    ],
+        MatChipsModule,
+        MatDialogModule 
+    ]
 })
 export class CategoriesModule { }

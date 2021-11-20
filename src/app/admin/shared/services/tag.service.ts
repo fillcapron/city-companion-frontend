@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { IMessage, Tag } from "../interface";
+import { ApiResponse, Tag } from "../interface";
 
 @Injectable({ providedIn: 'root' })
 export class TagService {
@@ -10,12 +10,12 @@ export class TagService {
 
     constructor(private http: HttpClient) { }
 
-    createTag(tag: Tag): Observable<IMessage> {
-        return this.http.post<IMessage>(this.url, tag);
+    createTag(tag: Tag): Observable<ApiResponse> {
+        return this.http.post<ApiResponse>(this.url, tag);
     }
 
-    deleteTag(id: number | undefined): Observable<IMessage> {
-        return this.http.delete<IMessage>(`${this.url}/${id}`);
+    deleteTag(id: number | undefined): Observable<ApiResponse> {
+        return this.http.delete<ApiResponse>(`${this.url}/${id}`);
     }
 
     createTags(tags: Tag[]): Observable<any> {

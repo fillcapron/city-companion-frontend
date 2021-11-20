@@ -25,7 +25,7 @@ export interface EventsForm {
     cancel: () => void
 }
 
-export interface IMessage {
+export interface ApiResponse {
     message: string,
     error?: boolean,
     meta?: any

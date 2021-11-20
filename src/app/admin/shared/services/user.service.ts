@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { IMessage, User } from "../interface";
+import { ApiResponse, User } from "../interface";
 import { AuthService } from "./auth.service";
 
 @Injectable({ providedIn: 'root' })
@@ -19,11 +19,11 @@ export class UserService {
         return this.auth.registration(user);
     }
 
-    deleteUser(id: number | null): Observable<IMessage>{
-        return this.http.delete<IMessage>(this.url + id);
+    deleteUser(id: number | null): Observable<ApiResponse>{
+        return this.http.delete<ApiResponse>(this.url + id);
     }
 
-    updateUser(user: User): Observable<IMessage> {
-        return this.http.patch<IMessage>(this.url, user);
+    updateUser(user: User): Observable<ApiResponse> {
+        return this.http.patch<ApiResponse>(this.url, user);
     }
 }

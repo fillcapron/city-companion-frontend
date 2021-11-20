@@ -1,0 +1,7 @@
+<mat-dialog-content>
+  <h1>{{data.msg}}</h1>
+</mat-dialog-content>
+<mat-dialog-actions class="confirm-buttons">
+  <button mat-raised-button color="warn" [mat-dialog-close]="true" (click)="accept()">{{data.btnOk}}</button>
+  <button mat-raised-button [mat-dialog-close]="false" (click)="decline()">{{data.btnCancel}}</button>
+</mat-dialog-actions>

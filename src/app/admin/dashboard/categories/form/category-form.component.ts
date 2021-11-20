@@ -7,7 +7,8 @@ import { EventsForm, Tag } from "src/app/admin/shared/interface";
 import { isEmptyObject } from "src/app/admin/shared/utils";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { TagService } from "src/app/admin/shared/services/tag.service";
-import { map, switchMap } from "rxjs/operators";
+import { switchMap } from "rxjs/operators";
+import { ConfirmDialogService } from "src/app/admin/shared/components/confirm/confirm.service";
 
 @Component({
     selector: 'dialog-categories',
@@ -32,16 +33,16 @@ export class DialogCategoryComponent implements OnInit, EventsForm {
         public dialogRef: MatDialogRef<DialogCategoryComponent>,
         @Inject(MAT_DIALOG_DATA) public data: Categories,
         private serviceCategory: CategoryService,
-        private serviceTag: TagService
+        private serviceTag: TagService,
+        private confirmDialog: ConfirmDialogService
     ) { }
 
     ngOnInit(): void {
         this.category = Object.assign(this.category, this.data);
-        if (!isEmptyObject(this.data)) {
-            this.isReading = true;
-            this.removable = false;
-            this.isDisabledField = true;
-        }
+        if (isEmptyObject(this.data)) return
+        this.isReading = true;
+        this.removable = false;
+        this.isDisabledField = true;
     }
 
     submit(formCategory: NgForm): void {
@@ -54,31 +55,32 @@ export class DialogCategoryComponent implements OnInit, EventsForm {
                 (err) => this.dialogRef.close(err));
         } else {
             this.serviceCategory.createCategory(formCategory.value).pipe(
-                map((category) => {
+                switchMap(category => {
                     if (this.category.tags?.length) {
                         this.category.tags.map(elem => {
                             elem.category = category.meta.id;
                         });
                     }
-                    return category;
-                }),
-                switchMap(category => {
-                    if (this.category.tags?.length) {
-                        return this.serviceTag.createTags(this.category.tags);
-                    }
-                    return category.message;
+                    return this.serviceTag.createTags(this.category.tags!);
                 })
             ).subscribe(
-                (res) => this.dialogRef.close(res),
+                (res) => this.dialogRef.close('Категория создана'),
                 (err) => this.dialogRef.close(err)
             )
         }
     }
 
     deleting(): void {
-        this.serviceCategory.deleteCategory(this.category.id).subscribe(
-            (res) => this.dialogRef.close(res?.message),
-            (err) => this.dialogRef.close(err));
+        this.confirmDialog.confirm('Хотите удалить запись?', 'Да', 'Нет').afterClosed().subscribe(
+            result => {
+                result ?
+                    this.serviceCategory.deleteCategory(this.category.id).subscribe(
+                        (res) => this.dialogRef.close(res?.message),
+                        (err) => this.dialogRef.close(err))
+                    :
+                    this.dialogRef.close('Отменено')
+            }
+        )
     }
 
     close(): void {
@@ -94,7 +96,7 @@ export class DialogCategoryComponent implements OnInit, EventsForm {
         const value = (event.value || '').trim();
         if (this.category.id && value) {
             this.serviceTag.createTag({ name: value, category: this.category.id }).subscribe(
-                (tag) => this.category.tags!.push(tag),
+                (tag) => tag.error ? this.category.tags!.push(tag) : null,
                 (err) => alert(err)
             );
         } else if (value) {
@@ -112,6 +114,7 @@ export class DialogCategoryComponent implements OnInit, EventsForm {
     }
 
     cancel(): void {
+        if (!this.isReading) return this.dialogRef.close('Отменено')
         this.isDisabledField = true;
         this.removable = false;
     }

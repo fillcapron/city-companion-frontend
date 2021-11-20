@@ -8,7 +8,10 @@
     <div class="input-group" name="category">
       <mat-form-field appearance="fill">
         <mat-label>Название</mat-label>
-        <input matInput name="name" [(ngModel)]="category.name" [disabled]="isDisabledField">
+        <input matInput name="name" [(ngModel)]="category.name" required [disabled]="isDisabledField">
+        <mat-error *ngIf="formCategory.hasError('required')">
+          Введите название
+        </mat-error>
       </mat-form-field>
     </div>
     <mat-chip-list #chipList>
