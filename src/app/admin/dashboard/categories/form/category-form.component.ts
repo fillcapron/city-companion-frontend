@@ -73,12 +73,11 @@ export class DialogCategoryComponent implements OnInit, EventsForm {
     deleting(): void {
         this.confirmDialog.confirm('Хотите удалить запись?', 'Да', 'Нет').afterClosed().subscribe(
             result => {
-                result ?
+                if (result) {
                     this.serviceCategory.deleteCategory(this.category.id).subscribe(
                         (res) => this.dialogRef.close(res?.message),
                         (err) => this.dialogRef.close(err))
-                    :
-                    this.dialogRef.close('Отменено')
+                }
             }
         )
     }

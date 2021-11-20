@@ -8,12 +8,12 @@
   <form #formPlace="ngForm">
     <mat-form-field appearance="fill" class="main-input">
       <mat-label>Название места</mat-label>
-      <input matInput name="name" [(ngModel)]="place.name" [disabled]="isDisabledField">
+      <input matInput name="name" required [(ngModel)]="place.name" [disabled]="isDisabledField">
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Категория</mat-label>
-      <mat-select name="category" [(ngModel)]="selectedCategory.id" [disabled]="isDisabledField">
+      <mat-select name="category" required [(ngModel)]="selectedCategory.id" [disabled]="isDisabledField">
         <mat-option *ngFor="let category of categories" [value]="selectedCategory.id">{{category.name}}</mat-option>
       </mat-select>
     </mat-form-field>
@@ -25,7 +25,7 @@
 
     <mat-form-field appearance="fill" class="main-input">
       <mat-label>Описание</mat-label>
-      <textarea matInput name="description" [(ngModel)]="place.description" [disabled]="isDisabledField"></textarea>
+      <textarea matInput name="description" [(ngModel)]="place.description" required [disabled]="isDisabledField"></textarea>
     </mat-form-field>
   </form>
   <form #formAddress="ngForm">
@@ -60,7 +60,7 @@
     </ng-container>
   </div>
   <ng-template #read>
-    <button [disabled]="formAddress.invalid" mat-raised-button color="accent"
+    <button [disabled]="formPlace.invalid" mat-raised-button color="accent"
       (click)="submit(formPlace, formAddress)">Отправить</button>
       <button mat-raised-button color="warn"
       (click)="cancel()">Отмена</button>

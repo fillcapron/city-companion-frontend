@@ -28,5 +28,6 @@ export interface Address {
     street: string,
     house: string,
     latitude?: string,
-    longitude?: string
+    longitude?: string,
+    places?: Place[]
 }

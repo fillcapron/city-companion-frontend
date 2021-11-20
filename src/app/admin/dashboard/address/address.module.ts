@@ -9,6 +9,9 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSelectModule } from "@angular/material/select";
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatListModule } from '@angular/material/list';
 
 import { TableGeneratedColumnsAddress } from "./address.component";
 import { DialogAddressComponent } from "./form/address-form.component";
@@ -31,7 +34,10 @@ import { DialogAddressComponent } from "./form/address-form.component";
         MatTableModule,
         MatIconModule,
         MatSelectModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatDialogModule,
+        MatSidenavModule,
+        MatListModule
     ],
 })
 export class AddressModule { }

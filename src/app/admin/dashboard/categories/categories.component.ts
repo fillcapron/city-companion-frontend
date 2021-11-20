@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { CategoryService } from 'src/app/shared/services/category.service';
@@ -6,7 +6,6 @@ import { Categories } from 'src/app/shared/interface';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogCategoryComponent } from './form/category-form.component';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 
 @Component({
     selector: 'app-table-categories',
