@@ -2,6 +2,41 @@
   width: 100%;
 }
 
+.dialog-blocks {
+  display: flex;
+  min-height: 70vh;
+
+  &__input {
+    max-width: 500px;
+    margin: 0 20px 0 0;
+    padding: 0;
+
+    & form {
+      display: flex;
+      flex-direction: column;
+      width: 450px;
+      padding-right: 10px;
+    }
+
+  }
+
+  &__images {
+    max-width: 300px;
+  }
+
+  &__address {
+    max-width: 400px;
+
+    & form {
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+      border: 1px dotted;
+    }
+  }
+
+}
+
 .mt-5 {
   margin-top: 50px;
 }
@@ -9,11 +44,12 @@
 .input-group {
   display: flex;
   flex-direction: column;
+  padding: 10px;
 }
 
-.button-close {
+.title-dialog {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-bottom: 10px;
 }
 

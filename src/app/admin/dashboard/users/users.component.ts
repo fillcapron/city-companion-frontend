@@ -14,6 +14,8 @@ import { DialogUserComponent } from './form/user-form.component';
 })
 export class TableGeneratedColumnsUsers implements OnInit {
 
+    isLoaded: boolean = false;
+
     columns = [
         {
             columnDef: 'index',
@@ -46,6 +48,7 @@ export class TableGeneratedColumnsUsers implements OnInit {
     ngOnInit() {
         this.userService.getUsers().subscribe(users => {
             this.data.data = users;
+            this.isLoaded = true;
         });
     }
     applyFilter(event: Event) {

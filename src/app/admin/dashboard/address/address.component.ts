@@ -14,6 +14,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class TableGeneratedColumnsAddress implements OnInit {
 
+    isLoaded: boolean = false;
+
     columns = [
         {
             columnDef: 'index',
@@ -71,6 +73,7 @@ export class TableGeneratedColumnsAddress implements OnInit {
     ngOnInit() {
         this.addressService.getAllAddress().subscribe(result => {
             this.data.data = result;
+            this.isLoaded = true;
         });
     }
 

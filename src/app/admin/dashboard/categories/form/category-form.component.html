@@ -1,6 +1,7 @@
 <div>
-  <div class="button-close">
-    <button mat-icon-button (click)="close()">
+  <div class="dialog-title">
+    <h2 mat-dialog-title>Форма добавления и редактирования категории</h2>
+    <button mat-icon-button mat-dialog-close>
       <mat-icon>clear</mat-icon>
     </button>
   </div>
@@ -29,12 +30,12 @@
              (matChipInputTokenEnd)="addTag($event)">
     </mat-chip-list>
   </form>
-  <div class="button-group mt-5">
+  <mat-dialog-actions class="mt-5">
     <ng-container *ngIf="isReading && isDisabledField else read">
       <button mat-stroked-button color="basic" (click)="reading()">Изменить</button>
       <button mat-raised-button color="warn" (click)="deleting()">Удалить</button>
     </ng-container>
-  </div>
+  </mat-dialog-actions>
   <ng-template #read>
     <button [disabled]="formCategory.invalid" mat-raised-button color="accent"
       (click)="submit(formCategory)">Отправить</button>

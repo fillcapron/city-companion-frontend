@@ -17,7 +17,8 @@ export interface Place {
     images?: string[],
     reviews?: string[],
     rating: string,
-    website: string
+    website: string,
+    published: boolean
 }
 
 export interface Address {

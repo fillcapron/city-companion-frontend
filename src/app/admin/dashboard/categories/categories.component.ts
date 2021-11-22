@@ -14,6 +14,8 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class TableGeneratedColumnsCategories implements OnInit {
 
+    isLoaded: boolean = false;
+
     category: Categories = {
         id: null,
         name: ''
@@ -48,6 +50,7 @@ export class TableGeneratedColumnsCategories implements OnInit {
     ngOnInit() {
         this.categoryService.getCategories().subscribe((categories) => {
             this.data.data = categories;
+            this.isLoaded = true;
         });
     }
 

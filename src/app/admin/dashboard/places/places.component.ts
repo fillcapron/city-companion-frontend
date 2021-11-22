@@ -14,6 +14,8 @@ import { DialogPlaceComponent } from './form/place-form.component';
 })
 export class TableGeneratedColumnsPlaces implements OnInit {
 
+    isLoaded: boolean = false;
+
     columns = [
         {
             columnDef: 'id',
@@ -74,6 +76,7 @@ export class TableGeneratedColumnsPlaces implements OnInit {
     ngOnInit() {
         this.placeService.getPlaces().subscribe(places => {
             this.data.data = places;
+            this.isLoaded = true;
         });
     }
 
@@ -85,7 +88,7 @@ export class TableGeneratedColumnsPlaces implements OnInit {
     openFormDialog(elem: string | object): void {
 
         const dialogRef = this.dialog.open(DialogPlaceComponent, {
-            width: '700px',
+            maxWidth: '900px',
             data: elem === 'add' ? {} : elem
         });
 

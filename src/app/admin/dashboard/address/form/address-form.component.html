@@ -1,6 +1,7 @@
 <div>
-  <div class="button-close">
-    <button mat-icon-button (click)="close()">
+  <div class="title-dialog">
+    <h2 mat-dialog-title>Форма добавления и редактирования адреса</h2>
+    <button mat-icon-button mat-dialog-close>
       <mat-icon>clear</mat-icon>
     </button>
   </div>
@@ -49,7 +50,7 @@
     </mat-dialog-content>
   </div>
 
-  <mat-dialog-actions class="button-group">
+  <mat-dialog-actions>
     <ng-container *ngIf="isReading && isDisabledField else read">
       <button mat-stroked-button color="basic" (click)="reading()">Изменить</button>
       <button mat-raised-button color="warn" (click)="deleting()">Удалить</button>

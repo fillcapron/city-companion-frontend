@@ -83,6 +83,7 @@ export class DialogAddressComponent implements OnInit, EventsForm {
     }
 
     cancel(): void {
+        if (!this.isReading) return this.dialogRef.close('Отменено');
         this.isDisabledField = true;
     }
 }

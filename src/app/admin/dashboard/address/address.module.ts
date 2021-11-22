@@ -1,20 +1,11 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatButtonModule } from "@angular/material/button";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatIconModule } from "@angular/material/icon";
-import { MatInputModule } from "@angular/material/input";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { MatSelectModule } from "@angular/material/select";
-import { MatTableModule } from "@angular/material/table";
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatDialogModule } from "@angular/material/dialog";
-import { MatSidenavModule } from "@angular/material/sidenav";
-import { MatListModule } from '@angular/material/list';
+import { MaterialModule } from "src/app/material.module";
 
 import { TableGeneratedColumnsAddress } from "./address.component";
 import { DialogAddressComponent } from "./form/address-form.component";
+
 
 
 @NgModule({
@@ -24,20 +15,10 @@ import { DialogAddressComponent } from "./form/address-form.component";
     ],
     entryComponents: [DialogAddressComponent],
     imports: [
-        MatButtonModule,
-        MatInputModule,
         FormsModule,
         ReactiveFormsModule,
         CommonModule,
-        MatFormFieldModule,
-        MatProgressSpinnerModule,
-        MatTableModule,
-        MatIconModule,
-        MatSelectModule,
-        MatPaginatorModule,
-        MatDialogModule,
-        MatSidenavModule,
-        MatListModule
+        MaterialModule
     ],
 })
 export class AddressModule { }
