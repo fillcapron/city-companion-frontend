@@ -1,3 +1,5 @@
+import { Images } from "../admin/shared/interface";
+
 export interface Tags {
     name: string
 }
@@ -10,11 +12,11 @@ export interface Categories {
 export interface Place {
     id: number | null,
     name: string,
-    address?: Address | number | null,
+    address?: Address,
     description: string,
     category: Categories,
     tags?: string[],
-    images?: string[],
+    images?: Images[],
     reviews?: string[],
     rating: string,
     website: string,

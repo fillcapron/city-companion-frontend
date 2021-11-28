@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-
+import { Component, Output, EventEmitter } from "@angular/core";
+import { ImagesService } from "src/app/shared/services/images.service";
 @Component({
     selector: 'image-upload',
     templateUrl: './image-upload.component.html',
@@ -7,21 +7,22 @@ import { Component } from "@angular/core";
 })
 export class ImageUploadComponent {
 
+    @Output() upload = new EventEmitter();
+
     file!: File;
 
-    constructor() {}
+    constructor(private service: ImagesService) { }
 
     onChange(event: any) {
         this.file = event.target.files[0];
     }
 
-    onUpload(){
-        console.log(this.file);
+    async onUpload() {
         const formData = new FormData();
-        formData.append('image', this.file);
-        fetch('https://api.imgbb.com/1/upload?expiration=600&key=6bc5e52e6e7269527190e01f01479346', {
-            method: 'POST',
-            body: formData
-        }).then(res => console.log(res)).catch(err => console.log(err))
+        formData.append('file', this.file);
+        this.service.upload(formData).subscribe(
+            (images) => this.upload.emit(images),
+            (err) => console.log(err)
+        )
     }
 }

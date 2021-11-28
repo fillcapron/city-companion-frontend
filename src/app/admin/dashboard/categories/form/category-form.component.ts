@@ -1,11 +1,11 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Inject, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CategoryService } from "src/app/shared/services/category.service";
 import { Categories } from "src/app/shared/interface";
 import { EventsForm, Tag } from "src/app/admin/shared/interface";
 import { isEmptyObject } from "src/app/admin/shared/utils";
-import { MatChipInputEvent } from "@angular/material/chips";
+import { MatChipInputEvent, MatChipList } from "@angular/material/chips";
 import { TagService } from "src/app/admin/shared/services/tag.service";
 import { switchMap } from "rxjs/operators";
 import { ConfirmDialogService } from "src/app/admin/shared/components/confirm/confirm.service";
@@ -19,6 +19,8 @@ export class DialogCategoryComponent implements OnInit, EventsForm {
 
     isReading!: boolean;
     isDisabledField!: boolean;
+
+    @ViewChild("chipList") chipList!: MatChipList;
     selectable = false;
     removable!: boolean;
     addOnBlur = true;
@@ -64,7 +66,7 @@ export class DialogCategoryComponent implements OnInit, EventsForm {
                     return this.serviceTag.createTags(this.category.tags!);
                 })
             ).subscribe(
-                (res) => this.dialogRef.close('Категория создана'),
+                () => this.dialogRef.close('Категория создана'),
                 (err) => this.dialogRef.close(err)
             )
         }
@@ -93,9 +95,13 @@ export class DialogCategoryComponent implements OnInit, EventsForm {
 
     addTag(event: MatChipInputEvent): void {
         const value = (event.value || '').trim();
+        if (this.category.tags?.some((tag) => tag.name === value)) {
+            this.chipList.errorState = true;
+            return; 
+        }
         if (this.category.id && value) {
             this.serviceTag.createTag({ name: value, category: this.category.id }).subscribe(
-                (tag) => tag.error ? this.category.tags!.push(tag) : null,
+                (tag) => tag.error ? null : this.category.tags!.push(tag),
                 (err) => alert(err)
             );
         } else if (value) {

@@ -44,6 +44,8 @@ export class LoginComponent implements OnInit {
 
             if (res.token) {
                 this.Router.navigate(['/admin', 'dashboard'])
+            } else {
+                alert(res.message);
             }
 
         }, err => {

@@ -12,8 +12,7 @@ export class PlaceService {
 
     constructor(private http: HttpClient) { }
 
-    createPlaces(place: Place, address: Address): Observable<ApiResponse> {
-        place.address = address;
+    createPlaces(place: Place, address?: Address): Observable<ApiResponse> {
         return this.http.post<ApiResponse>(this.url, place);
     }
 

@@ -12,19 +12,19 @@ export class CategoryService {
 
     constructor(private http: HttpClient) { }
 
-    public getCategories(): Observable<Categories[]> {
+    getCategories(): Observable<Categories[]> {
         return this.http.get<Categories[]>(this.url);
     }
 
-    public createCategory(cat_name: string): Observable<ApiResponse> {
+    createCategory(cat_name: string): Observable<ApiResponse> {
         return this.http.post<ApiResponse>(this.url, cat_name )
     }
 
-    public deleteCategory(id: number | null): Observable<ApiResponse> {
+    deleteCategory(id: number | null): Observable<ApiResponse> {
         return this.http.delete<ApiResponse>(this.url + id );
     }
 
-    public updateCategory(dto: Categories): Observable<ApiResponse> {
+    updateCategory(dto: Categories): Observable<ApiResponse> {
         return this.http.patch<ApiResponse>(this.url, dto);
     }
 }

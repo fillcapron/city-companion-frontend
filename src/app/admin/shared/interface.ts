@@ -8,7 +8,8 @@ export interface User {
 }
 
 export interface AuthToken {
-    token: string
+    token: string,
+    message?: string
 }
 
 export interface NavMenu {
@@ -36,4 +37,10 @@ export interface Tag {
     name: string,
     category?: number | null,
     place?: number | null
+}
+
+export interface Images {
+    id?: number,
+    place: string,
+    url: string
 }

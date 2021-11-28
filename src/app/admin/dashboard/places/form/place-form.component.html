@@ -5,68 +5,78 @@
       <mat-icon>clear</mat-icon>
     </button>
   </div>
-  <div class="dialog-blocks">
-    <mat-dialog-content class="dialog-blocks__input">
-      <form #formPlace="ngForm">
-        <mat-form-field appearance="fill" class="main-input">
-          <mat-label>Название места</mat-label>
-          <input matInput name="name" required [(ngModel)]="place.name" [disabled]="isDisabledField">
-        </mat-form-field>
+  <mat-dialog-content>
+    <form #formPlace="ngForm">
+      <div class="dialog-blocks">
+        <div class="dialog-blocks__input">
+          <mat-checkbox name="published" class="dialog-blocks__input published" [(ngModel)]="place.published">
+            Опубликовано</mat-checkbox>
+          <mat-form-field appearance="fill" class="main-input">
+            <mat-label>Название места</mat-label>
+            <input matInput name="name" required [(ngModel)]="place.name" [disabled]="isDisabledField">
+          </mat-form-field>
 
-        <mat-form-field appearance="fill">
-          <mat-label>Категория</mat-label>
-          <mat-select name="category" [(ngModel)]="place.category" [disabled]="isDisabledField">
-            <mat-option *ngFor="let category of categories" [value]="category">{{category.name}}</mat-option>
-          </mat-select>
-        </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Категория</mat-label>
+            <mat-select name="category" [compareWith]="compareFn" [(ngModel)]="place.category" required [disabled]="isDisabledField">
+              <mat-option *ngFor="let category of categories" [value]="category">{{category.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
 
-        <mat-form-field appearance="fill" class="main-input">
-          <mat-label>Вебсайт</mat-label>
-          <input matInput name="website" [(ngModel)]="place.website" [disabled]="isDisabledField">
-        </mat-form-field>
+          <mat-form-field appearance="fill" class="main-input">
+            <mat-label>Вебсайт</mat-label>
+            <input matInput name="website" [(ngModel)]="place.website" [disabled]="isDisabledField">
+          </mat-form-field>
 
-        <mat-form-field appearance="fill" class="main-input">
-          <mat-label>Описание</mat-label>
-          <textarea matInput name="description" [(ngModel)]="place.description" required
-            [disabled]="isDisabledField"></textarea>
-        </mat-form-field>
-        <mat-label>Выберите адрес из существующих:</mat-label>
-        <address-search (selectAddressEvent)="selectAddress($event)"></address-search>
-        
-        <mat-checkbox name="published" class="example-margin" [(ngModel)]="place.published">Опубликовать</mat-checkbox>
-
-      </form>
-    </mat-dialog-content>
-    
-    <mat-dialog-content class="dialog-blocks__address">
-      <mat-label><b>Добавить адрес:</b></mat-label>
-      <form #formAddress="ngForm">
-        <div class="input-group" name="address">
-          <mat-form-field appearance="fill" class="input-address">
-            <mat-label>Страна</mat-label>
-            <input matInput name="country" [(ngModel)]="address.country" [disabled]="isDisabledField">
+          <mat-form-field appearance="fill" class="main-input">
+            <mat-label>Описание</mat-label>
+            <textarea matInput name="description" [(ngModel)]="place.description" required
+              [disabled]="isDisabledField"></textarea>
           </mat-form-field>
-          <mat-form-field appearance="fill" class="input-address">
-            <mat-label>Регион</mat-label>
-            <input matInput name="region" [(ngModel)]="address.region" [disabled]="isDisabledField">
-          </mat-form-field>
-          <mat-form-field appearance="fill" class="input-address">
-            <mat-label>Город</mat-label>
-            <input matInput name="city" [(ngModel)]="address.city" [disabled]="isDisabledField">
-          </mat-form-field>
-          <mat-form-field appearance="fill" class="input-address">
-            <mat-label>Улица</mat-label>
-            <input matInput name="street" [(ngModel)]="address.street" [disabled]="isDisabledField">
-          </mat-form-field>
-          <mat-form-field appearance="fill" class="input-address">
-            <mat-label>Дом</mat-label>
-            <input matInput name="house" [(ngModel)]="address.house" [disabled]="isDisabledField">
-          </mat-form-field>
+          <ng-container *ngIf="!isReading">
+            <mat-label class="label-text">Выберите адрес или <span class="button-text"
+                (click)="addAddress = !addAddress">добавьте</span> новый</mat-label>
+            <address-search (selectAddressEvent)="selectAddress($event)"></address-search>
+          </ng-container>
         </div>
-      </form>
-    </mat-dialog-content>
+
+        <div class="dialog-blocks__address">
+          <div class="input-group" name="address" *ngIf="addAddress || isReading">
+            <mat-label class="label-text"><b>Местоположение</b></mat-label>
+            <mat-form-field appearance="fill" class="input-address">
+              <mat-label>Страна</mat-label>
+              <input matInput name="country" [(ngModel)]="place.address!.country" [disabled]="isDisabledField">
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="input-address">
+              <mat-label>Регион</mat-label>
+              <input matInput name="region" [(ngModel)]="place.address!.region" [disabled]="isDisabledField">
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="input-address">
+              <mat-label>Город</mat-label>
+              <input matInput name="city" [(ngModel)]="place.address!.city" [disabled]="isDisabledField">
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="input-address">
+              <mat-label>Улица</mat-label>
+              <input matInput name="street" [(ngModel)]="place.address!.street" [disabled]="isDisabledField">
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="input-address">
+              <mat-label>Дом</mat-label>
+              <input matInput name="house" [(ngModel)]="place.address!.house" [disabled]="isDisabledField">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-label><b>Изображения</b></mat-label>
+  <div class="images-block">
+    <div class="images-view" *ngIf="place.images">
+      <img mat-card-md-image class="img" *ngFor="let img of place.images" src="{{img.url}}">
+    </div>
+    <image-upload (upload)="uploadImage($event)"></image-upload>
   </div>
-  <image-upload></image-upload>
+
   <mat-dialog-actions align="start">
     <ng-container *ngIf="isReading && isDisabledField else read">
       <button mat-stroked-button color="basic" (click)="reading()">Изменить</button>
@@ -75,7 +85,7 @@
   </mat-dialog-actions>
   <ng-template #read>
     <button [disabled]="formPlace.invalid" mat-raised-button color="accent"
-      (click)="submit(formPlace, formAddress)">Отправить</button>
+      (click)="submit(formPlace)">Отправить</button>
     <button mat-raised-button color="warn" (click)="cancel()">Отмена</button>
   </ng-template>
 </div>

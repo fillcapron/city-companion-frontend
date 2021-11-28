@@ -14,7 +14,9 @@
           Введите название
         </mat-error>
       </mat-form-field>
-    </div>
+    
+    <mat-form-field appearance="fill">
+      <mat-label>Теги</mat-label>
     <mat-chip-list #chipList>
       <mat-chip *ngFor="let tag of category.tags" [selectable]="selectable"
                [removable]="removable" [disabled]="isDisabledField" (removed)="remove(tag)">
@@ -23,12 +25,16 @@
           <mat-icon>cancel</mat-icon>
         </button>
       </mat-chip>
-      <input placeholder="Добавить теги"
+      <input placeholder="Добавить тег"
              [matChipInputFor]="chipList"
              [disabled]="isDisabledField"
+             (change)="chipList.errorState = false"
              [matChipInputAddOnBlur]="addOnBlur"
              (matChipInputTokenEnd)="addTag($event)">
     </mat-chip-list>
+    <mat-error *ngIf="chipList.errorState">Тег существует</mat-error>
+  </mat-form-field>
+</div>
   </form>
   <mat-dialog-actions class="mt-5">
     <ng-container *ngIf="isReading && isDisabledField else read">

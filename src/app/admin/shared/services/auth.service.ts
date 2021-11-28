@@ -3,7 +3,7 @@ import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 import { AUTH_API_URL } from "../../admin-injection-tokens";
-import { AuthToken, User } from "../interface";
+import { ApiResponse, AuthToken, User } from "../interface";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Router } from "@angular/router";
 
@@ -22,8 +22,12 @@ export class AuthService {
 
     login(userDto: User): Observable<AuthToken> {
         return this.http.post<AuthToken>(this.url + 'login', userDto).pipe(
-            tap(token => {
-                localStorage.setItem(ACCESS_TOKEN_KEY, token.token)
+            tap(auth => {
+                if(auth.token){
+                    localStorage.setItem(ACCESS_TOKEN_KEY, auth.token);
+                    return;
+                }
+                return auth.message;
             })
         );
     }

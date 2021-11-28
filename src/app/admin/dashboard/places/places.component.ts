@@ -30,7 +30,7 @@ export class TableGeneratedColumnsPlaces implements OnInit {
         {
             columnDef: 'description',
             header: 'Описание',
-            cell: (element: Place) => `${element.description}`,
+            cell: (element: Place) => `${element.description.slice(0, 50)}...`,
         },
         {
             columnDef: 'category',
@@ -45,17 +45,12 @@ export class TableGeneratedColumnsPlaces implements OnInit {
         {
             columnDef: 'images',
             header: 'Изображения',
-            cell: (element: Place) => `${element.images}`,
+            cell: (element: Place) => `${element.images?.length}`,
         },
         {
             columnDef: 'tags',
             header: 'Теги',
             cell: (element: Place) => `${element.tags}`,
-        },
-        {
-            columnDef: 'website',
-            header: 'Вебсайт',
-            cell: (element: Place) => `${element.website}`,
         }
     ];
 
@@ -89,6 +84,7 @@ export class TableGeneratedColumnsPlaces implements OnInit {
 
         const dialogRef = this.dialog.open(DialogPlaceComponent, {
             maxWidth: '900px',
+            position: {top: '10px'},
             data: elem === 'add' ? {} : elem
         });
 

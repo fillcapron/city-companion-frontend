@@ -4,24 +4,23 @@
 
 .dialog-blocks {
   display: flex;
-  min-height: 70vh;
+  margin-bottom: 10px;
 
   &__input {
-    max-width: 500px;
     margin: 0 20px 0 0;
-    padding: 0;
+    padding: 0 5px 0 5px;
 
     & form {
       display: flex;
       flex-direction: column;
       width: 450px;
-      padding-right: 10px;
+      padding: 10px;
     }
 
-  }
+    & .published {
+      margin: 10px 0;
+    }
 
-  &__images {
-    max-width: 300px;
   }
 
   &__address {
@@ -37,6 +36,10 @@
 
 }
 
+.images-block {
+  border: 1px dotted gray;
+}
+
 .mt-5 {
   margin-top: 50px;
 }
@@ -44,7 +47,10 @@
 .input-group {
   display: flex;
   flex-direction: column;
-  padding: 10px;
+}
+
+.img {
+  width: calc(100% / 3);
 }
 
 .title-dialog {
@@ -58,4 +64,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+.images-view {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px;
 }
