@@ -15,7 +15,7 @@ export interface Place {
     address?: Address,
     description: string,
     category: Categories,
-    tags?: string[],
+    tags?: Tags[],
     images?: Images[],
     reviews?: string[],
     rating: string,
