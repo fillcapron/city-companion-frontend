@@ -37,7 +37,7 @@
 }
 
 .images-block {
-  border: 1px dotted gray;
+  margin: 10px;
 }
 
 .mt-5 {
@@ -50,7 +50,7 @@
 }
 
 .img {
-  width: calc(100% / 3);
+  width: calc(100% / 4);
 }
 
 .title-dialog {
@@ -70,4 +70,21 @@
   display: flex;
   flex-wrap: wrap;
   margin: 5px;
+}
+
+.drop-area {
+  border: 2px dashed #ccc;
+  padding: 10px;
+  text-align: center;
+  color: gray;
+}
+
+.text-button {
+  cursor: pointer;
+  font-size: 16px;
+
+  &:hover {
+    color: black;
+  }
+
 }

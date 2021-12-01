@@ -1,0 +1,9 @@
+.images-group {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+.img {
+    width: calc(100% / 4);
+}

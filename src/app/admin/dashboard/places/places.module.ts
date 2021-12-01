@@ -3,7 +3,8 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule } from "src/app/material.module";
 import { AddressSearch } from "../../shared/components/address-input/address-search.component";
-import { ImageUploadComponent } from "../../shared/components/image-upload/image-upload.component";
+import { ImageUploadModule } from "../../shared/components/image-upload/image-upload.module";
+
 
 import { DialogPlaceComponent } from "./form/place-form.component";
 import { TableGeneratedColumnsPlaces } from "./places.component";
@@ -11,15 +12,16 @@ import { TableGeneratedColumnsPlaces } from "./places.component";
     declarations: [
         DialogPlaceComponent,
         TableGeneratedColumnsPlaces,
-        AddressSearch,
-        ImageUploadComponent
+        AddressSearch
     ],
     entryComponents: [DialogPlaceComponent],
     imports: [
         FormsModule,
         ReactiveFormsModule,
         CommonModule,
-        MaterialModule
+        MaterialModule,
+        ImageUploadModule
     ],
+    exports: []
 })
 export class PlacesModule { }

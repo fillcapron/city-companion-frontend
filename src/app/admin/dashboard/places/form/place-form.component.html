@@ -18,7 +18,8 @@
 
           <mat-form-field appearance="fill">
             <mat-label>Категория</mat-label>
-            <mat-select name="category" [compareWith]="compareFn" [(ngModel)]="place.category" required [disabled]="isDisabledField">
+            <mat-select name="category" [compareWith]="compareFn" [(ngModel)]="place.category" required
+              [disabled]="isDisabledField">
               <mat-option *ngFor="let category of categories" [value]="category">{{category.name}}</mat-option>
             </mat-select>
           </mat-form-field>
@@ -69,13 +70,18 @@
     </form>
   </mat-dialog-content>
 
+  <mat-dialog-content>
   <mat-label><b>Изображения</b></mat-label>
   <div class="images-block">
-    <div class="images-view" *ngIf="place.images">
-      <img mat-card-md-image class="img" *ngFor="let img of place.images" src="{{img.url}}">
+    <upload-field #files [images]="images" (upload)="uploadImage($event)">
+    </upload-field>
+    <div [uploadFile]="files" class="drop-area" *ngIf="!isDisabledField">
+      Перенесите изображения или
+      <input [uploadFile]="files" id="img" type="file" style="display:none;">
+      <label for="img">Нажмите <b class="text-button">сюда</b></label>
     </div>
-    <image-upload (upload)="uploadImage($event)"></image-upload>
   </div>
+</mat-dialog-content>
 
   <mat-dialog-actions align="start">
     <ng-container *ngIf="isReading && isDisabledField else read">
@@ -84,8 +90,7 @@
     </ng-container>
   </mat-dialog-actions>
   <ng-template #read>
-    <button [disabled]="formPlace.invalid" mat-raised-button color="accent"
-      (click)="submit(formPlace)">Отправить</button>
+    <button [disabled]="formPlace.invalid" mat-raised-button color="accent" (click)="submit()">Отправить</button>
     <button mat-raised-button color="warn" (click)="cancel()">Отмена</button>
   </ng-template>
 </div>
