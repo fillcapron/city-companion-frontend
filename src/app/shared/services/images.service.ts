@@ -20,4 +20,8 @@ export class ImagesService {
     create(images: Images[]): Observable<any> {
         return this.http.post<any>(this.url + 'save', images);
     }
+
+    delete(id: number | undefined): Observable<any> {
+        return this.http.delete<any>(this.url + id);
+    }
 }
