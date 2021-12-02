@@ -94,7 +94,7 @@ export class DialogCategoryComponent implements OnInit, EventsForm {
     }
 
     addTag(event: MatChipInputEvent): void {
-        const value = (event.value || '').trim();
+        const value = (event.value || '').toLowerCase().trim();
         if (this.category.tags?.some((tag) => tag.name === value)) {
             this.chipList.errorState = true;
             return; 
