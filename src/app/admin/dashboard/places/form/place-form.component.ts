@@ -80,15 +80,8 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
 
         if (this.isReading) {
             this.servicePlace.updatePlace(this.place).subscribe(
-                (place) => {
-                    if (this.images.length) {
-                        this.images.map(elem => elem.place = place.meta.id);
-                    }
-                    this.dialogRef.close(place?.message);
-                },
-                (err) => {
-                    this.dialogRef.close(err);
-                }
+                (place) => this.dialogRef.close(place?.message),
+                (err) => this.dialogRef.close(err)
             );
             return;
         }

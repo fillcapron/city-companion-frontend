@@ -73,12 +73,12 @@
   <mat-dialog-content>
   <mat-label><b>Изображения</b></mat-label>
   <div class="images-block">
-    <upload-field #files [images]="images" (upload)="uploadImage($event)">
+    <upload-field #files [images]="images" [disabled]="!isDisabledField" (upload)="uploadImage($event)">
     </upload-field>
     <div [uploadFile]="files" class="drop-area" *ngIf="!isDisabledField">
       Перенесите изображения или
       <input [uploadFile]="files" id="img" type="file" style="display:none;">
-      <label for="img">Нажмите <b class="text-button">сюда</b></label>
+      <label for="img">нажмите <b class="text-button">сюда</b></label>
     </div>
   </div>
 </mat-dialog-content>
