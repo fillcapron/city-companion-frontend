@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from "@angular/core";
 import { ImagesService } from "src/app/shared/services/images.service";
+import { Images } from "../../../interface";
 
 @Component({
     selector: 'upload-field',
@@ -9,7 +10,8 @@ import { ImagesService } from "src/app/shared/services/images.service";
 })
 export class UploadFiledComponent {
 
-    @Input() images: any = [];
+    @Input() images: Images[] = [];
+    @Input() disabled!: boolean;
     @Output() upload = new EventEmitter();
 
     constructor(private changeDetector: ChangeDetectorRef, private service: ImagesService) { }
@@ -26,8 +28,13 @@ export class UploadFiledComponent {
         )
     }
 
-    public onDelete(file: any): void {
-        this.images.splice(file, 1);
+    public onDelete(file: Images, index: number): void {
+        const id = file && file.id;
+        this.service.delete(id).subscribe(
+            (res) => console.log(res),
+            (err) => console.log(err)
+        )
+        this.images.splice(index, 1);
         this.changeDetector.markForCheck();
     }
 }

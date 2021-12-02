@@ -1,3 +1,8 @@
 <div *ngIf="images.length > 0" class="images-group">
-    <img *ngFor="let img of images" src={{img.url}} class="img" alt="">
+  <div class="image-block" *ngFor="let img of images; let i = index">
+    <button mat-icon-button class="delete-button" *ngIf="disabled" (click)="onDelete(img, i)"> 
+        <mat-icon>clear</mat-icon>
+    </button>
+    <img src={{img.url}} class="img" alt="">
+  </div>
 </div>
