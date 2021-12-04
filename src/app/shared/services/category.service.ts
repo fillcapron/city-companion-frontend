@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Categories } from '../interface';
+import { Categories, Place } from '../interface';
 import { ApiResponse } from 'src/app/admin/shared/interface';
 
 @Injectable({

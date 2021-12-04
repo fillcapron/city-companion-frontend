@@ -31,11 +31,11 @@
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Долгота</mat-label>
-            <input matInput name="latitude" [(ngModel)]="address.latitude" [disabled]="isDisabledField">
+            <input matInput name="longitude" type="number" [(ngModel)]="address.latitude" [disabled]="isDisabledField">
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Широта</mat-label>
-            <input matInput name="longitude" [(ngModel)]="address.longitude" [disabled]="isDisabledField">
+            <input matInput name="latitude" type="number" [(ngModel)]="address.longitude" [disabled]="isDisabledField">
           </mat-form-field>
         </div>
       </form>

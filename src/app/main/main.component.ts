@@ -7,21 +7,17 @@ import { CategoryService } from '../shared/services/category.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnChanges, OnInit {
+export class MainComponent implements OnInit {
   message!: string;
   @Input() input!: string;
   categories: Categories[] = [];
 
   constructor(private TagService: CategoryService) { }
-  
-  ngOnInit(){
+
+  ngOnInit() {
     this.TagService.getCategories().subscribe(categories => this.categories = categories);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log('in ngOnChanges');
-    console.log(changes)
-  }
   search(): void {
     if (!this.input) {
       this.message = 'Вы ничего не ввели'

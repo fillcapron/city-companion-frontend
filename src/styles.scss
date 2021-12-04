@@ -10,6 +10,14 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
 .content {
   max-width: 1000px;
   margin: 0 auto;

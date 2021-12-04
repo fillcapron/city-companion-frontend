@@ -9,3 +9,33 @@
     width: 100px;
     height: 50px;
 }
+.categories-block {
+    margin-top: 30px;
+    & h1 {
+        text-align: center;
+    }
+    & .categories-list {
+        &_nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 0;
+
+            & li  {
+                font-size: 20px;
+            }
+            & a {
+                color: black;
+                &:hover {
+                    color: brown;
+                }
+            }
+        }
+    }
+}
+.popular-places {
+    margin-top: 30px;
+    & h1 {
+        text-align: center;
+    }
+}

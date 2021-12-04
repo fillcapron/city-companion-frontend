@@ -31,4 +31,9 @@ export class PlaceService {
     deletePlace(id: number | null): Observable<ApiResponse>  {
         return this.http.delete<ApiResponse>(this.url + id);
     }
+
+    getPlacesByCategory(categoryName: string): Observable<Place[]> {
+        console.log(categoryName)
+        return this.http.get<Place[]>(this.url + 'category/' + categoryName);
+    }
 }

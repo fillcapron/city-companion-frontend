@@ -12,6 +12,7 @@ import { InfoPageComponent } from './info-page/info-page.component';
 import { MainComponent } from './main/main.component';
 import { AdminModule } from './admin/admin.module';
 import { MainLayoutComponent } from './shared/components/main-layout.component';
+import { ListPageModule } from './list-page/list-page.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MainLayoutComponent } from './shared/components/main-layout.component';
     BrowserAnimationsModule,
     FormsModule,
     AngularYandexMapsModule,
-    HttpClientModule
+    HttpClientModule,
+    ListPageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

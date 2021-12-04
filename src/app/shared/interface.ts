@@ -30,7 +30,7 @@ export interface Address {
     city: string,
     street: string,
     house: string,
-    latitude?: string,
-    longitude?: string,
+    latitude?: number | null,
+    longitude?: number | null,
     places?: Place[]
 }

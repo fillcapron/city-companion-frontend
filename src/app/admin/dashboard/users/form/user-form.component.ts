@@ -6,6 +6,7 @@ import { Place } from "src/app/shared/interface";
 import { EventsForm, User } from "src/app/admin/shared/interface";
 import { UserService } from "src/app/admin/shared/services/user.service";
 import { isEmptyObject } from "src/app/admin/shared/utils";
+import { ConfirmDialogService } from "src/app/admin/shared/components/confirm/confirm.service";
 
 @Component({
     selector: 'dialog-user',
@@ -27,7 +28,8 @@ export class DialogUserComponent implements OnInit, EventsForm {
     constructor(
         public dialogRef: MatDialogRef<DialogUserComponent>,
         @Inject(MAT_DIALOG_DATA) public data: Place,
-        private serviceUser: UserService
+        private serviceUser: UserService,
+        private confirmDialog: ConfirmDialogService
     ) { }
 
     ngOnInit(): void {
@@ -61,12 +63,13 @@ export class DialogUserComponent implements OnInit, EventsForm {
     }
 
     deleting(): void {
-        this.serviceUser.deleteUser(this.user.id || null).subscribe(
-            (user) => {
-                this.dialogRef.close(user?.message);
-            },
-            (err) => {
-                this.dialogRef.close(err);
+        this.confirmDialog.confirm('Хотите удалить запись?', 'Да', 'Нет').afterClosed().subscribe(
+            result => {
+                if (result) {
+                    this.serviceUser.deleteUser(this.user.id || null).subscribe(
+                        (user) => this.dialogRef.close(user?.message),
+                        (err) => this.dialogRef.close(err))
+                }
             }
         )
     }

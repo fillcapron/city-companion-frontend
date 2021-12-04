@@ -24,8 +24,8 @@ export class DialogAddressComponent implements OnInit, EventsForm {
         city: '',
         street: '',
         house: '',
-        latitude: '',
-        longitude: ''
+        latitude: null,
+        longitude: null
     };
 
     places: Place[] = [];
