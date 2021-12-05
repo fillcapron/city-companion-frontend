@@ -1,37 +1,28 @@
 <div class="list">
-<div class="list-place">
-  <mat-card class="mt-5" *ngFor="let place of places">
-    <mat-card-header>
+  <div class="list-places mt-5">
+    <mat-card #cardPlace class="list-places_card" tabindex="0" *ngFor="let place of places">
+      <mat-card-header>
         <mat-card-title>{{place.name}}</mat-card-title>
-        <mat-card-subtitle>{{place.website}}</mat-card-subtitle>
-    </mat-card-header>
-    <ng-container *ngIf="place.images">
-        <img *ngFor="let img of place.images" mat-card-sm-image src={{img.url}}>
+        <mat-card-subtitle>подзаголовок</mat-card-subtitle>
+      </mat-card-header>
+      <ng-container *ngIf="place.images">
+        <img *ngFor="let img of place.images" mat-card-image src={{img.url}}>
       </ng-container>
-    <mat-card-content>
-      <p>
-        {{place.description}}
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
-    </mat-card-actions>
-  </mat-card>
-</div>
-<div class="list-map mt-5">
-    <ya-map 
-    [center]="[56.2414, 43.4554]"
-    (ready)="onMapReady($event)"
-    [state]="mapState"
-    >
-    <ya-placemark
-      *ngFor="let placemark of placemarks"
-      [geometry]="placemark.geometry"
-      [properties]="placemark.properties"
-      [options]="placemark.options"
-    ></ya-placemark>
+      <mat-card-content>
+        <p>
+          {{place.description}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>Подробнее</button>
+        <button mat-button>Сайт</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <div class="list-map mt-5">
+    <ya-map [center]="[56.2414, 43.4554]" [state]="mapState" (ready)="onMapReady($event)">
+      <ya-placemark *ngFor="let placemark of placemarks; let i = index" [geometry]="placemark.geometry"
+        [properties]="placemark.properties" [options]="placemark.options" (yaclick)="clickPlace(i)"></ya-placemark>
     </ya-map>
+  </div>
 </div>
-</div>
-

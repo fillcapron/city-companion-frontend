@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { map, switchMap } from 'rxjs/operators';
-import { Address, Place } from '../shared/interface';
+import { switchMap } from 'rxjs/operators';
+import { Place } from '../shared/interface';
 import { PlaceService } from '../shared/services/places.service';
-import { YaReadyEvent } from 'angular8-yandex-maps';
+import { YaEvent, YaReadyEvent } from 'angular8-yandex-maps';
+
 interface PlacemarkConstructor {
   geometry: number[];
   properties: ymaps.IPlacemarkProperties;
@@ -17,9 +18,11 @@ interface PlacemarkConstructor {
 })
 export class ListPageComponent implements OnInit {
 
+  @ViewChildren("cardPlace", { read: ElementRef })
+  cardPlaceList!: QueryList<ElementRef>;
+
   places: Place[] = [];
   map!: ymaps.Map;
-  coordinates: any = [];
 
   mapState: ymaps.IMapState = {
     type: 'yandex#map',
@@ -38,12 +41,19 @@ export class ListPageComponent implements OnInit {
       this.places = places;
     });
   }
+
   onMapReady(event: YaReadyEvent<ymaps.Map>): void {
     this.map = event.target;
   }
 
-  private setPlaceMarks(place: Place) {
-    const name = place.name;
+  clickPlace(index: any): void {
+    console.log(index)
+    const elementRef = this.cardPlaceList.find((_, i) => i === index);
+    elementRef?.nativeElement.focus();
+  }
+
+  private setPlaceMarks(place: Place): void {
+    const { name, description } = place;
     const address = place && place.address;
     const latitude = address && address.latitude;
     const longitude = address && address.longitude;
@@ -52,7 +62,11 @@ export class ListPageComponent implements OnInit {
       {
         geometry: [latitude!, longitude!],
         properties: {
-          balloonContent: name
+          id: 1,
+          balloonContentHeader: name,
+          balloonContentBody: description,
+          balloonContentFooter: 'Basement',
+          hintContent: name,
         },
         options: {
           preset: 'islands#blueCinemaCircleIcon'
