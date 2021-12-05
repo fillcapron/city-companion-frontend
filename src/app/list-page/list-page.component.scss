@@ -4,12 +4,16 @@
   margin: 0 auto;
   &-places {
     width: 500px;
+    height: 80vh;
+    overflow: auto;
     &_card {
+        margin: 5px 10px;
         margin-bottom: 20px;
         margin-right: 10px;
     }
   }
   &-map {
+    margin-left: 10px;
     width: 100%;
     height: 80vh;
   }

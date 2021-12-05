@@ -47,7 +47,6 @@ export class ListPageComponent implements OnInit {
   }
 
   clickPlace(index: any): void {
-    console.log(index)
     const elementRef = this.cardPlaceList.find((_, i) => i === index);
     elementRef?.nativeElement.focus();
   }

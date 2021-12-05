@@ -1,13 +1,13 @@
 <div class="list">
   <div class="list-places mt-5">
     <mat-card #cardPlace class="list-places_card" tabindex="0" *ngFor="let place of places">
+      <ng-container *ngIf="place.images">
+        <img *ngFor="let img of place.images" mat-card-image src={{img.url}}>
+      </ng-container>
       <mat-card-header>
         <mat-card-title>{{place.name}}</mat-card-title>
         <mat-card-subtitle>подзаголовок</mat-card-subtitle>
       </mat-card-header>
-      <ng-container *ngIf="place.images">
-        <img *ngFor="let img of place.images" mat-card-image src={{img.url}}>
-      </ng-container>
       <mat-card-content>
         <p>
           {{place.description}}
