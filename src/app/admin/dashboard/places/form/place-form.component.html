@@ -23,8 +23,13 @@
               <mat-option *ngFor="let category of categories" [value]="category">{{category.name}}</mat-option>
             </mat-select>
           </mat-form-field>
-
-          <mat-form-field appearance="fill" class="main-input">
+          <mat-form-field appearance="fill" class="phone-input" *ngIf="place.phone || !isDisabledField">
+            <mat-label>Телефон</mat-label>
+            <span matPrefix>+7 &nbsp;</span>
+            <input type="tel" matInput  name="phone" [(ngModel)]="place.phone" placeholder="555-555-1234"  [disabled]="isDisabledField">
+            <mat-icon matSuffix>mode_edit</mat-icon>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="main-input"  *ngIf="place.website || !isDisabledField">
             <mat-label>Вебсайт</mat-label>
             <input matInput name="website" [(ngModel)]="place.website" [disabled]="isDisabledField">
           </mat-form-field>

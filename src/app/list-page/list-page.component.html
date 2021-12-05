@@ -6,9 +6,12 @@
       </ng-container>
       <mat-card-header>
         <mat-card-title>{{place.name}}</mat-card-title>
-        <mat-card-subtitle>подзаголовок</mat-card-subtitle>
+        <mat-card-subtitle>{{place.address!.city}} {{place.address!.street}} д.{{place.address!.house}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
+        <div class="info-block">
+          <div>Рейтинг</div><div>Отзывы</div>
+        </div>
         <p>
           {{place.description}}
         </p>

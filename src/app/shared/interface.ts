@@ -18,6 +18,7 @@ export interface Place {
     tags?: Tags[],
     images?: Images[],
     reviews?: string[],
+    phone: string,
     rating: string,
     website: string,
     published: boolean

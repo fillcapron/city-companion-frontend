@@ -40,9 +40,10 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
         website: "",
         description: "",
         published: false,
+        phone: "",
         category: {
             id: null,
-            name: ''
+            name: ""
         },
         address: this.address
     }

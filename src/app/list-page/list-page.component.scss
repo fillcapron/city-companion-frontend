@@ -22,3 +22,9 @@
 .mat-card:focus {
   outline: 3px solid gold;
 }
+
+.info-block {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}

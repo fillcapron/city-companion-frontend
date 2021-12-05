@@ -48,9 +48,9 @@ export class TableGeneratedColumnsPlaces implements OnInit {
             cell: (element: Place) => `${element.images?.length}`,
         },
         {
-            columnDef: 'tags',
-            header: 'Теги',
-            cell: (element: Place) => `${element.tags}`,
+            columnDef: 'phone',
+            header: 'Телефон',
+            cell: (element: Place) => element.phone ? '+7' + element.phone: '-',
         }
     ];
 

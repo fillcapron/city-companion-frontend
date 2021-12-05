@@ -21,6 +21,10 @@
       margin: 10px 0;
     }
 
+    & .phone-input {
+      margin-left: 10px;
+    }
+
   }
 
   &__address {
@@ -86,5 +90,4 @@
   &:hover {
     color: black;
   }
-
 }
