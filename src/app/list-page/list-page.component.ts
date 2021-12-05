@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { Place } from '../shared/interface';
 import { PlaceService } from '../shared/services/places.service';
 import { YaEvent, YaReadyEvent } from 'angular8-yandex-maps';
@@ -21,6 +21,7 @@ export class ListPageComponent implements OnInit {
   @ViewChildren("cardPlace", { read: ElementRef })
   cardPlaceList!: QueryList<ElementRef>;
 
+  categoryName: string = '';
   places: Place[] = [];
   map!: ymaps.Map;
 
@@ -35,6 +36,7 @@ export class ListPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.pipe(
+      tap((category) => this.categoryName = category.name),
       switchMap(param => this.placeService.getPlacesByCategory(param.name))
     ).subscribe(places => {
       places.map(elem => this.setPlaceMarks(elem));
@@ -52,8 +54,9 @@ export class ListPageComponent implements OnInit {
   }
 
   private setPlaceMarks(place: Place): void {
-    const { name, description } = place;
+    const { name, description, phone } = place;
     const address = place && place.address;
+    const fullAddress = address?.street + ' ' + address?.house;
     const latitude = address && address.latitude;
     const longitude = address && address.longitude;
 
@@ -64,7 +67,7 @@ export class ListPageComponent implements OnInit {
           id: 1,
           balloonContentHeader: name,
           balloonContentBody: description,
-          balloonContentFooter: 'Basement',
+          balloonContentFooter: phone ? fullAddress + ', +7' + phone : fullAddress,
           hintContent: name,
         },
         options: {

@@ -1,6 +1,17 @@
+.category {
+  margin: 0 auto;
+  max-width: 1040px;
+  &-name {
+    font-weight: 500;
+  }
+  &-count {
+    color: gray;
+  }
+}
+
 .list {
   display: flex;
-  width: 1040px;
+  max-width: 1040px;
   margin: 0 auto;
   &-places {
     width: 500px;

@@ -1,5 +1,11 @@
+<div class="category">
+  <h1 class="category-name">{{categoryName}} в Дзержинске <span class="category-count">{{places.length}}</span></h1>
+</div>
 <div class="list">
-  <div class="list-places mt-5">
+  <div class="list-places">
+    <div class="sort-place">
+      Сортировать по 
+    </div>
     <mat-card #cardPlace class="list-places_card" tabindex="0" *ngFor="let place of places">
       <ng-container *ngIf="place.images">
         <img *ngFor="let img of place.images" mat-card-image src={{img.url}}>
@@ -10,7 +16,7 @@
       </mat-card-header>
       <mat-card-content>
         <div class="info-block">
-          <div>Рейтинг</div><div>Отзывы</div>
+          <div>Рейтинг:</div><div>Отзывы</div>
         </div>
         <p>
           {{place.description}}
@@ -22,7 +28,7 @@
       </mat-card-actions>
     </mat-card>
   </div>
-  <div class="list-map mt-5">
+  <div class="list-map">
     <ya-map [center]="[56.2414, 43.4554]" [state]="mapState" (ready)="onMapReady($event)">
       <ya-placemark *ngFor="let placemark of placemarks; let i = index" [geometry]="placemark.geometry"
         [properties]="placemark.properties" [options]="placemark.options" (yaclick)="clickPlace(i)"></ya-placemark>
