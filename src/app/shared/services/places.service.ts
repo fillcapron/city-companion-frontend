@@ -33,7 +33,10 @@ export class PlaceService {
     }
 
     getPlacesByCategory(categoryName: string): Observable<Place[]> {
-        console.log(categoryName)
         return this.http.get<Place[]>(this.url + 'category/' + categoryName);
+    }
+
+    changePublished(id: number | null, dto: {isPublished: boolean}): Observable<void> {
+        return this.http.put<void>(this.url + 'published/' + id, dto);
     }
 }

@@ -2,6 +2,7 @@
   margin: 0 auto;
   max-width: 1040px;
   &-name {
+    margin-top: 20px;
     font-weight: 500;
   }
   &-count {
@@ -21,6 +22,9 @@
         margin: 5px 10px;
         margin-bottom: 20px;
         margin-right: 10px;
+        & a {
+          color: #000000DE;
+        }
     }
   }
   &-map {
@@ -28,6 +32,10 @@
     width: 100%;
     height: 80vh;
   }
+}
+
+.sort-place {
+  margin-right: 20px;
 }
 
 .mat-card:focus {
@@ -38,4 +46,16 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+}
+
+.noPlace {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.select {
+  font-size: 12px;
+  width: 100%;
+  margin: 5px 10px;
 }

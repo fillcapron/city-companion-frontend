@@ -9,7 +9,7 @@
     <form #formPlace="ngForm">
       <div class="dialog-blocks">
         <div class="dialog-blocks__input">
-          <mat-checkbox name="published" class="dialog-blocks__input published" [(ngModel)]="place.published">
+          <mat-checkbox name="published" class="dialog-blocks__input published" [(ngModel)]="place.published" (change)="onPublished()">
             Опубликовано</mat-checkbox>
           <mat-form-field appearance="fill" class="main-input">
             <mat-label>Название места</mat-label>

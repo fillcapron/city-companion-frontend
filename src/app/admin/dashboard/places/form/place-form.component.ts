@@ -76,7 +76,12 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
         }
         this.serviceCategory.getCategories().subscribe(category => this.categories = category);
     }
-
+    onPublished():void {
+        this.servicePlace.changePublished(this.place.id, {isPublished: this.place.published}).subscribe(
+            (place) => this.dialogRef.close('Запись опубликована'),
+            (err) => this.dialogRef.close(err)
+        );
+    }
     submit(): void {
 
         if (this.isReading) {

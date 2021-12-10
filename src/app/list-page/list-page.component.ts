@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { switchMap, tap } from 'rxjs/operators';
 import { Place } from '../shared/interface';
 import { PlaceService } from '../shared/services/places.service';
@@ -24,6 +24,7 @@ export class ListPageComponent implements OnInit {
   categoryName: string = '';
   places: Place[] = [];
   map!: ymaps.Map;
+  selected = '123';
 
   mapState: ymaps.IMapState = {
     type: 'yandex#map',
@@ -51,6 +52,13 @@ export class ListPageComponent implements OnInit {
   clickPlace(index: any): void {
     const elementRef = this.cardPlaceList.find((_, i) => i === index);
     elementRef?.nativeElement.focus();
+  }
+
+  sortData({value}: any) {
+    
+    if(value === 'reviews'){
+      console.log(value);
+    }
   }
 
   private setPlaceMarks(place: Place): void {
