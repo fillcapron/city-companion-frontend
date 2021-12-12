@@ -6,14 +6,24 @@
     </mat-card-header>
     <div class="place-block__info">
       <carousel class="img" [maxSlides]="3" [images]="place?.images || []"></carousel>
-    <mat-card-content class="description">
-      <h3>Адресс:</h3>
-      <h3>О месте:</h3>
-      <p>
-        {{place?.description}}
-      </p>
-    </mat-card-content>
-  </div>
+      <mat-card-content class="description">
+        <h2>Описание</h2>
+        <p>
+          {{place?.description}}
+        </p>
+        <a href={{place.website}} target="_blank">Перейти на сайт</a>
+        <h2>Телефон</h2>
+        {{place?.phone ? '+7' + place?.phone : 'Отсутствует'}}
+        
+      </mat-card-content>
+    </div>
+    <h2>Расположение</h2>
+    <p>{{place?.address?.region}}, г.{{place?.address?.city}}, {{place?.address?.street}} {{place?.address?.house}}</p>
+    <div class="map">
+      <ya-map [center]="placemark[0].geometry" [state]="mapState" (ready)="onMapReady($event)">
+        <ya-placemark *ngFor="let place of placemark" [geometry]="place.geometry"
+          [properties]="place.properties" [options]="place.options"></ya-placemark>
+      </ya-map>
+    </div>
   </mat-card>
-  
 </div>

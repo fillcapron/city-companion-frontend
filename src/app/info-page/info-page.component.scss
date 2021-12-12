@@ -7,10 +7,17 @@
     }
     & .description {
       max-width: 400px;
+      & h3 {
+        margin-bottom: 5px;
+      }
     }
   }
   &__img {
     width: 100%;
     height: 200px;
+  }
+  & .map {
+    width: 100%;
+    height: 380px;
   }
 }

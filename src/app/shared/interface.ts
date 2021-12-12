@@ -35,3 +35,8 @@ export interface Address {
     longitude?: number | null,
     places?: Place[]
 }
+export interface PlacemarkConstructor {
+    geometry: number[];
+    properties: ymaps.IPlacemarkProperties;
+    options: ymaps.IPlacemarkOptions;
+  }

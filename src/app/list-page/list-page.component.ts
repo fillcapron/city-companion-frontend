@@ -1,15 +1,12 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap, tap } from 'rxjs/operators';
-import { Place } from '../shared/interface';
+import { Place, PlacemarkConstructor } from '../shared/interface';
 import { PlaceService } from '../shared/services/places.service';
 import { YaEvent, YaReadyEvent } from 'angular8-yandex-maps';
+import { setPlaceMarks } from '../shared/utils';
 
-interface PlacemarkConstructor {
-  geometry: number[];
-  properties: ymaps.IPlacemarkProperties;
-  options: ymaps.IPlacemarkOptions;
-}
+
 
 @Component({
   selector: 'app-list-page',
@@ -24,7 +21,7 @@ export class ListPageComponent implements OnInit {
   categoryName: string = '';
   places: Place[] = [];
   map!: ymaps.Map;
-  selected = '123';
+  selected = '';
 
   mapState: ymaps.IMapState = {
     type: 'yandex#map',
@@ -40,7 +37,7 @@ export class ListPageComponent implements OnInit {
       tap((category) => this.categoryName = category.name),
       switchMap(param => this.placeService.getPlacesByCategory(param.name))
     ).subscribe(places => {
-      places.map(elem => this.setPlaceMarks(elem));
+      places.map(elem => this.placemarks.push(setPlaceMarks(elem)));
       this.places = places;
     });
   }
@@ -65,27 +62,5 @@ export class ListPageComponent implements OnInit {
     this.router.navigate(['/place', id]);
   }
 
-  private setPlaceMarks(place: Place): void {
-    const { name, description, phone } = place;
-    const address = place && place.address;
-    const fullAddress = address?.street + ' ' + address?.house;
-    const latitude = address && address.latitude;
-    const longitude = address && address.longitude;
-
-    this.placemarks.push(
-      {
-        geometry: [latitude!, longitude!],
-        properties: {
-          id: 1,
-          balloonContentHeader: name,
-          balloonContentBody: description,
-          balloonContentFooter: phone ? fullAddress + ', +7' + phone : fullAddress,
-          hintContent: name,
-        },
-        options: {
-          preset: 'islands#blueCinemaCircleIcon'
-        }
-      }
-    )
-  }
+  
 }
