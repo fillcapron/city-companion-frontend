@@ -1,0 +1,25 @@
+<section>
+    <div class="container">
+        <div class="carousel">
+            <input type="radio" name="slides" *ngFor="let elem of _inputArray; let i = index" id="slide-{{i+1}}">
+            <!-- <input type="radio" name="slides" id="slide-2">
+            <input type="radio" name="slides" id="slide-3">
+            <input type="radio" name="slides" id="slide-4">
+            <input type="radio" name="slides" id="slide-5">
+            <input type="radio" name="slides" id="slide-6"> -->
+            <ul class="carousel__slides">
+                <li class="carousel__slide" *ngFor="let img of _images">
+                    <figure>
+                        <div>
+                            <img src={{img.url}} alt="">
+                        </div>
+                    </figure>
+                </li>
+            </ul>    
+            <ul class="carousel__thumbnails" *ngIf="_images.length > 1">
+                <li *ngFor="let img of _images; let i = index">
+                    <label for="slide-{{i + 1}}"><img src={{img.url}} alt=""></label>
+                </li>
+            </ul>
+        </div>
+    </div>
