@@ -1,0 +1,10 @@
+.toolbar {
+    &_nav {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+    a {
+        color: white;
+    }
+}
