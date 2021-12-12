@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap, tap } from 'rxjs/operators';
 import { Place } from '../shared/interface';
 import { PlaceService } from '../shared/services/places.service';
@@ -33,7 +33,7 @@ export class ListPageComponent implements OnInit {
 
   placemarks: PlacemarkConstructor[] = [];
 
-  constructor(private route: ActivatedRoute, private placeService: PlaceService) { }
+  constructor(private route: ActivatedRoute, private placeService: PlaceService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.pipe(
@@ -59,6 +59,10 @@ export class ListPageComponent implements OnInit {
     if(value === 'reviews'){
       console.log(value);
     }
+  }
+
+  goPlaceDetail(id: number): void {
+    this.router.navigate(['/place', id]);
   }
 
   private setPlaceMarks(place: Place): void {

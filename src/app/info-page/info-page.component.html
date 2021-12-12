@@ -1,18 +1,19 @@
-<div class="container">
-    <ya-map 
-    [center]="[56.2414, 43.4554]"
-    (ready)="onMapReady($event)"
-    [state]="mapState"
-    >
-    <ya-placemark
-      *ngFor="let placemark of placemarks"
-      [geometry]="placemark.geometry"
-      [properties]="placemark.properties"
-      [options]="placemark.options"
-    ></ya-placemark>
-    </ya-map>
+<div class="content">
+  <mat-card class="place-block">
+    <mat-card-header>
+      <mat-card-title>{{place?.name}}</mat-card-title>
+      <mat-card-subtitle>{{place?.category?.name}}</mat-card-subtitle>
+    </mat-card-header>
+    <div class="place-block__info">
+      <carousel class="img" [maxSlides]="3" [images]="place?.images || []"></carousel>
+    <mat-card-content class="description">
+      <h3>Адресс:</h3>
+      <h3>О месте:</h3>
+      <p>
+        {{place?.description}}
+      </p>
+    </mat-card-content>
+  </div>
+  </mat-card>
+  
 </div>
-<ng-container *ngIf="map">
-    <button (click)="setMarks()">Change center</button>
-    <button (click)="setZoom()">Change zoom</button>
-</ng-container>

@@ -11,15 +11,17 @@ import { AppComponent } from './app.component';
 import { InfoPageComponent } from './info-page/info-page.component';
 import { MainComponent } from './main/main.component';
 import { AdminModule } from './admin/admin.module';
-import { MainLayoutComponent } from './shared/components/main-layout.component';
+import { MainLayoutComponent } from './shared/components/layout/main-layout.component';
 import { ListPageModule } from './list-page/list-page.module';
+import { CarouselComponent } from './shared/components/carousel/carousel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainLayoutComponent,
     MainComponent,
-    InfoPageComponent
+    InfoPageComponent,
+    CarouselComponent
   ],
   imports: [
     AdminModule,

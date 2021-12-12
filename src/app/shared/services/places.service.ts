@@ -20,8 +20,8 @@ export class PlaceService {
         return this.http.get<Place[]>(this.url);
     }
 
-    getPlace(): Observable<Place> {
-        return this.http.get<Place>(this.url);
+    getPlace(id: number): Observable<Place> {
+        return this.http.get<Place>(this.url + id);
     }
 
     updatePlace(place: Place): Observable<ApiResponse> {

@@ -31,7 +31,7 @@
         </p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button>Подробнее</button>
+        <button mat-button (click)="goPlaceDetail(place.id!)">Подробнее</button>
         <button mat-button><a href={{place.website}} target="_blank">Сайт</a></button>
       </mat-card-actions>
     </mat-card>
