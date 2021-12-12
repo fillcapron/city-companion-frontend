@@ -16,7 +16,7 @@
     <ng-container *ngFor="let place of places">
     <mat-card *ngIf="place.published" #cardPlace class="list-places_card" tabindex="0">
       <ng-container *ngIf="place.images">
-        <img *ngFor="let img of place.images" mat-card-image src={{img.url}}>
+        <img mat-card-image src={{place.images[0].url}}>
       </ng-container>
       <mat-card-header>
         <mat-card-title>{{place.name}}</mat-card-title>
