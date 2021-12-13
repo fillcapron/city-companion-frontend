@@ -1,4 +1,4 @@
-import { Images } from "../admin/shared/interface";
+import { Images, Tag } from "../admin/shared/interface";
 
 export interface Tags {
     name: string
@@ -6,7 +6,7 @@ export interface Tags {
 export interface Categories {
     id: number | null,
     name: string,
-    tags?: any[]
+    tags?: Tag[]
 }
 
 export interface Place {
@@ -15,7 +15,7 @@ export interface Place {
     address?: Address,
     description: string,
     category: Categories,
-    tags?: Tags[],
+    tags?: Tag[],
     images?: Images[],
     reviews?: string[],
     phone: string,

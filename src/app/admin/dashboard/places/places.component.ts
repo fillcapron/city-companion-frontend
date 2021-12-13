@@ -30,7 +30,7 @@ export class TableGeneratedColumnsPlaces implements OnInit {
         {
             columnDef: 'description',
             header: 'Описание',
-            cell: (element: Place) => `${element.description.slice(0, 50)}...`,
+            cell: (element: Place) => `${element.description.length > 50 ? element.description.slice(0, 50)+ '...': element.description}`,
         },
         {
             columnDef: 'category',

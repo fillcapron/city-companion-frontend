@@ -1,0 +1,19 @@
+<mat-form-field appearance="fill" class="main-input">
+    <mat-label>Теги</mat-label>
+  <mat-chip-list #chipList>
+    <mat-chip *ngFor="let tag of _tags" [selectable]="selectable"
+             [removable]="!disabled" [disabled]="disabled" (removed)="remove(tag)">
+      {{tag.name}}
+      <button matChipRemove *ngIf="!disabled">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip>
+    <input placeholder="Добавить тег"
+           [matChipInputFor]="chipList"
+           [disabled]="disabled"
+           (change)="chipList.errorState = false"
+           [matChipInputAddOnBlur]="addOnBlur"
+           (matChipInputTokenEnd)="addTag($event)">
+  </mat-chip-list>
+  <mat-error *ngIf="chipList.errorState">Тег существует</mat-error>
+</mat-form-field>

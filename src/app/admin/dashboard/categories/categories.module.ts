@@ -5,19 +5,19 @@ import { MaterialModule } from "src/app/material.module";
 
 import { TableGeneratedColumnsCategories } from "./categories.component";
 import { DialogCategoryComponent } from "./form/category-form.component";
-import { ConfirmComponent } from "../../shared/components/confirm/confirm.component";
+import { CreateTagsModule } from "../../shared/components/create-tags/create-tags.module";
 @NgModule({
     declarations: [
         DialogCategoryComponent,
-        TableGeneratedColumnsCategories,
-        ConfirmComponent
+        TableGeneratedColumnsCategories
     ],
-    entryComponents: [DialogCategoryComponent, ConfirmComponent],
+    entryComponents: [DialogCategoryComponent],
     imports: [
         FormsModule,
         ReactiveFormsModule,
         CommonModule,
-        MaterialModule
+        MaterialModule,
+        CreateTagsModule
     ]
 })
 export class CategoriesModule { }

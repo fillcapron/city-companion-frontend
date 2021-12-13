@@ -20,16 +20,12 @@ export class DialogCategoryComponent implements OnInit, EventsForm {
     isReading!: boolean;
     isDisabledField!: boolean;
 
-    @ViewChild("chipList") chipList!: MatChipList;
-    selectable = false;
-    removable!: boolean;
-    addOnBlur = true;
-
     category: Categories = {
         id: null,
-        name: '',
-        tags: []
+        name: ''
     };
+
+    tags: Tag[] = [];
 
     constructor(
         public dialogRef: MatDialogRef<DialogCategoryComponent>,
@@ -42,8 +38,8 @@ export class DialogCategoryComponent implements OnInit, EventsForm {
     ngOnInit(): void {
         this.category = Object.assign(this.category, this.data);
         if (isEmptyObject(this.data)) return
+        this.tags = this.data.tags || [];
         this.isReading = true;
-        this.removable = false;
         this.isDisabledField = true;
     }
 
@@ -90,37 +86,10 @@ export class DialogCategoryComponent implements OnInit, EventsForm {
 
     reading(): void {
         this.isDisabledField = false;
-        this.removable = true;
-    }
-
-    addTag(event: MatChipInputEvent): void {
-        const value = (event.value || '').toLowerCase().trim();
-        if (this.category.tags?.some((tag) => tag.name === value)) {
-            this.chipList.errorState = true;
-            return; 
-        }
-        if (this.category.id && value) {
-            this.serviceTag.createTag({ name: value, category: this.category.id }).subscribe(
-                (tag) => tag.error ? null : this.category.tags!.push(tag),
-                (err) => alert(err)
-            );
-        } else if (value) {
-            this.category.tags!.push({ name: value });
-        }
-        event.chipInput!.clear();
-    }
-
-    remove(tag: Tag): void {
-        this.serviceTag.deleteTag(tag.id).subscribe(
-            (tag) => console.log(tag?.message),
-            (err) => alert(err)
-        )
-        this.category.tags = this.category.tags?.filter(elem => elem.id !== tag.id);
     }
 
     cancel(): void {
         if (!this.isReading) return this.dialogRef.close('Отменено')
         this.isDisabledField = true;
-        this.removable = false;
     }
 }

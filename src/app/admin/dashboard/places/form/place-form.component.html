@@ -44,6 +44,8 @@
                 (click)="addAddress = !addAddress">добавьте</span> новый</mat-label>
             <address-search (selectAddressEvent)="selectAddress($event)"></address-search>
           </ng-container>
+
+          <create-tags [tags]="tags" type="place" [disabled]="isDisabledField" [id]="place.id"></create-tags>
         </div>
 
         <div class="dialog-blocks__address">

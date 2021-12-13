@@ -14,21 +14,18 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AUTH_API_URL } from "./admin-injection-tokens";
 import { JwtModule } from '@auth0/angular-jwt';
 
-
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { LoginComponent } from "./login/login.component";
 import { AdminLayoutComponent } from "./shared/components/layout/admin-layout.component";
 import { ACCESS_TOKEN_KEY } from "./shared/services/auth.service";
 import { AuthGuard } from "./shared/guards/auth.guard";
 import { MenuListItemComponent } from "./shared/components/menu/menu-list-item.component";
-
-
-
+import { CreateTagsComponent } from "./shared/components/create-tags/create-tags.component";
+import { ConfirmComponent } from "./shared/components/confirm/confirm.component";
 
 export function tokenGetter() {
     return localStorage.getItem(ACCESS_TOKEN_KEY);
 }
-
 @NgModule(
     {
         imports: [
@@ -53,7 +50,8 @@ export function tokenGetter() {
             AdminLayoutComponent,
             DashboardComponent,
             LoginComponent,
-            MenuListItemComponent
+            MenuListItemComponent,
+            ConfirmComponent
         ],
         providers: [
             {

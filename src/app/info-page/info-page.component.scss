@@ -1,14 +1,30 @@
 .place-block {
   margin-top: 50px;
+
+  & .header {
+    justify-content: space-between;
+  }
+
   &__info {
     display: flex;
+    
     & .img {
-      width: calc(100% - 400px);
+      width: 100%;
     }
     & .description {
-      max-width: 400px;
-      & h3 {
+      width:  calc(100% - 400px);
+      & h2 {
         margin-bottom: 5px;
+      }
+      & .phone {
+        padding: 16px 18px;
+        background: #ebebeb;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        text-align: center;
+        &:hover {
+          background: whitesmoke;
+        }
       }
     }
   }

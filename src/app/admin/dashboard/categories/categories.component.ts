@@ -18,7 +18,8 @@ export class TableGeneratedColumnsCategories implements OnInit {
 
     category: Categories = {
         id: null,
-        name: ''
+        name: '',
+        tags: []
     };
 
     columns = [

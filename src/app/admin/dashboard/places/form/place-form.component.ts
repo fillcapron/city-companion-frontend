@@ -1,15 +1,16 @@
 import { Component, Inject, OnInit } from "@angular/core";
-import { FormBuilder, NgForm } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { AddressService } from "src/app/shared/services/address.service";
 import { CategoryService } from "src/app/shared/services/category.service";
-import { Address, Categories, Place, Tags } from "src/app/shared/interface";
+import { Address, Categories, Place } from "src/app/shared/interface";
 import { PlaceService } from "src/app/shared/services/places.service";
-import { EventsForm, Images } from "src/app/admin/shared/interface";
+import { ApiResponse, EventsForm, Images, Tag } from "src/app/admin/shared/interface";
 import { isEmptyObject } from "src/app/admin/shared/utils";
-import { switchMap } from "rxjs/operators";
+import { mergeMap, switchMap } from "rxjs/operators";
 import { ImagesService } from "src/app/shared/services/images.service";
 import { ConfirmDialogService } from "src/app/admin/shared/components/confirm/confirm.service";
+import { TagService } from "src/app/admin/shared/services/tag.service";
+import { forkJoin } from "rxjs";
 @Component({
     selector: 'dialog-places',
     templateUrl: 'place-form.component.html',
@@ -23,6 +24,7 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
 
     categories: Categories[] = [];
     images: Images[] = [];
+    tags: Tag[] = [];
 
     address: Address = {
         id: null,
@@ -48,8 +50,6 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
         address: this.address
     }
 
-    tags: Tags[] = [];
-
     constructor(
         public dialogRef: MatDialogRef<DialogPlaceComponent>,
         @Inject(MAT_DIALOG_DATA) public data: Place,
@@ -57,7 +57,8 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
         private serviceAddress: AddressService,
         private servicePlace: PlaceService,
         private serviceImages: ImagesService,
-        private confirmDialog: ConfirmDialogService
+        private confirmDialog: ConfirmDialogService,
+        private serviceTag: TagService
     ) { }
 
     compareFn(c1: Categories, c2: Categories): boolean {
@@ -76,8 +77,9 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
         }
         this.serviceCategory.getCategories().subscribe(category => this.categories = category);
     }
-    onPublished():void {
-        this.servicePlace.changePublished(this.place.id, {isPublished: this.place.published}).subscribe(
+    onPublished(): void {
+        if (!this.place.id) return;
+        this.servicePlace.changePublished(this.place.id, { isPublished: this.place.published }).subscribe(
             (place) => this.dialogRef.close('Запись опубликована'),
             (err) => this.dialogRef.close(err)
         );
@@ -94,14 +96,14 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
         if (this.address.id) {
             this.servicePlace.createPlaces({ ...this.place }).pipe(
                 switchMap((place) => {
-                    if (this.images.length) {
-                        this.images.map(elem => elem.place = place.meta.id);
-                    }
-                    return this.serviceImages.create(this.images);
+                    return forkJoin([this.createImages(place), this.createTags(place)]);
                 })
             ).subscribe(
-                (place) => {
-                    this.dialogRef.close(place?.message);
+                (result) => {
+                    if (result.some(el => Boolean(el.error))) {
+                        return this.dialogRef.close('Ошибка');
+                    }
+                    this.dialogRef.close('Место создано');
                 },
                 (err) => {
                     this.dialogRef.close(err);
@@ -115,15 +117,15 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
                         return this.servicePlace.createPlaces(this.place);
                     }),
                     switchMap((place) => {
-                        if (this.images.length) {
-                            this.images.map(elem => elem.place = place.meta.id);
-                        }
-                        return this.serviceImages.create(this.images);
+                        return forkJoin([this.createImages(place), this.createTags(place)]);
                     })
                 )
                 .subscribe(
-                    (place) => {
-                        this.dialogRef.close(place?.message);
+                    (result) => {
+                        if (result.some(el => Boolean(el.error))) {
+                            return this.dialogRef.close('Ошибка');
+                        }
+                        this.dialogRef.close('Место создано');
                     },
                     (err) => {
                         this.dialogRef.close(err);
@@ -175,5 +177,21 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
     cancel(): void {
         if (!this.isReading) return this.dialogRef.close('Отменено');
         this.isDisabledField = true;
+    }
+
+    private createTags(place: ApiResponse) {
+        if (this.tags?.length) {
+            this.tags.map(elem => {
+                elem.place = place.meta.id;
+            });
+        }
+        return this.serviceTag.createTags(this.tags!);
+    }
+
+    private createImages(place: ApiResponse) {
+        if (this.images.length) {
+            this.images.map(elem => elem.place = place.meta.id);
+        }
+        return this.serviceImages.create(this.images);
     }
 }

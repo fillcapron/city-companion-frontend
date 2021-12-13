@@ -2,12 +2,12 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule } from "src/app/material.module";
-import { AddressSearch } from "../../shared/components/address-input/address-search.component";
 import { ImageUploadModule } from "../../shared/components/image-upload/image-upload.module";
 
-
+import { AddressSearch } from "../../shared/components/address-input/address-search.component";
 import { DialogPlaceComponent } from "./form/place-form.component";
 import { TableGeneratedColumnsPlaces } from "./places.component";
+import { CreateTagsModule } from "../../shared/components/create-tags/create-tags.module";
 @NgModule({
     declarations: [
         DialogPlaceComponent,
@@ -20,7 +20,8 @@ import { TableGeneratedColumnsPlaces } from "./places.component";
         ReactiveFormsModule,
         CommonModule,
         MaterialModule,
-        ImageUploadModule
+        ImageUploadModule,
+        CreateTagsModule
     ],
     exports: []
 })
