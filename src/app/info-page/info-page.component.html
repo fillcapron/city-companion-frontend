@@ -10,33 +10,51 @@
         <carousel class="img" [maxSlides]="3" [images]="place?.images || []"></carousel>
         <mat-card-content class="description">
           <div class="phone mb-2">
-          <h2>Телефон</h2>
-          {{place?.phone ? '+7' + place?.phone : 'Отсутствует'}}
+            <h2>Телефон</h2>
+            {{place?.phone ? '+7' + place?.phone : 'Отсутствует'}}
           </div>
           <div class="mb-2">
-          <h2>Описание</h2>
-          <p>
-            {{place?.description}}
-          </p>
-          <ng-container *ngIf="place?.website">
-          <a href={{place?.website}} target="_blank">Перейти на сайт</a>
-          </ng-container>
-        </div>
-        <div class="tags">
-          <mat-chip-list aria-label="Fish selection">
-            <mat-chip *ngFor="let tag of place?.tags">{{tag.name}}</mat-chip>
-          </mat-chip-list>
-        </div>
+            <h2>Описание</h2>
+            <p>
+              {{place?.description}}
+            </p>
+            <ng-container *ngIf="place?.website">
+              <a href={{place?.website}} target="_blank">Перейти на сайт</a>
+            </ng-container>
+          </div>
+          <div class="tags">
+            <mat-chip-list aria-label="Fish selection">
+              <mat-chip *ngFor="let tag of place?.tags">{{tag.name}}</mat-chip>
+            </mat-chip-list>
+          </div>
         </mat-card-content>
       </div>
-      <h2>Расположение</h2>
-      <p>{{place?.address?.region}}, г.{{place?.address?.city}}, {{place?.address?.street}} {{place?.address?.house}}</p>
-      <div class="map">
-        <ya-map [center]="placemark[0]?.geometry!" [state]="mapState" (ready)="onMapReady($event)">
-          <ya-placemark *ngFor="let place of placemark" [geometry]="place.geometry"
-            [properties]="place.properties" [options]="place.options"></ya-placemark>
-        </ya-map>
-      </div>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">place</mat-icon>
+            Расположение
+          </ng-template>
+          <p>{{place?.address?.region}}, г.{{place?.address?.city}}, {{place?.address?.street}}
+            {{place?.address?.house}}</p>
+          <div class="map">
+            <ya-map [center]="placemark[0]?.geometry!" [state]="mapState" (ready)="onMapReady($event)">
+              <ya-placemark *ngFor="let place of placemark" [geometry]="place.geometry" [properties]="place.properties"
+                [options]="place.options"></ya-placemark>
+            </ya-map>
+          </div>
+        </mat-tab>
+
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+            Отзывы
+          </ng-template>
+          Отзывы
+        </mat-tab>
+      </mat-tab-group>
+
+
     </ng-container>
   </mat-card>
 </div>

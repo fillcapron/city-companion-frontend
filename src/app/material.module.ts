@@ -19,6 +19,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSortModule } from '@angular/material/sort';
+import { MatTabsModule } from '@angular/material/tabs';
 
 const material = [
   MatFormFieldModule,
@@ -40,7 +41,8 @@ const material = [
   MatChipsModule,
   MatCheckboxModule,
   MatAutocompleteModule,
-  MatSortModule
+  MatSortModule,
+  MatTabsModule
 ];
 
 @NgModule({
