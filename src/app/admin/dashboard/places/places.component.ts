@@ -84,6 +84,7 @@ export class TableGeneratedColumnsPlaces implements OnInit {
 
         const dialogRef = this.dialog.open(DialogPlaceComponent, {
             maxWidth: '900px',
+            maxHeight: window.innerHeight + 'px',
             position: {top: '10px'},
             data: elem === 'add' ? {} : elem
         });
