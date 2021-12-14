@@ -21,7 +21,11 @@
         <a href={{place?.website}} target="_blank">Перейти на сайт</a>
         </ng-container>
       </div>
-      <div class="tags">теги</div>
+      <div class="tags">
+        <mat-chip-list aria-label="Fish selection">
+          <mat-chip *ngFor="let tag of place?.tags">{{tag.name}}</mat-chip>
+        </mat-chip-list>
+      </div>
       </mat-card-content>
     </div>
     <h2>Расположение</h2>

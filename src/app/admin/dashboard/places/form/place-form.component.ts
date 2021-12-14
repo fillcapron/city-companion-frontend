@@ -100,7 +100,7 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
                 })
             ).subscribe(
                 (result) => {
-                    if (result.some(el => Boolean(el.error))) {
+                    if (result.every(el => Boolean(el.error))) {
                         return this.dialogRef.close('Ошибка');
                     }
                     this.dialogRef.close('Место создано');
@@ -122,7 +122,7 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
                 )
                 .subscribe(
                     (result) => {
-                        if (result.some(el => Boolean(el.error))) {
+                        if (result.every(el => Boolean(el.error))) {
                             return this.dialogRef.close('Ошибка');
                         }
                         this.dialogRef.close('Место создано');
