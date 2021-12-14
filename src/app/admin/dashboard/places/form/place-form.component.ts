@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { AddressService } from "src/app/shared/services/address.service";
 import { CategoryService } from "src/app/shared/services/category.service";
-import { Address, Categories, Place } from "src/app/shared/interface";
+import { Address, Categories, Place, Tags } from "src/app/shared/interface";
 import { PlaceService } from "src/app/shared/services/places.service";
 import { ApiResponse, EventsForm, Images, Tag } from "src/app/admin/shared/interface";
 import { isEmptyObject } from "src/app/admin/shared/utils";
@@ -10,7 +10,7 @@ import { mergeMap, switchMap } from "rxjs/operators";
 import { ImagesService } from "src/app/shared/services/images.service";
 import { ConfirmDialogService } from "src/app/admin/shared/components/confirm/confirm.service";
 import { TagService } from "src/app/admin/shared/services/tag.service";
-import { forkJoin } from "rxjs";
+import { forkJoin, Observable } from "rxjs";
 @Component({
     selector: 'dialog-places',
     templateUrl: 'place-form.component.html',
@@ -21,6 +21,7 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
     isReading!: boolean;
     isDisabledField!: boolean;
     addAddress!: boolean;
+    mobNumberPattern = "^((\\+91-?)|0)?[0-9]{10}$";
 
     categories: Categories[] = [];
     images: Images[] = [];
@@ -101,9 +102,10 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
             ).subscribe(
                 (result) => {
                     if (result.every(el => Boolean(el.error))) {
-                        return this.dialogRef.close('Ошибка');
+                        this.dialogRef.close('Место создано');
+                        return;
                     }
-                    this.dialogRef.close('Место создано');
+                    return this.dialogRef.close('Ошибка создания');
                 },
                 (err) => {
                     this.dialogRef.close(err);
@@ -123,9 +125,10 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
                 .subscribe(
                     (result) => {
                         if (result.every(el => Boolean(el.error))) {
-                            return this.dialogRef.close('Ошибка');
+                            this.dialogRef.close('Место создано');
+                            return;
                         }
-                        this.dialogRef.close('Место создано');
+                        return this.dialogRef.close('Ошибка создания');
                     },
                     (err) => {
                         this.dialogRef.close(err);
@@ -179,7 +182,7 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
         this.isDisabledField = true;
     }
 
-    private createTags(place: ApiResponse) {
+    private createTags(place: ApiResponse): Observable<ApiResponse> {
         if (this.tags?.length) {
             this.tags.map(elem => {
                 elem.place = place.meta.id;
@@ -188,7 +191,7 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
         return this.serviceTag.createTags(this.tags!);
     }
 
-    private createImages(place: ApiResponse) {
+    private createImages(place: ApiResponse): Observable<ApiResponse> {
         if (this.images.length) {
             this.images.map(elem => elem.place = place.meta.id);
         }

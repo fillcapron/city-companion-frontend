@@ -9,7 +9,8 @@
     <form #formPlace="ngForm">
       <div class="dialog-blocks">
         <div class="dialog-blocks__input">
-          <mat-checkbox name="published" class="dialog-blocks__input published" [(ngModel)]="place.published" (change)="onPublished()">
+          <mat-checkbox name="published" class="dialog-blocks__input published" [(ngModel)]="place.published"
+            (change)="onPublished()">
             Опубликовано</mat-checkbox>
           <mat-form-field appearance="fill" class="main-input">
             <mat-label>Название места</mat-label>
@@ -18,18 +19,19 @@
 
           <mat-form-field appearance="fill">
             <mat-label>Категория</mat-label>
-            <mat-select name="category" [compareWith]="compareFn" [(ngModel)]="place.category" required
-              [disabled]="isDisabledField">
+            <mat-select name="category" [compareWith]="compareFn" [disabled]="isDisabledField"
+              [(ngModel)]="place.category" required>
               <mat-option *ngFor="let category of categories" [value]="category">{{category.name}}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="fill" class="phone-input" *ngIf="place.phone || !isDisabledField">
             <mat-label>Телефон</mat-label>
             <span matPrefix>+7 &nbsp;</span>
-            <input type="tel" matInput  name="phone" [(ngModel)]="place.phone" placeholder="555-555-1234"  [disabled]="isDisabledField">
+            <input type="tel" matInput name="phone" [(ngModel)]="place.phone" placeholder="555-555-1234"
+              [pattern]="mobNumberPattern" [disabled]="isDisabledField">
             <mat-icon matSuffix>mode_edit</mat-icon>
           </mat-form-field>
-          <mat-form-field appearance="fill" class="main-input"  *ngIf="place.website || !isDisabledField">
+          <mat-form-field appearance="fill" class="main-input" *ngIf="place.website || !isDisabledField">
             <mat-label>Вебсайт</mat-label>
             <input matInput name="website" [(ngModel)]="place.website" [disabled]="isDisabledField">
           </mat-form-field>
@@ -57,19 +59,19 @@
             </mat-form-field>
             <mat-form-field appearance="fill" class="input-address">
               <mat-label>Регион</mat-label>
-              <input matInput name="region" [(ngModel)]="place.address!.region" [disabled]="isDisabledField">
+              <input matInput required name="region" [(ngModel)]="place.address!.region" [disabled]="isDisabledField">
             </mat-form-field>
             <mat-form-field appearance="fill" class="input-address">
               <mat-label>Город</mat-label>
-              <input matInput name="city" [(ngModel)]="place.address!.city" [disabled]="isDisabledField">
+              <input matInput required name="city" [(ngModel)]="place.address!.city" [disabled]="isDisabledField">
             </mat-form-field>
             <mat-form-field appearance="fill" class="input-address">
               <mat-label>Улица</mat-label>
-              <input matInput name="street" [(ngModel)]="place.address!.street" [disabled]="isDisabledField">
+              <input matInput required name="street" [(ngModel)]="place.address!.street" [disabled]="isDisabledField">
             </mat-form-field>
             <mat-form-field appearance="fill" class="input-address">
               <mat-label>Дом</mat-label>
-              <input matInput name="house" [(ngModel)]="place.address!.house" [disabled]="isDisabledField">
+              <input matInput required name="house" [(ngModel)]="place.address!.house" [disabled]="isDisabledField">
             </mat-form-field>
           </div>
         </div>
@@ -78,17 +80,17 @@
   </mat-dialog-content>
 
   <mat-dialog-content>
-  <mat-label><b>Изображения</b></mat-label>
-  <div class="images-block">
-    <upload-field #files [images]="images" [disabled]="!isDisabledField" (upload)="uploadImage($event)">
-    </upload-field>
-    <div [uploadFile]="files" class="drop-area" *ngIf="!isDisabledField">
-      Перенесите изображения или
-      <input [uploadFile]="files" id="img" type="file" style="display:none;">
-      <label for="img">нажмите <b class="text-button">сюда</b></label>
+    <mat-label><b>Изображения</b></mat-label>
+    <div class="images-block">
+      <upload-field #files [images]="images" [disabled]="!isDisabledField" (upload)="uploadImage($event)">
+      </upload-field>
+      <div [uploadFile]="files" class="drop-area" *ngIf="!isDisabledField">
+        Перенесите изображения или
+        <input [uploadFile]="files" id="img" type="file" style="display:none;">
+        <label for="img">нажмите <b class="text-button">сюда</b></label>
+      </div>
     </div>
-  </div>
-</mat-dialog-content>
+  </mat-dialog-content>
 
   <mat-dialog-actions align="start">
     <ng-container *ngIf="isReading && isDisabledField else read">
