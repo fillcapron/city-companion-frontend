@@ -45,7 +45,7 @@
       <h3>Все места:</h3>
       <mat-nav-list>
         <a mat-list-item *ngFor="let place of address.places" target="_blank"
-          routerLinkActive="active">{{place.name}}</a>
+          (click)="goPlacePage(place.id!)">{{place.name}}</a>
       </mat-nav-list>
     </mat-dialog-content>
   </div>

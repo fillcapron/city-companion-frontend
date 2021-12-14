@@ -6,6 +6,7 @@ import { Address, Place } from "src/app/shared/interface";
 import { EventsForm } from "src/app/admin/shared/interface";
 import { isEmptyObject } from "src/app/admin/shared/utils";
 import { ConfirmDialogService } from "src/app/admin/shared/components/confirm/confirm.service";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'dialog-address',
@@ -34,7 +35,8 @@ export class DialogAddressComponent implements OnInit, EventsForm {
         public dialogRef: MatDialogRef<DialogAddressComponent>,
         @Inject(MAT_DIALOG_DATA) public data: Address,
         private serviceAddress: AddressService,
-        private confirmDialog: ConfirmDialogService
+        private confirmDialog: ConfirmDialogService,
+        private route: Router
     ) { }
 
     ngOnInit(): void {
@@ -85,5 +87,10 @@ export class DialogAddressComponent implements OnInit, EventsForm {
     cancel(): void {
         if (!this.isReading) return this.dialogRef.close('Отменено');
         this.isDisabledField = true;
+    }
+
+    goPlacePage(id: number):void {
+        this.close();
+        this.route.navigate(['/place', id]);
     }
 }
