@@ -17,7 +17,7 @@ export interface Place {
     category: Categories,
     tags?: Tag[],
     images?: Images[],
-    reviews?: string[],
+    reviews?: Reviews[],
     phone: string,
     rating: string,
     website: string,
@@ -39,4 +39,11 @@ export interface PlacemarkConstructor {
     geometry: number[];
     properties: ymaps.IPlacemarkProperties;
     options: ymaps.IPlacemarkOptions;
-  }
+}
+
+export interface Reviews {
+    id?: number,
+    author_name: string,
+    review_text: string,
+    place: number
+}

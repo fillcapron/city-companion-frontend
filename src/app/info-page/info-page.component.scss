@@ -13,6 +13,9 @@
     }
     & .description {
       width:  calc(100% - 400px);
+      & a {
+        color: #000000DE;
+      }
       & h2 {
         margin-bottom: 5px;
       }
@@ -33,7 +36,13 @@
     height: 200px;
   }
   & .map {
+    margin: 5px 0;
     width: 100%;
     height: 380px;
   }
+}
+
+.form-review {
+  display: flex;
+  flex-direction: column;
 }

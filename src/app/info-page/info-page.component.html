@@ -14,13 +14,20 @@
             {{place?.phone ? '+7' + place?.phone : 'Отсутствует'}}
           </div>
           <div class="mb-2">
-            <h2>Описание</h2>
+            <h2>Адрес:</h2>
+            <p>{{place?.address?.region}}, г.{{place?.address?.city}}, {{place?.address?.street}}
+              {{place?.address?.house}}</p>
+            <h2>Описание:</h2>
             <p>
               {{place?.description}}
             </p>
-            <ng-container *ngIf="place?.website">
-              <a href={{place?.website}} target="_blank">Перейти на сайт</a>
-            </ng-container>
+            <mat-divider inset></mat-divider>
+            <mat-card-actions>
+              <button mat-button (click)="setActiveTab('отзывы')">Оставить отзыв</button>
+              <ng-container *ngIf="place?.website">
+                <button mat-button><a href={{place?.website}} target="_blank">Перейти на сайт</a></button>
+              </ng-container>
+            </mat-card-actions>
           </div>
           <div class="tags">
             <mat-chip-list aria-label="Fish selection">
@@ -29,15 +36,14 @@
           </div>
         </mat-card-content>
       </div>
-      <mat-tab-group animationDuration="0ms">
+      <mat-tab-group animationDuration="0ms" [selectedIndex]="selectedTab" #tabs>
         <mat-tab>
           <ng-template mat-tab-label>
             <mat-icon class="example-tab-icon">place</mat-icon>
             Расположение
           </ng-template>
-          <p>{{place?.address?.region}}, г.{{place?.address?.city}}, {{place?.address?.street}}
-            {{place?.address?.house}}</p>
-          <div class="map">
+
+          <div class="map mt-5">
             <ya-map [center]="placemark[0]?.geometry!" [state]="mapState" (ready)="onMapReady($event)">
               <ya-placemark *ngFor="let place of placemark" [geometry]="place.geometry" [properties]="place.properties"
                 [options]="place.options"></ya-placemark>
@@ -48,13 +54,26 @@
         <mat-tab>
           <ng-template mat-tab-label>
             <mat-icon class="example-tab-icon">thumb_up</mat-icon>
-            Отзывы
+            &nbsp;Отзывы
           </ng-template>
-          Отзывы
+          <mat-card>
+            <mat-list>
+              <mat-list-item role="listitem" *ngFor="let review of reviews">{{review.review_text}}</mat-list-item>
+            </mat-list>
+            <div class="form-review">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Ваше имя</mat-label>
+                <input [(ngModel)]="author_name" matInput placeholder="Введите имя" value="Аноним">
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Ваш отзыв</mat-label>
+                <textarea matInput [(ngModel)]="review_text" placeholder="Введите ваш отзыв" (keyup.enter)="sendReview()"></textarea>
+              </mat-form-field>
+            </div>
+          </mat-card>
         </mat-tab>
       </mat-tab-group>
-
-
     </ng-container>
   </mat-card>
 </div>
