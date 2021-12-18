@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatTabGroup } from '@angular/material/tabs';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { YaReadyEvent } from 'angular8-yandex-maps';
 import { switchMap } from 'rxjs/operators';
@@ -33,7 +34,8 @@ export class InfoPageComponent implements OnInit {
   constructor(
     private placeService: PlaceService,
     private route: ActivatedRoute,
-    private serviceReviews: ReviewsService) { }
+    private serviceReviews: ReviewsService,
+    private titleService: Title) { }
 
   ngOnInit() {
     this.route.params.pipe(
@@ -42,6 +44,7 @@ export class InfoPageComponent implements OnInit {
       this.placemark.push(setPlaceMarks(place));
       this.place = place;
       this.reviews = place.reviews || [];
+      this.titleService.setTitle(this.place.name);
     });
   }
 

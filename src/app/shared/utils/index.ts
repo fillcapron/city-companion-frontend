@@ -1,6 +1,6 @@
 import { Place } from "../interface";
 
-export function setPlaceMarks(place: Place): any {
+export function setPlaceMarks(place: Place, more=false): any {
     const { name, description, phone } = place;
     const address = place && place.address;
     const fullAddress = address?.street + ' ' + address?.house;
@@ -17,7 +17,7 @@ export function setPlaceMarks(place: Place): any {
           hintContent: name,
         },
         options: {
-          preset: 'islands#blueCinemaCircleIcon'
+          preset: more ? 'islands#blueCircleIcon' : 'islands#redIcon'
         }
       }
   }

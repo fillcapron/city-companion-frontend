@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Categories } from '../shared/interface';
 import { CategoryService } from '../shared/services/category.service';
 
@@ -12,10 +13,11 @@ export class MainComponent implements OnInit {
   @Input() input!: string;
   categories: Categories[] = [];
 
-  constructor(private TagService: CategoryService) { }
+  constructor(private TagService: CategoryService, private titleService: Title) { }
 
   ngOnInit() {
     this.TagService.getCategories().subscribe(categories => this.categories = categories);
+    this.titleService.setTitle('Главная страница');
   }
 
   search(): void {

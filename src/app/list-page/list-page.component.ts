@@ -5,6 +5,7 @@ import { Place, PlacemarkConstructor } from '../shared/interface';
 import { PlaceService } from '../shared/services/places.service';
 import { YaEvent, YaReadyEvent } from 'angular8-yandex-maps';
 import { setPlaceMarks } from '../shared/utils';
+import { Title } from '@angular/platform-browser';
 
 
 
@@ -30,15 +31,16 @@ export class ListPageComponent implements OnInit {
 
   placemarks: PlacemarkConstructor[] = [];
 
-  constructor(private route: ActivatedRoute, private placeService: PlaceService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private placeService: PlaceService, private router: Router, private titleService: Title) { }
 
   ngOnInit(): void {
     this.route.params.pipe(
       tap((category) => this.categoryName = category.name),
       switchMap(param => this.placeService.getPlacesByCategory(param.name))
     ).subscribe(places => {
-      places.map(elem => this.placemarks.push(setPlaceMarks(elem)));
+      places.map(elem => this.placemarks.push(setPlaceMarks(elem, true)));
       this.places = places;
+      this.titleService.setTitle(this.categoryName);
     });
   }
 
