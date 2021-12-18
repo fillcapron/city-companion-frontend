@@ -29,6 +29,7 @@ export class ListPageComponent implements OnInit {
   mapState: ymaps.IMapState = {
     type: 'yandex#map',
     zoom: 12,
+    controls: ['zoomControl']
   };
 
   placemarks: PlacemarkConstructor[] = [];
