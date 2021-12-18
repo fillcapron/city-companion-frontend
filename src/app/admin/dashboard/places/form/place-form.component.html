@@ -30,8 +30,8 @@
           <mat-form-field appearance="fill" class="phone-input" *ngIf="place.phone || !isDisabledField">
             <mat-label>Телефон</mat-label>
             <span matPrefix>+7 &nbsp;</span>
-            <input type="tel" matInput name="phone" [(ngModel)]="place.phone" placeholder="555-555-1234"
-              [pattern]="mobNumberPattern" [disabled]="isDisabledField">
+            <input type="tel" matInput name="phone" phoneMask [(ngModel)]="place.phone" placeholder="555-555-1234"
+            minlength="14" [disabled]="isDisabledField">
             <mat-icon matSuffix>mode_edit</mat-icon>
           </mat-form-field>
 

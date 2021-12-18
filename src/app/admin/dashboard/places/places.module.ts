@@ -8,11 +8,13 @@ import { AddressSearch } from "../../shared/components/address-input/address-sea
 import { DialogPlaceComponent } from "./form/place-form.component";
 import { TableGeneratedColumnsPlaces } from "./places.component";
 import { CreateTagsModule } from "../../shared/components/create-tags/create-tags.module";
+import { PhoneMaskDirective } from "../../shared/directives/phone-mask.directive";
 @NgModule({
     declarations: [
         DialogPlaceComponent,
         TableGeneratedColumnsPlaces,
-        AddressSearch
+        AddressSearch,
+        PhoneMaskDirective
     ],
     entryComponents: [DialogPlaceComponent],
     imports: [

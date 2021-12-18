@@ -21,7 +21,6 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
     isReading!: boolean;
     isDisabledField!: boolean;
     addAddress!: boolean;
-    mobNumberPattern = "^((\\+91-?)|0)?[0-9]{3}-[0-9]{3}-[0-9]{4}$";
 
     categories: Categories[] = [];
     images: Images[] = [];
