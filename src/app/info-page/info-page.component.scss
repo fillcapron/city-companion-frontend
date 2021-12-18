@@ -1,5 +1,5 @@
 .place-block {
-  margin-top: 50px;
+  margin-top: 20px;
 
   & .header {
     justify-content: space-between;
@@ -45,4 +45,27 @@
 .form-review {
   display: flex;
   flex-direction: column;
+  margin-top: 10px;
+}
+
+.reviews-list {
+  margin-top: 2px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  background-color: whitesmoke;
+}
+
+.tags {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  gap: 1rem;
+}
+
+.mat-list-item.mat-list-item-word-wrap {
+  height: initial !important;
+  .mat-line {
+    word-wrap: break-word !important; 
+    white-space: pre-wrap !important;
+  }
 }

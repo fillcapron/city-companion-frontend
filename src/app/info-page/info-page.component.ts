@@ -68,7 +68,9 @@ export class InfoPageComponent implements OnInit {
       author_name: this.author_name,
       place: this.place.id
     }
-    this.serviceReviews.create(review).subscribe(review => this.reviews.push(review.meta));
+    if (this.review_text && this.author_name) {
+      this.serviceReviews.create(review).subscribe(review => this.reviews.push(review.meta));
+    }
   }
 }
 
