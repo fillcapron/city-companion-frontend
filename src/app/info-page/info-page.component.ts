@@ -65,7 +65,7 @@ export class InfoPageComponent implements OnInit {
     }
   }
 
-  sendReview() {
+  onSendReview() {
     const review = {
       review_text: this.review_text,
       author_name: this.author_name,
@@ -73,6 +73,7 @@ export class InfoPageComponent implements OnInit {
     }
     if (this.review_text && this.author_name) {
       this.serviceReviews.create(review).subscribe(review => this.reviews.push(review.meta));
+      this.review_text = '';
     }
   }
 }

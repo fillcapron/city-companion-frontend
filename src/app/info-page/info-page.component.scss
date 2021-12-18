@@ -63,7 +63,9 @@
 }
 
 .mat-list-item.mat-list-item-word-wrap {
+  padding: 15px;
   height: initial !important;
+  width: calc(100% - 30px);
   .mat-line {
     word-wrap: break-word !important; 
     white-space: pre-wrap !important;

@@ -4,16 +4,20 @@ import { ListPageComponent } from './list-page.component';
 import { MaterialModule } from '../material.module';
 import { AngularYandexMapsModule } from 'angular8-yandex-maps';
 import { PluralDirective } from '../shared/directives/plural.directive';
+import { FilterPipe } from '../shared/pipes/filter.pipe';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     ListPageComponent,
-    PluralDirective
+    PluralDirective,
+    FilterPipe
   ],
   imports: [
     CommonModule,
     MaterialModule,
-    AngularYandexMapsModule
+    AngularYandexMapsModule,
+    FormsModule      
   ]
 })
 export class ListPageModule { }

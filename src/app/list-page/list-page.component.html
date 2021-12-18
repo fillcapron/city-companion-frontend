@@ -1,51 +1,63 @@
 <ng-container *ngIf="places.length; else Load">
-<div class="category">
-  <h1 class="category-name">{{categoryName}} в Дзержинске <span class="category-count">{{places.length}}</span></h1>
-</div>
-<div class="list">
-  <div class="list-places">
-    <div class="sort-place">
-      <mat-form-field appearance="fill" class="select">
-        <mat-label>Сортировать по</mat-label>
-        <mat-select [(value)]="selected" (selectionChange)="sortData($event)">
-          <mat-option value="reviews">отзывам</mat-option>
-          <mat-option value="rating">рейтингу</mat-option>
-          <mat-option value="rating">популярности</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <ng-container *ngFor="let place of places">
-    <mat-card *ngIf="place.published" #cardPlace class="list-places_card" tabindex="0">
-      <ng-container *ngIf="place.images">
-        <img mat-card-image src={{place.images[0].url}}>
+  <div class="category">
+    <h1 class="category-name">{{categoryName}} в Дзержинске <span class="category-count">{{places.length}}</span></h1>
+  </div>
+  <div class="list">
+    <div class="list-places">
+      <div class="sort-place">
+        <mat-form-field class="blocks" appearance="fill">
+          <mat-label>Поиск</mat-label>
+          <input [(ngModel)]="search" matInput placeholder="Введите название места">
+        </mat-form-field>
+        <mat-form-field *ngIf="(copyPlaces | filter:search).length > 1" appearance="fill" class="blocks">
+          <mat-label>Сортировать по</mat-label>
+          <mat-select [(value)]="selected" (selectionChange)="sortPlace($event)">
+            <mat-option value="reviews">отзывам</mat-option>
+            <mat-option value="rating">рейтингу</mat-option>
+            <mat-option value="rating">популярности</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <ng-container *ngFor="let place of copyPlaces | filter: search">
+        <mat-card *ngIf="place.published" #cardPlace class="list-places_card" tabindex="0">
+          <ng-container *ngIf="place.images">
+            <img mat-card-image src={{place.images[0].url}}>
+          </ng-container>
+          <mat-card-header>
+            <mat-card-title>{{place.name}}</mat-card-title>
+            <mat-card-subtitle>{{place.address!.city}} {{place.address!.street}} д.{{place.address!.house}}
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="info-block">
+              <div>Рейтинг:</div>
+              <div>{{place?.reviews?.length!}} <span plural [variants]="['отзыв', 'отзыва', 'отзывов']"
+                  [value]="place?.reviews?.length!"></span></div>
+            </div>
+            <p>
+              {{place.description}}
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button (click)="goPlaceDetail(place.id!)">Подробнее</button>
+            <button mat-button><a href={{place.website}} target="_blank">Сайт</a></button>
+          </mat-card-actions>
+        </mat-card>
       </ng-container>
-      <mat-card-header>
-        <mat-card-title>{{place.name}}</mat-card-title>
-        <mat-card-subtitle>{{place.address!.city}} {{place.address!.street}} д.{{place.address!.house}}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="info-block">
-          <div>Рейтинг:</div><div>{{place?.reviews?.length!}} <span plural [variants]="['отзыв', 'отзыва', 'отзывов']" [value]="place?.reviews?.length!"></span></div>
-        </div>
-        <p>
-          {{place.description}}
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button (click)="goPlaceDetail(place.id!)">Подробнее</button>
-        <button mat-button><a href={{place.website}} target="_blank">Сайт</a></button>
-      </mat-card-actions>
-    </mat-card>
-  </ng-container>
+      <div *ngIf="(copyPlaces | filter:search).length < 1">
+        Мест не найдено
+      </div>
+    </div>
+    <div class="list-map">
+      <ya-map [center]="[56.2414, 43.4554]" [state]="mapState" (ready)="onMapReady($event)">
+        <ya-placemark *ngFor="let placemark of placemarks; let i = index" [geometry]="placemark.geometry"
+          [properties]="placemark.properties" [options]="placemark.options" (yaclick)="onClickPlace(i)"></ya-placemark>
+      </ya-map>
+    </div>
   </div>
-  <div class="list-map">
-    <ya-map [center]="[56.2414, 43.4554]" [state]="mapState" (ready)="onMapReady($event)">
-      <ya-placemark *ngFor="let placemark of placemarks; let i = index" [geometry]="placemark.geometry"
-        [properties]="placemark.properties" [options]="placemark.options" (yaclick)="onClickPlace(i)"></ya-placemark>
-    </ya-map>
-  </div>
-</div>
 </ng-container>
 <ng-template #Load>
-  <div class="loading"><mat-spinner></mat-spinner></div>
+  <div class="loading">
+    <mat-spinner></mat-spinner>
+  </div>
 </ng-template>

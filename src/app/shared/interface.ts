@@ -10,6 +10,7 @@ export interface Categories {
 }
 
 export interface Place {
+    [value: string]: any,
     id: number | null,
     name: string,
     address?: Address,

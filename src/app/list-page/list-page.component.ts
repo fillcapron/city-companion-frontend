@@ -21,8 +21,10 @@ export class ListPageComponent implements OnInit {
 
   categoryName: string = '';
   places: Place[] = [];
+  copyPlaces: Place[] = [];
   map!: ymaps.Map;
   selected = '';
+  search = '';
 
   mapState: ymaps.IMapState = {
     type: 'yandex#map',
@@ -40,6 +42,7 @@ export class ListPageComponent implements OnInit {
     ).subscribe(places => {
       places.map(elem => this.placemarks.push(setPlaceMarks(elem, true)));
       this.places = places;
+      this.copyPlaces = places.slice();
       this.titleService.setTitle(this.categoryName);
     });
   }
@@ -53,11 +56,9 @@ export class ListPageComponent implements OnInit {
     elementRef?.nativeElement.focus();
   }
 
-  sortData({ value }: any) {
-
-    if (value === 'reviews') {
-      this.places = this.places.sort((firstPlace, nextPlace) => nextPlace.reviews?.length! - firstPlace.reviews?.length!);
-    }
+  sortPlace(event: any): void {
+    const value: string = event.value;
+    this.copyPlaces = this.places.sort((firstPlace, nextPlace) => nextPlace[value]?.length! - firstPlace[value]?.length!);
   }
 
   goPlaceDetail(id: number): void {
