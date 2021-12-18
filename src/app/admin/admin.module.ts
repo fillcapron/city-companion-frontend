@@ -20,7 +20,6 @@ import { AdminLayoutComponent } from "./shared/components/layout/admin-layout.co
 import { ACCESS_TOKEN_KEY } from "./shared/services/auth.service";
 import { AuthGuard } from "./shared/guards/auth.guard";
 import { MenuListItemComponent } from "./shared/components/menu/menu-list-item.component";
-import { CreateTagsComponent } from "./shared/components/create-tags/create-tags.component";
 import { ConfirmComponent } from "./shared/components/confirm/confirm.component";
 
 export function tokenGetter() {

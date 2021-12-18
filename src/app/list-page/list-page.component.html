@@ -10,6 +10,7 @@
         <mat-select [(value)]="selected" (selectionChange)="sortData($event)">
           <mat-option value="reviews">отзывам</mat-option>
           <mat-option value="rating">рейтингу</mat-option>
+          <mat-option value="rating">популярности</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -24,7 +25,7 @@
       </mat-card-header>
       <mat-card-content>
         <div class="info-block">
-          <div>Рейтинг:</div><div>Отзывы</div>
+          <div>Рейтинг:</div><div>{{place?.reviews?.length!}} <span plural [variants]="['отзыв', 'отзыва', 'отзывов']" [value]="place?.reviews?.length!"></span></div>
         </div>
         <p>
           {{place.description}}
@@ -40,7 +41,7 @@
   <div class="list-map">
     <ya-map [center]="[56.2414, 43.4554]" [state]="mapState" (ready)="onMapReady($event)">
       <ya-placemark *ngFor="let placemark of placemarks; let i = index" [geometry]="placemark.geometry"
-        [properties]="placemark.properties" [options]="placemark.options" (yaclick)="clickPlace(i)"></ya-placemark>
+        [properties]="placemark.properties" [options]="placemark.options" (yaclick)="onClickPlace(i)"></ya-placemark>
     </ya-map>
   </div>
 </div>

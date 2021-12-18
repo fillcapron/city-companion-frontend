@@ -48,15 +48,15 @@ export class ListPageComponent implements OnInit {
     this.map = event.target;
   }
 
-  clickPlace(index: any): void {
+  onClickPlace(index: any): void {
     const elementRef = this.cardPlaceList.find((_, i) => i === index);
     elementRef?.nativeElement.focus();
   }
 
-  sortData({value}: any) {
-    
-    if(value === 'reviews'){
-      console.log(value);
+  sortData({ value }: any) {
+
+    if (value === 'reviews') {
+      this.places = this.places.sort((firstPlace, nextPlace) => nextPlace.reviews?.length! - firstPlace.reviews?.length!);
     }
   }
 
