@@ -65,6 +65,8 @@ export class ListPageComponent implements OnInit {
   }
 
   openReviews(reviews: Reviews): void {
+    if (reviews) return;
+    
     const dialogRef = this.dialog.open(ReviewsDialogComponent, {
       minWidth: '500px',
       maxWidth: '900px',
