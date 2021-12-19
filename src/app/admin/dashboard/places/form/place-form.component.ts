@@ -67,7 +67,7 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
 
     ngOnInit(): void {
         if (!isEmptyObject(this.data)) {
-            const { address, images, tags, ...place } = this.data;
+            const { address, images, tags, reviews, ...place } = this.data;
             this.images = images || [];
             this.place = Object.assign(this.place, place);
             this.address = Object.assign(this.address, address);
