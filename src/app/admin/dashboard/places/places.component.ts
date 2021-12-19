@@ -51,6 +51,11 @@ export class TableGeneratedColumnsPlaces implements OnInit {
             columnDef: 'phone',
             header: 'Телефон',
             cell: (element: Place) => element.phone ? '+7' + element.phone: '-',
+        },
+        {
+            columnDef: 'published',
+            header: 'Опубликовано',
+            cell: (element: Place) => element.published ? 'Да' : 'Нет',
         }
     ];
 
