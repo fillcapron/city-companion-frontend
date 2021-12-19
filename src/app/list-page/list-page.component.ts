@@ -64,9 +64,9 @@ export class ListPageComponent implements OnInit {
     this.router.navigate(['/place', id]);
   }
 
-  openReviews(reviews: Reviews): void {
-    if (reviews) return;
-    
+  openReviews(reviews: Reviews[]): void {
+    if (!reviews.length) return;
+
     const dialogRef = this.dialog.open(ReviewsDialogComponent, {
       minWidth: '500px',
       maxWidth: '900px',

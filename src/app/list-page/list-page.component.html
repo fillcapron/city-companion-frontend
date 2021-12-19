@@ -31,7 +31,7 @@
           <mat-card-content>
             <div class="info-block">
               <div>Рейтинг:</div>
-              <button class="reviews" (click)="openReviews(place?.reviews)">{{place?.reviews?.length!}} <span plural [variants]="['отзыв', 'отзыва', 'отзывов']"
+              <button class="reviews" (click)="openReviews(place?.reviews)">{{place?.reviews?.length! ? place?.reviews?.length! : 'Нет'}} <span plural [variants]="['отзыв', 'отзыва', 'отзывов']"
                   [value]="place?.reviews?.length!"></span></button>
             </div>
             <p>
