@@ -1,0 +1,20 @@
+import { Component, Inject, OnInit } from "@angular/core";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Reviews } from "../../interface";
+
+@Component({
+    selector: 'reviews-dialog',
+    templateUrl: './reviews-dialog.component.html',
+    styleUrls: ['./reviews-dialog.component.scss']
+})
+export class ReviewsDialogComponent implements OnInit{
+
+    constructor(
+        public dialogRef: MatDialogRef<ReviewsDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public reviews: Reviews[],
+    ) { }
+
+    ngOnInit(): void {
+        console.log(this.reviews);
+    }
+}

@@ -1,11 +1,13 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap, tap } from 'rxjs/operators';
-import { Place, PlacemarkConstructor } from '../shared/interface';
+import { Place, PlacemarkConstructor, Reviews } from '../shared/interface';
 import { PlaceService } from '../shared/services/places.service';
-import { YaEvent, YaReadyEvent } from 'angular8-yandex-maps';
+import { YaReadyEvent } from 'angular8-yandex-maps';
 import { setPlaceMarks } from '../shared/utils';
 import { Title } from '@angular/platform-browser';
+import { ReviewsDialogComponent } from '../shared/components/reviews-dialog/reviews-dialog.component';
 
 
 
@@ -34,18 +36,14 @@ export class ListPageComponent implements OnInit {
 
   placemarks: PlacemarkConstructor[] = [];
 
-  constructor(private route: ActivatedRoute, private placeService: PlaceService, private router: Router, private titleService: Title) { }
+  constructor(private route: ActivatedRoute,
+    private placeService: PlaceService,
+    private router: Router,
+    public dialog: MatDialog,
+    private titleService: Title) { }
 
   ngOnInit(): void {
-    this.route.params.pipe(
-      tap((category) => this.categoryName = category.name),
-      switchMap(param => this.placeService.getPlacesByCategory(param.name))
-    ).subscribe(places => {
-      places.map(elem => this.placemarks.push(setPlaceMarks(elem, true)));
-      this.places = places;
-      this.copyPlaces = places.slice();
-      this.titleService.setTitle(this.categoryName);
-    });
+    this.loadData();
   }
 
   onMapReady(event: YaReadyEvent<ymaps.Map>): void {
@@ -64,5 +62,29 @@ export class ListPageComponent implements OnInit {
 
   goPlaceDetail(id: number): void {
     this.router.navigate(['/place', id]);
+  }
+
+  openReviews(reviews: Reviews): void {
+    const dialogRef = this.dialog.open(ReviewsDialogComponent, {
+      minWidth: '500px',
+      maxWidth: '900px',
+      data: reviews,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  private loadData(): void {
+    this.route.params.pipe(
+      tap((category) => this.categoryName = category.name),
+      switchMap(param => this.placeService.getPlacesByCategory(param.name))
+    ).subscribe(places => {
+      places.map(elem => this.placemarks.push(setPlaceMarks(elem, true)));
+      this.places = places;
+      this.copyPlaces = places.slice();
+      this.titleService.setTitle(this.categoryName);
+    });
   }
 }

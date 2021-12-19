@@ -6,14 +6,15 @@ import { FormsModule } from '@angular/forms';
 import { AngularYandexMapsModule } from 'angular8-yandex-maps';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ListPageModule } from './list-page/list-page.module';
+import { AdminModule } from './admin/admin.module';
 
 import { AppComponent } from './app.component';
 import { InfoPageComponent } from './info-page/info-page.component';
 import { MainComponent } from './main/main.component';
-import { AdminModule } from './admin/admin.module';
 import { MainLayoutComponent } from './shared/components/layout/main-layout.component';
-import { ListPageModule } from './list-page/list-page.module';
 import { CarouselComponent } from './shared/components/carousel/carousel.component';
+import { ReviewsDialogModule } from './shared/components/reviews-dialog/reviews-dialog.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { CarouselComponent } from './shared/components/carousel/carousel.compone
     MainLayoutComponent,
     MainComponent,
     InfoPageComponent,
-    CarouselComponent
+    CarouselComponent,
   ],
   imports: [
     AdminModule,
@@ -32,7 +33,8 @@ import { CarouselComponent } from './shared/components/carousel/carousel.compone
     FormsModule,
     AngularYandexMapsModule,
     HttpClientModule,
-    ListPageModule
+    ListPageModule,
+    ReviewsDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
