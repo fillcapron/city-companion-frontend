@@ -90,7 +90,7 @@ export class DialogAddressComponent implements OnInit, EventsForm {
     }
 
     goPlacePage(id: number):void {
-        this.close();
-        this.route.navigate(['/place', id]);
+        const url = this.route.createUrlTree(['/place', id]);
+        window.open(url.toString(), '_blank');
     }
 }
