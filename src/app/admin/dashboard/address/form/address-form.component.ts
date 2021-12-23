@@ -89,8 +89,8 @@ export class DialogAddressComponent implements OnInit, EventsForm {
         this.isDisabledField = true;
     }
 
-    goPlacePage(id: number):void {
-        const url = this.route.createUrlTree(['/place', id]);
+    goPlacePage(name: string):void {
+        const url = this.route.createUrlTree(['/place', name]);
         window.open(url.toString(), '_blank');
     }
 }
