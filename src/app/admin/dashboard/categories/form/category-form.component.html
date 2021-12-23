@@ -14,9 +14,8 @@
           Введите название
         </mat-error>
       </mat-form-field>
-    
       <create-tags [tags]="tags" type="category" [disabled]="isDisabledField" [id]="category.id"></create-tags>
-</div>
+    </div>
   </form>
   <mat-dialog-actions class="mt-5">
     <ng-container *ngIf="isReading && isDisabledField else read">
@@ -27,7 +26,6 @@
   <ng-template #read>
     <button [disabled]="formCategory.invalid" mat-raised-button color="accent"
       (click)="submit(formCategory)">Отправить</button>
-      <button mat-raised-button color="warn"
-      (click)="cancel()">Отмена</button>
+    <button mat-raised-button color="warn" (click)="cancel()">Отмена</button>
   </ng-template>
 </div>

@@ -7,14 +7,10 @@ import { Reviews } from "../../interface";
     templateUrl: './reviews-dialog.component.html',
     styleUrls: ['./reviews-dialog.component.scss']
 })
-export class ReviewsDialogComponent implements OnInit{
+export class ReviewsDialogComponent {
 
     constructor(
         public dialogRef: MatDialogRef<ReviewsDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public reviews: Reviews[],
     ) { }
-
-    ngOnInit(): void {
-        console.log(this.reviews);
-    }
 }

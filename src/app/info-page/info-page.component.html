@@ -1,4 +1,5 @@
 <div class="content">
+  <a mat-button class="breadcrumb" (click)="goBack()"><mat-icon>arrow_back_ios</mat-icon>Вернуться назад</a>
   <mat-card class="place-block">
     <ng-container *ngIf="place?.id; else Loading">
       <mat-card-header class="header">

@@ -23,6 +23,13 @@ a {
   margin: 0 auto;
 }
 
+.breadcrumb {
+  margin: 5px 0 !important;
+  padding: 5px !important;
+  display: flex;
+  align-items: center;
+}
+
 .main-input {
   width: 100%;
 }

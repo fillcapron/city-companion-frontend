@@ -31,7 +31,7 @@
             <mat-label>Телефон</mat-label>
             <span matPrefix>+7 &nbsp;</span>
             <input type="tel" matInput name="phone" phoneMask [(ngModel)]="place.phone" placeholder="555-555-1234"
-            minlength="14" [disabled]="isDisabledField">
+              minlength="14" [disabled]="isDisabledField">
             <mat-icon matSuffix>mode_edit</mat-icon>
           </mat-form-field>
 
@@ -51,7 +51,6 @@
                 (click)="addAddress = !addAddress">добавьте</span> новый</mat-label>
             <address-search (selectAddressEvent)="selectAddress($event)"></address-search>
           </ng-container>
-
           <create-tags [tags]="tags" type="place" [disabled]="isDisabledField" [id]="place.id"></create-tags>
         </div>
 
@@ -108,9 +107,10 @@
       <button mat-raised-button color="warn" (click)="deleting()">Удалить</button>
     </ng-container>
   </mat-dialog-actions>
-  
+
   <ng-template #read>
-    <button [disabled]="formPlace.invalid || catSelect.empty" mat-raised-button color="accent" (click)="submit()">Отправить</button>
+    <button [disabled]="formPlace.invalid || catSelect.empty" mat-raised-button color="accent"
+      (click)="submit()">Отправить</button>
     <button mat-raised-button color="warn" (click)="cancel()">Отмена</button>
   </ng-template>
 </div>
