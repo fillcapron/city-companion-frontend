@@ -31,7 +31,7 @@
           <mat-card-content>
             <div class="info-block">
               <div>Рейтинг:</div>
-              <button class="reviews" (click)="openReviews(place?.reviews)">{{place?.reviews?.length! ? place?.reviews?.length! : 'Нет'}} <span plural [variants]="['отзыв', 'отзыва', 'отзывов']"
+              <button class="reviews" (click)="openReviews(place)">{{place?.reviews?.length! ? place?.reviews?.length! : 'Нет'}} <span plural [variants]="['отзыв', 'отзыва', 'отзывов']"
                   [value]="place?.reviews?.length!"></span></button>
             </div>
             <p>
@@ -39,12 +39,12 @@
             </p>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-button (click)="goPlaceDetail(place.id!)">Подробнее</button>
+            <button mat-button (click)="goPlaceDetail(place.name!)">Подробнее</button>
             <button mat-button><a href={{place.website}} target="_blank">Сайт</a></button>
           </mat-card-actions>
         </mat-card>
       </ng-container>
-      <div class="blocks" *ngIf="(copyPlaces | filter:search).length < 1">
+      <div class="blocks text" *ngIf="(copyPlaces | filter:search).length < 1">
         Мест не найдено
       </div>
     </div>

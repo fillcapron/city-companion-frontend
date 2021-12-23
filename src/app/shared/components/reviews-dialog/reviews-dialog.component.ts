@@ -9,8 +9,14 @@ import { Reviews } from "../../interface";
 })
 export class ReviewsDialogComponent {
 
+    reviews!: Reviews[];
+    name!: string;
+
     constructor(
         public dialogRef: MatDialogRef<ReviewsDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public reviews: Reviews[],
-    ) { }
+        @Inject(MAT_DIALOG_DATA) public data: {name: string, reviews: Reviews[]},
+    ) { 
+        this.reviews = data.reviews;
+        this.name = data.name;
+    }
 }

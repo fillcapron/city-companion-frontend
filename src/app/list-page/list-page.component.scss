@@ -67,4 +67,10 @@
   font-size: 12px;
   width: 100%;
   margin: 5px 10px;
+
+  &.text {
+    width: auto;
+    text-align: center;
+    font-size: 14px;
+  }
 }

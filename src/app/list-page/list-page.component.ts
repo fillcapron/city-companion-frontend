@@ -60,17 +60,17 @@ export class ListPageComponent implements OnInit {
     this.copyPlaces = this.places.sort((firstPlace, nextPlace) => nextPlace[value]?.length! - firstPlace[value]?.length!);
   }
 
-  goPlaceDetail(id: number): void {
-    this.router.navigate(['/place', id]);
+  goPlaceDetail(name: number): void {
+    this.router.navigate(['/place', name]);
   }
 
-  openReviews(reviews: Reviews[]): void {
-    if (!reviews.length) return;
+  openReviews(place: Place): void {
+    if (!place.reviews?.length) return;
 
     const dialogRef = this.dialog.open(ReviewsDialogComponent, {
       minWidth: '500px',
       maxWidth: '900px',
-      data: reviews,
+      data: {name: place.name, reviews: place.reviews},
     });
 
     dialogRef.afterClosed().subscribe(result => {
