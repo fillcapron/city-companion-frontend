@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatTabGroup } from '@angular/material/tabs';
 import { Title } from '@angular/platform-browser';
@@ -14,7 +15,7 @@ import { setPlaceMarks } from '../shared/utils';
   templateUrl: './info-page.component.html',
   styleUrls: ['./info-page.component.scss']
 })
-export class InfoPageComponent implements OnInit {
+export class InfoPageComponent implements OnInit, OnDestroy {
 
   place!: Place;
   reviews: Reviews[] = [];
@@ -35,18 +36,18 @@ export class InfoPageComponent implements OnInit {
     private placeService: PlaceService,
     private route: ActivatedRoute,
     private serviceReviews: ReviewsService,
-    private router: Router,
-    private titleService: Title) { }
+    private titleService: Title,
+    private location: Location) { }
 
   ngOnInit() {
-    this.route.params.pipe(
-      switchMap(({ id }) => this.placeService.getPlace(id))
-    ).subscribe((place) => {
-      this.placemark.push(setPlaceMarks(place));
-      this.place = place;
-      this.reviews = place.reviews || [];
-      this.titleService.setTitle(this.place.name);
-    });
+    this.loadData();
+  }
+
+  ngOnDestroy(): void {
+    if(!localStorage.getItem('view-' + this.place.id)) {
+      console.log('destroy', this.place.id);
+      localStorage.setItem('view-' + this.place.id, 'true');
+    }
   }
 
   onMapReady(event: YaReadyEvent<ymaps.Map>): void {
@@ -79,7 +80,18 @@ export class InfoPageComponent implements OnInit {
   }
 
   goBack(): void  {
-    this.router.navigate(['/categories', this.place.category.name]);
+    this.location.back();
+  }
+
+  private loadData(): void {
+    this.route.params.pipe(
+      switchMap(({ id }) => this.placeService.getPlace(id))
+    ).subscribe((place) => {
+      this.placemark.push(setPlaceMarks(place));
+      this.place = place;
+      this.reviews = place.reviews || [];
+      this.titleService.setTitle(this.place.name);
+    });
   }
 }
 
