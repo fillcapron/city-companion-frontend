@@ -44,9 +44,12 @@ export class InfoPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if(!localStorage.getItem('view-' + this.place.id)) {
-      console.log('destroy', this.place.id);
-      localStorage.setItem('view-' + this.place.id, 'true');
+    const views = this.place.views! + 1;
+    if (!localStorage.getItem('view-' + this.place.id)) {
+      this.placeService.updateViewsPlace(this.place.id!, { views }).subscribe(
+        () => localStorage.setItem('view-' + this.place.id, 'true'),
+        (e) => console.error(e)
+      );
     }
   }
 
@@ -58,10 +61,10 @@ export class InfoPageComponent implements OnInit, OnDestroy {
     switch (type) {
       case "отзывы":
         this.tabGroup.selectedIndex = 1;
-        break;
+        return;
       case "карта":
         this.tabGroup.selectedIndex = 0;
-        break;
+        return;
       default:
         this.tabGroup.selectedIndex = 0;
     }
@@ -79,7 +82,7 @@ export class InfoPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  goBack(): void  {
+  goBack(): void {
     this.location.back();
   }
 

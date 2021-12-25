@@ -3,9 +3,9 @@
   <mat-card class="place-block">
     <ng-container *ngIf="place?.id; else Loading">
       <mat-card-header class="header">
-        <mat-card-title class="title">{{place?.name}}</mat-card-title>
+        <mat-card-title>{{place?.name}}</mat-card-title>
         <mat-card-subtitle>{{place?.category?.name}}</mat-card-subtitle>
-        <div>что-то</div>
+        <div class="views"><mat-icon class="icon">visibility</mat-icon> {{place?.views}}</div>
       </mat-card-header>
       <div class="place-block__info">
         <carousel class="img" [maxSlides]="3" [images]="place?.images || []"></carousel>

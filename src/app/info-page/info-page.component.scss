@@ -4,6 +4,18 @@
     justify-content: space-between;
   }
 
+  & .views {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    gap: 3px;
+
+    & .icon {
+      opacity: .2;
+      transform: scale(0.9);
+    }
+  }
+
   &__info {
     display: flex;
     

@@ -28,7 +28,7 @@ export class PlaceService {
         return this.http.patch<ApiResponse>(this.url, place);
     }
 
-    deletePlace(id: number | null): Observable<ApiResponse>  {
+    deletePlace(id: number | null): Observable<ApiResponse> {
         return this.http.delete<ApiResponse>(this.url + id);
     }
 
@@ -36,7 +36,11 @@ export class PlaceService {
         return this.http.get<Place[]>(this.url + 'category/' + categoryName);
     }
 
-    changePublished(id: number | null, dto: {isPublished: boolean}): Observable<void> {
+    changePublished(id: number | null, dto: { isPublished: boolean }): Observable<void> {
         return this.http.put<void>(this.url + 'published/' + id, dto);
+    }
+
+    updateViewsPlace(id: number, dto: { views: number}): Observable<void> {
+        return this.http.put<void>(this.url + 'views/' + id, dto);
     }
 }

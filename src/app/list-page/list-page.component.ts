@@ -57,7 +57,12 @@ export class ListPageComponent implements OnInit {
 
   sortPlace(event: any): void {
     const value: string = event.value;
-    this.copyPlaces = this.places.sort((firstPlace, nextPlace) => nextPlace[value]?.length! - firstPlace[value]?.length!);
+    this.copyPlaces = this.places.sort((firstPlace, nextPlace) => {
+      if (Array.isArray(firstPlace[value])) {
+        return nextPlace[value]?.length! - firstPlace[value]?.length!;
+      }
+      return nextPlace[value] - firstPlace[value];
+    });
   }
 
   goPlaceDetail(name: number): void {
@@ -70,7 +75,7 @@ export class ListPageComponent implements OnInit {
     const dialogRef = this.dialog.open(ReviewsDialogComponent, {
       minWidth: '500px',
       maxWidth: '900px',
-      data: {name: place.name, reviews: place.reviews},
+      data: { name: place.name, reviews: place.reviews },
     });
 
     dialogRef.afterClosed().subscribe(result => {

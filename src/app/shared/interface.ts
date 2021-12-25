@@ -22,7 +22,8 @@ export interface Place {
     phone: string,
     rating: string,
     website: string,
-    published: boolean
+    published: boolean,
+    views?: number
 }
 
 export interface Address {
