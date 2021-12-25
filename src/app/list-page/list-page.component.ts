@@ -65,7 +65,7 @@ export class ListPageComponent implements OnInit {
     });
   }
 
-  goPlaceDetail(name: number): void {
+  goPlaceDetail(name: string): void {
     this.router.navigate(['/place', name]);
   }
 

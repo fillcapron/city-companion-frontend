@@ -22,5 +22,18 @@
   </div>
   <div class="popular-places">
     <h1>Популярные места</h1>
+    <div class="place">
+      <mat-card *ngFor="let place of popularPlaces" class="card" (click)="goPlaceDetail(place.name)">
+        <ng-container *ngIf="place.images">
+          <img mat-card-image src={{place.images[0].url}}>
+        </ng-container>
+        <mat-card-header>
+          <mat-card-title>{{place.name}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          {{place.description}}
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
 </main>

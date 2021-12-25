@@ -38,4 +38,18 @@
     & h1 {
         text-align: center;
     }
+
+    & .place {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        & .card {
+            width: calc((100% / 3) - 39px);
+
+            &:hover {
+                outline: 3px solid gold;
+            }
+        }
+    }
 }

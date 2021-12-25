@@ -43,4 +43,8 @@ export class PlaceService {
     updateViewsPlace(id: number, dto: { views: number}): Observable<void> {
         return this.http.put<void>(this.url + 'views/' + id, dto);
     }
+
+    popularPlaces(): Observable<Place[]> {
+        return this.http.get<Place[]>(this.url + 'popular/all');
+    }
 }
