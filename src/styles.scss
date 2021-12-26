@@ -30,6 +30,12 @@ a {
   align-items: center;
 }
 
+.icon {
+  margin: 0 !important;
+  opacity: 0.2;
+  transform: scale(0.9);
+}
+
 .main-input {
   width: 100%;
 }

@@ -54,6 +54,8 @@ export class MainComponent implements OnInit {
           toArray()
           )
         .subscribe(result => this.searchResult = result);
+    } else {
+      this.searchResult.length = 0;
     }
   }
 
