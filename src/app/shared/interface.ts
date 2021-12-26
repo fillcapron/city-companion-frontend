@@ -1,5 +1,10 @@
 import { Images, Tag } from "../admin/shared/interface";
 
+type CategoryOrPlace = {
+    id: number,
+    name: string
+} 
+
 export interface Tags {
     name: string
 }
@@ -48,4 +53,10 @@ export interface Reviews {
     author_name: string,
     review_text: string,
     place: number
+}
+
+export interface SearchResult {
+    id: number,
+    category?: CategoryOrPlace,
+    place?: CategoryOrPlace
 }

@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { distinct, map, mergeAll, toArray } from 'rxjs/operators';
 import { TagService } from '../admin/shared/services/tag.service';
-import { Categories, Place } from '../shared/interface';
+import { Categories, Place, SearchResult } from '../shared/interface';
 import { CategoryService } from '../shared/services/category.service';
 import { PlaceService } from '../shared/services/places.service';
 
@@ -44,13 +44,13 @@ export class MainComponent implements OnInit {
     }
   }
 
-  changes(value: string) {
+  onAutoComplite(value: string): void {
     if (value.length > 3) {
       this.tagsService.getPlaceOrCategory(value)
         .pipe(
-          mergeAll(),
-          map((elem: any) => elem.place ? {place: elem.place} : {category: elem.category}),
-          distinct((elem: any) => elem.place?.id || elem.category?.id),
+          <any>mergeAll(),
+          map((elem: SearchResult) => elem.place ? {place: elem.place} : {category: elem.category}),
+          distinct((elem: Omit<SearchResult, 'id'>) => elem.place?.id || elem.category?.id),
           toArray()
           )
         .subscribe(result => this.searchResult = result);

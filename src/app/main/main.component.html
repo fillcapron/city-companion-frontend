@@ -4,7 +4,7 @@
     <span>{{message}}</span>
     <div class="search-block__input">
       <mat-form-field class="main-input" appearance="fill">
-        <input type="text" matInput [(ngModel)]="input" (ngModelChange)="changes($event)" placeholder="Введите что хотите найти" [matAutocomplete]="auto">
+        <input type="text" matInput [(ngModel)]="input" (ngModelChange)="onAutoComplite($event)" placeholder="Введите что хотите найти" [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option *ngFor="let option of searchResult" [value]="option" (click)="goResultPage(option)">
             {{input}} <mat-icon class="icon">keyboard_backspace</mat-icon> <span class="result">{{option.place ? option.place.name : option.category.name}}</span>
