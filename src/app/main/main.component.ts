@@ -1,6 +1,8 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { distinct, map, mergeAll, toArray } from 'rxjs/operators';
+import { TagService } from '../admin/shared/services/tag.service';
 import { Categories, Place } from '../shared/interface';
 import { CategoryService } from '../shared/services/category.service';
 import { PlaceService } from '../shared/services/places.service';
@@ -12,36 +14,49 @@ import { PlaceService } from '../shared/services/places.service';
 })
 export class MainComponent implements OnInit {
   message!: string;
+  searchResult: any[] = [];
   @Input() input!: string;
 
   categories: Categories[] = [];
   popularPlaces: Place[] = [];
 
   constructor(
-    private TagService: CategoryService,
+    private categoryService: CategoryService,
     private titleService: Title,
     private placeService: PlaceService,
+    private tagsService: TagService,
     private router: Router) { }
 
   ngOnInit(): void {
-    this.TagService.getCategories().subscribe(categories => this.categories = categories);
+    this.categoryService.getCategories().subscribe(categories => this.categories = categories);
     this.placeService.popularPlaces().subscribe(places => this.popularPlaces = places);
     this.titleService.setTitle('Главная страница');
   }
 
-  search(): void {
-    if (!this.input) {
-      this.message = 'Вы ничего не ввели'
-    } else {
-      this.message = ''
+  goResultPage(value: any): void {
+    if(value.category){
+      const name = value.category.name;
+      this.router.navigate(['/categories', name]);
     }
-    console.log(this.message)
+    if(value.place){
+      const name = value.place.name;
+      this.router.navigate(['/place', name]);
+    }
   }
 
-  changes() {
-    console.log(this.input)
+  changes(value: string) {
+    if (value.length > 3) {
+      this.tagsService.getPlaceOrCategory(value)
+        .pipe(
+          mergeAll(),
+          map((elem: any) => elem.place ? {place: elem.place} : {category: elem.category}),
+          distinct((elem: any) => elem.place?.id || elem.category?.id),
+          toArray()
+          )
+        .subscribe(result => this.searchResult = result);
+    }
   }
-  
+
   goPlaceDetail(name: string): void {
     this.router.navigate(['/place', name]);
   }
