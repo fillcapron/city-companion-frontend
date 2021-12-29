@@ -45,8 +45,7 @@
         gap: 10px;
 
         & .card {
-            width: calc((100% / 3) - 39px);
-
+            flex-basis: 21%;
             &:hover {
                 outline: 3px solid gold;
             }
