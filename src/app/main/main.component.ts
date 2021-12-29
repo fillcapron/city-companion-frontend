@@ -67,14 +67,11 @@ export class MainComponent implements OnInit {
   }
 
   private loadData(): void {
-    setTimeout(() => {
-      this.categoryService.getCategories().subscribe(categories => this.categories = categories);
+    this.categoryService.getCategories().subscribe(categories => this.categories = categories);
       this.placeService.popularPlaces().subscribe(places => {
         this.loading = false;
         this.popularPlaces = places;
       });
       this.titleService.setTitle('Главная страница');
-    }, 3000)
-    
   }
 }
