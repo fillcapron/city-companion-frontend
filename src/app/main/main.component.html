@@ -19,6 +19,9 @@
     <h1>Все категории</h1>
     <div class="categories-list">
       <ul class="categories-list_nav">
+        <ng-container *ngIf="loading">
+          <loader *ngFor="let i of Array(18).fill('')" Lwidth="154" Lheight="24"></loader>
+        </ng-container>
         <li *ngFor="let category of categories">
           <a [routerLink]="['/categories', category.name]">{{category.name}}</a>
         </li>
@@ -28,6 +31,9 @@
   <div class="popular-places">
     <h1>Популярные места</h1>
     <div class="place">
+      <ng-container *ngIf="loading">
+        <loader *ngFor="let i of Array(9).fill('')" Lwidth="325" Lheight="300"></loader>
+      </ng-container>
       <mat-card *ngFor="let place of popularPlaces" class="card" (click)="goPlaceDetail(place.name)">
         <ng-container *ngIf="place.images">
           <img mat-card-image src={{place.images[0].url}}>

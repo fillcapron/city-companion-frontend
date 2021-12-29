@@ -15,6 +15,7 @@ import { MainComponent } from './main/main.component';
 import { MainLayoutComponent } from './shared/components/layout/main-layout.component';
 import { CarouselComponent } from './shared/components/carousel/carousel.component';
 import { ReviewsDialogModule } from './shared/components/reviews-dialog/reviews-dialog.module';
+import { LoaderModule } from './shared/components/loader/loader.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ReviewsDialogModule } from './shared/components/reviews-dialog/reviews-
     AngularYandexMapsModule,
     HttpClientModule,
     ListPageModule,
-    ReviewsDialogModule
+    ReviewsDialogModule,
+    LoaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

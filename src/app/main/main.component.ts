@@ -13,6 +13,10 @@ import { PlaceService } from '../shared/services/places.service';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
+
+  loading: boolean = true;
+  Array = Array;
+
   message!: string;
   searchResult: any[] = [];
   @Input() input!: string;
@@ -25,20 +29,19 @@ export class MainComponent implements OnInit {
     private titleService: Title,
     private placeService: PlaceService,
     private tagsService: TagService,
-    private router: Router) { }
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    this.categoryService.getCategories().subscribe(categories => this.categories = categories);
-    this.placeService.popularPlaces().subscribe(places => this.popularPlaces = places);
-    this.titleService.setTitle('Главная страница');
+    this.loadData();
   }
 
   goResultPage(value: any): void {
-    if(value.category){
+    if (value.category) {
       const name = value.category.name;
       this.router.navigate(['/categories', name]);
     }
-    if(value.place){
+    if (value.place) {
       const name = value.place.name;
       this.router.navigate(['/place', name]);
     }
@@ -49,10 +52,10 @@ export class MainComponent implements OnInit {
       this.tagsService.getPlaceOrCategory(value)
         .pipe(
           <any>mergeAll(),
-          map((elem: SearchResult) => elem.place ? {place: elem.place} : {category: elem.category}),
+          map((elem: SearchResult) => elem.place ? { place: elem.place } : { category: elem.category }),
           distinct((elem: Omit<SearchResult, 'id'>) => elem.place?.id || elem.category?.id),
           toArray()
-          )
+        )
         .subscribe(result => this.searchResult = result);
     } else {
       this.searchResult.length = 0;
@@ -61,5 +64,17 @@ export class MainComponent implements OnInit {
 
   goPlaceDetail(name: string): void {
     this.router.navigate(['/place', name]);
+  }
+
+  private loadData(): void {
+    setTimeout(() => {
+      this.categoryService.getCategories().subscribe(categories => this.categories = categories);
+      this.placeService.popularPlaces().subscribe(places => {
+        this.loading = false;
+        this.popularPlaces = places;
+      });
+      this.titleService.setTitle('Главная страница');
+    }, 3000)
+    
   }
 }

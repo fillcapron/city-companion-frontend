@@ -36,11 +36,13 @@ export class ListPageComponent implements OnInit {
 
   placemarks: PlacemarkConstructor[] = [];
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private placeService: PlaceService,
     private router: Router,
     public dialog: MatDialog,
-    private titleService: Title) { }
+    private titleService: Title
+    ) { }
 
   ngOnInit(): void {
     this.loadData();
