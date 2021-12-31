@@ -21,6 +21,9 @@ a {
 .content {
   max-width: 1000px;
   margin: 0 auto;
+  @media (max-width: 450px) {
+    padding: 0 10px;
+}
 }
 
 .breadcrumb {
