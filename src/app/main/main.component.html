@@ -3,7 +3,7 @@
     <h1>Что ищем?</h1>
     <span>{{message}}</span>
     <div class="search-block__input">
-      <mat-form-field class="main-input" appearance="fill">
+      <mat-form-field class="form-field" appearance="fill">
         <input type="text" matInput [(ngModel)]="input" (ngModelChange)="onAutoComplite($event)" placeholder="Введите что хотите найти" [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option *ngFor="let option of searchResult" [value]="option" (click)="goResultPage(option)">

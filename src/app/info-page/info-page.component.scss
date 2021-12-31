@@ -35,7 +35,13 @@
           background: whitesmoke;
         }
       }
+      @media (max-width: 450px) {
+        width: 100%;
     }
+    }
+    @media (max-width: 450px) {
+      flex-direction: column;
+  }
   }
   &__img {
     width: 100%;

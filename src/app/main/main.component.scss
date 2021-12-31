@@ -3,11 +3,21 @@
     margin-top: 50px;
     &__input {
         display: flex;
+        & .form-field {
+            width: 100%;
+        }
+
+        @media (max-width: 450px) {
+            flex-direction: column;
+        }
     }
 }
 .search-button {
     width: 100px;
     height: 50px;
+    @media (max-width: 450px) {
+        width: 100%;
+    }
 }
 .categories-block {
     margin-top: 30px;
@@ -49,6 +59,9 @@
             &:hover {
                 outline: 3px solid gold;
             }
+        }
+        @media (max-width: 450px) {
+            flex-direction: column;
         }
     }
 }
