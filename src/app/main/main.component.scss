@@ -40,6 +40,9 @@
                     color: brown;
                 }
             }
+            @media (max-width: 450px) {
+                align-items: center;
+            }
         }
     }
 }
