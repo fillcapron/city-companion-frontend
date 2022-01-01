@@ -32,7 +32,7 @@
     <h1>Популярные места</h1>
     <div class="place">
       <ng-container *ngIf="loading">
-        <loader *ngFor="let i of Array(9).fill('')" Lwidth="242" Lheight="300"></loader>
+        <loader *ngFor="let i of Array(8).fill('')" Lwidth="400" Lheight="340"></loader>
       </ng-container>
       <mat-card *ngFor="let place of popularPlaces" class="card" (click)="goPlaceDetail(place.name)">
         <ng-container *ngIf="place.images">
