@@ -58,15 +58,7 @@
             &nbsp;Отзывы
           </ng-template>
           <mat-card>
-            <mat-list>
-              <mat-list-item role="listitem" *ngFor="let review of reviews"
-                class="mat-list-item-word-wrap reviews-list">
-                <h4 mat-line>
-                  <b>{{review.author_name}}</b>
-                </h4>
-                <p mat-line>{{review.review_text}}</p>
-              </mat-list-item>
-            </mat-list>
+            <reviews-list [reviewsArray]="reviews"></reviews-list>
             <mat-divider inset></mat-divider>
             <div class="form-review">
               <i><b>Оставьте свой отзыв:</b></i>

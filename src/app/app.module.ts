@@ -17,6 +17,7 @@ import { CarouselComponent } from './shared/components/carousel/carousel.compone
 import { ReviewsDialogModule } from './shared/components/reviews-dialog/reviews-dialog.module';
 import { LoaderModule } from './shared/components/loader/loader.module';
 import { RatingModule } from './shared/components/rating/rating.module';
+import { ReviewsListModule } from './shared/components/reviews-list/reviews-list.module';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { RatingModule } from './shared/components/rating/rating.module';
     ListPageModule,
     ReviewsDialogModule,
     LoaderModule,
-    RatingModule
+    RatingModule,
+    ReviewsListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
