@@ -19,7 +19,7 @@
             {{place?.phone ? '+7' + place?.phone : 'Отсутствует'}}
           </div>
           <div class="mb-2">
-            <rating [countStars]="5" [value]="place.rating!" [disabled]=true color="gold"></rating>
+            <rating [countStars]="5" [value]="place.rating!" [disabled]=true color="gold" [sizeIcons]="0.7"></rating>
             <h2>Адрес:</h2>
             <p>{{place?.address?.region}}, г.{{place?.address?.city}}, {{place?.address?.street}}
               {{place?.address?.house}}</p>
@@ -72,7 +72,7 @@
                 <textarea matInput [(ngModel)]="review_text" placeholder="Введите ваш отзыв"></textarea>
               </mat-form-field>
               <b>Оцените</b>
-              <rating [countStars]="5" [(ngModel)]="rating_place" [disabled]=false color="gold"></rating>
+              <rating [countStars]="5" [(ngModel)]="rating_place" [disabled]=false color="gold"  [sizeIcons]="1"></rating>
               <button mat-raised-button [disabled]="!review_text || !author_name || !rating_place"
                 (click)="onSendReview()">Отправить</button>
             </div>

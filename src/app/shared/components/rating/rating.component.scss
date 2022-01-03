@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-end;
 }
 
 .noHover{
@@ -13,4 +12,8 @@
 
 .default {
   color: #c2c2c2;
+}
+
+.icon-button {
+  width: 20px;
 }

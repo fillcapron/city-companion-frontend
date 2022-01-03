@@ -25,6 +25,7 @@ export class RatingComponent implements ControlValueAccessor{
     @Input() color!: string;
     @Input() disabled!: boolean;
     @Input() countStars!: number;
+    @Input() sizeIcons: number = 0.7;
     @Input()
     get value(): number | null {
         if (this._value === null) {
@@ -88,6 +89,14 @@ export class RatingComponent implements ControlValueAccessor{
         }
 
         return 'star_border';
+    }
+
+    getStyle(){
+        const styles = {
+            'transform': this.sizeIcons ? `scale(${this.sizeIcons})` : '',
+            'color': this.color ? this.color : '#c2c2c2'
+        }
+        return styles;
     }
 
     private _emitChangeEvent() {
