@@ -25,7 +25,7 @@ export interface Place {
     images?: Images[],
     reviews?: Reviews[],
     phone: string,
-    rating: string,
+    rating: number | null,
     website: string,
     published: boolean,
     views?: number

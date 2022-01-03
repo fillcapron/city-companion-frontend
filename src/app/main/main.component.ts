@@ -68,10 +68,10 @@ export class MainComponent implements OnInit {
 
   private loadData(): void {
     this.categoryService.getCategories().subscribe(categories => this.categories = categories);
-    this.placeService.popularPlaces().subscribe(places => {
-      this.loading = false;
-      this.popularPlaces = places;
-    });
-    this.titleService.setTitle('Главная страница');
+      this.placeService.popularPlaces().subscribe(places => {
+        this.loading = false;
+        this.popularPlaces = places;
+      });
+      this.titleService.setTitle('Главная страница');
   }
 }

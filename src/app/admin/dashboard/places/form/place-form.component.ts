@@ -38,7 +38,7 @@ export class DialogPlaceComponent implements OnInit, EventsForm {
     place: Place = {
         id: null,
         name: "",
-        rating: "",
+        rating: null,
         website: "",
         description: "",
         published: false,

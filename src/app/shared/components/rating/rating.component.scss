@@ -1,0 +1,16 @@
+.rating {
+  width: 200px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.noHover{
+  pointer-events: none;
+}
+
+.default {
+  color: #c2c2c2;
+}

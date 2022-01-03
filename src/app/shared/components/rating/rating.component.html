@@ -1,0 +1,7 @@
+<div class="rating" [class.noHover]="disabled">
+    <ng-container *ngFor="let elem of Array(countStars).fill(null); let i = index">
+        <button mat-icon-button [style.color]="color" (click)="onClick(i)">
+            <mat-icon>{{getIcon(i)}}</mat-icon>
+        </button>
+    </ng-container>
+</div>

@@ -1,5 +1,5 @@
 <div class="content">
-<ng-container *ngIf="places.length; else Load">
+<ng-container *ngIf="!loading; else Load">
   <div class="category">
     <h1 class="category-name">{{categoryName}} в Дзержинске <span class="category-count">{{places.length}}</span></h1>
   </div>

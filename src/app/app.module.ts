@@ -16,6 +16,7 @@ import { MainLayoutComponent } from './shared/components/layout/main-layout.comp
 import { CarouselComponent } from './shared/components/carousel/carousel.component';
 import { ReviewsDialogModule } from './shared/components/reviews-dialog/reviews-dialog.module';
 import { LoaderModule } from './shared/components/loader/loader.module';
+import { RatingModule } from './shared/components/rating/rating.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { LoaderModule } from './shared/components/loader/loader.module';
     HttpClientModule,
     ListPageModule,
     ReviewsDialogModule,
-    LoaderModule
+    LoaderModule,
+    RatingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

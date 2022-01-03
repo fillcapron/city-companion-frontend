@@ -20,14 +20,15 @@ export class ListPageComponent implements OnInit {
 
   @ViewChildren("cardPlace", { read: ElementRef })
   cardPlaceList!: QueryList<ElementRef>;
-
+  loading: boolean = true;
   categoryName: string = '';
   places: Place[] = [];
   copyPlaces: Place[] = [];
-  map!: ymaps.Map;
+
   selected = '';
   search = '';
 
+  map!: ymaps.Map;
   mapState: ymaps.IMapState = {
     type: 'yandex#map',
     zoom: 12,
@@ -94,6 +95,7 @@ export class ListPageComponent implements OnInit {
       this.places = places;
       this.copyPlaces = places.slice();
       this.titleService.setTitle(this.categoryName);
+      this.loading = false;
     });
   }
 }

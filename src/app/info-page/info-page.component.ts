@@ -22,6 +22,7 @@ export class InfoPageComponent implements OnInit, OnDestroy {
   selectedTab: number = 0;
   author_name!: string
   review_text!: string;
+  rating_place!: number;
   @ViewChild('tabs') tabGroup!: MatTabGroup;
   mapState: ymaps.IMapState = {
     type: 'yandex#map',
@@ -74,11 +75,13 @@ export class InfoPageComponent implements OnInit, OnDestroy {
     const review = {
       review_text: this.review_text,
       author_name: this.author_name,
-      place: this.place.id
+      place: this.place.id,
+      rating_place: this.rating_place
     }
     if (this.review_text && this.author_name) {
       this.serviceReviews.create(review).subscribe(review => this.reviews.push(review.meta));
       this.review_text = '';
+      this.rating_place = 0;
     }
   }
 
