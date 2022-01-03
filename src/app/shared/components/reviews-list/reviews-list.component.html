@@ -2,6 +2,7 @@
   <mat-list-item role="listitem" *ngFor="let review of pagedList" class="mat-list-item-word-wrap reviews-list">
     <h4 mat-line>
       <b>{{review.author_name}}</b>
+      <rating [countStars]="5" [value]="review.rating_place" [disabled]=true color="gold" [count]=false [sizeIcons]="0.6"></rating>
     </h4>
     <p mat-line>{{review.review_text}}</p>
   </mat-list-item>

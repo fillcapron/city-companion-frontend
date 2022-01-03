@@ -52,6 +52,7 @@ export interface Reviews {
     id?: number,
     author_name: string,
     review_text: string,
+    rating_place: number,
     place: number
 }
 

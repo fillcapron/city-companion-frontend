@@ -1,5 +1,5 @@
 <div class="rating" [class.noHover]="disabled">
-    <span>({{value}})</span>
+    <span *ngIf="count">({{value}})</span>
     <ng-container *ngFor="let elem of Array(countStars).fill(null); let i = index">
         <button mat-icon-button [style]="getStyle()" (click)="onClick(i)" class="icon-button">
             <mat-icon>{{getIcon(i)}}</mat-icon>

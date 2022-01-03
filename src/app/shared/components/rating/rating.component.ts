@@ -23,6 +23,7 @@ export class RatingComponent implements ControlValueAccessor{
     Array = Array;
 
     @Input() color!: string;
+    @Input() count: boolean = true;
     @Input() disabled!: boolean;
     @Input() countStars!: number;
     @Input() sizeIcons: number = 0.7;
