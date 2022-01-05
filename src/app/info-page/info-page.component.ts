@@ -86,8 +86,6 @@ export class InfoPageComponent implements OnInit, OnDestroy {
     }
   }
 
-
-
   goBack(): void {
     this.location.back();
   }

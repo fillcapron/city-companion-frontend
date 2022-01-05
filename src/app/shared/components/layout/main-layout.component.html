@@ -2,15 +2,20 @@
   <div class="toolbar_nav content">
     <div>
     <a routerLink="" routerLinkActive="active"><button mat-button>Главная</button></a>
-    <button mat-button [matMenuTriggerFor]="belowMenu">Категории</button>
-    <mat-menu #belowMenu="matMenu" yPosition="below">
+    <button mat-button id="modal" (click)="onShowCategories()">Категории</button>
+    <!-- <mat-menu #belowMenu="matMenu" yPosition="below">
       <button mat-menu-item><a routerLink="/info">Категория 1</a></button>
       <button mat-menu-item><a routerLink="/admin">Админка</a></button>
-    </mat-menu>
+    </mat-menu> -->
     </div>
     <div><a routerLink="" routerLinkActive="active"><button mat-button>Войти</button></a></div>
   </div>
 </mat-toolbar>
+<div *ngIf="showCategoriesList" id="modal" class="modal" (click)="onCloseModal($event)">
+  <div class="block content">
+    <mat-card><ul class="categories"><li *ngFor="let category of categories"><a (click)="goCategories(category.name)">{{category.name}}</a></li></ul></mat-card>
+  </div>
+</div>
 <router-outlet></router-outlet>
 <div class="content footer">
   <mat-divider></mat-divider>
