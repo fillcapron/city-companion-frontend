@@ -31,7 +31,7 @@
           </mat-card-header>
           <mat-card-content>
             <div class="info-block">
-              <div>Рейтинг:</div>
+              <div class="rating"><rating [countStars]="5" [value]="place.rating!" [disabled]=true color="gold" [sizeIcons]="0.7" [count]=false></rating></div>
               <button class="reviews" (click)="openReviews(place)">{{place?.reviews?.length! ? place?.reviews?.length! : 'Нет'}} <span plural [variants]="['отзыв', 'отзыва', 'отзывов']"
                   [value]="place?.reviews?.length!"></span></button>
             </div>

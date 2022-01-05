@@ -1,12 +1,11 @@
 import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { MatTabGroup } from '@angular/material/tabs';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { YaReadyEvent } from 'angular8-yandex-maps';
 import { switchMap } from 'rxjs/operators';
-import { Address, Place, PlacemarkConstructor, Reviews } from '../shared/interface';
+import { Place, PlacemarkConstructor, Reviews } from '../shared/interface';
 import { PlaceService } from '../shared/services/places.service';
 import { ReviewsService } from '../shared/services/reviews.service';
 import { setPlaceMarks } from '../shared/utils';
@@ -79,13 +78,15 @@ export class InfoPageComponent implements OnInit, OnDestroy {
       rating_place: this.rating_place
     }
     if (this.review_text && this.author_name) {
-      this.serviceReviews.create(review).subscribe(review => this.reviews.push(review.meta));
+      this.serviceReviews.create(review).subscribe(review => {
+        this.reviews = [...this.reviews, ...[review.meta]];
+      });
       this.review_text = '';
       this.rating_place = 0;
     }
   }
 
-  
+
 
   goBack(): void {
     this.location.back();

@@ -1,13 +1,14 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from "@angular/core";
 import { PageEvent } from "@angular/material/paginator";
 import { Reviews } from "../../interface";
 
 @Component({
     selector: 'reviews-list',
     templateUrl: './reviews-list.component.html',
-    styleUrls: ['./reviews-list.component.scss']
+    styleUrls: ['./reviews-list.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReviewsListComponent implements OnInit {
+export class ReviewsListComponent {
 
     length: number = 0;
     pagedList: Reviews[] = [];
@@ -15,10 +16,9 @@ export class ReviewsListComponent implements OnInit {
     pageEvent!: PageEvent;
     pageSizeOptions: number[] = [5, 10, 15];
     reviews: Reviews[] = [];
-    @Input() reviewsArray!: Reviews[];
-
-    ngOnInit(): void {
-        this.reviews = this.reviewsArray;
+    @Input()
+    set reviewsArray(reviews: Reviews[]) {
+        this.reviews = reviews;
         this.pagedList = this.reviews.slice(0, this.pageSize);
         this.length = this.reviews.length;
     }
@@ -29,7 +29,7 @@ export class ReviewsListComponent implements OnInit {
         if (endIndex > this.length) {
             endIndex = this.length;
         }
-        this.pagedList = this.reviewsArray.slice(startIndex, endIndex);
+        this.pagedList = this.reviews.slice(startIndex, endIndex);
         return this.pageEvent;
     }
 }

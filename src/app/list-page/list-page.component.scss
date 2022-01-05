@@ -59,6 +59,9 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+  & .rating {
+    max-width: 100px;
+  }
   & .reviews {
     color: #009cf0;
     cursor: pointer;

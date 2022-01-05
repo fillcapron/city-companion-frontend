@@ -6,6 +6,7 @@ import { AngularYandexMapsModule } from 'angular8-yandex-maps';
 import { PluralDirective } from '../shared/directives/plural.directive';
 import { FilterPipe } from '../shared/pipes/filter.pipe';
 import { FormsModule } from '@angular/forms';
+import { RatingModule } from '../shared/components/rating/rating.module';
 @NgModule({
   declarations: [
     ListPageComponent,
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     MaterialModule,
     AngularYandexMapsModule,
-    FormsModule  
+    FormsModule,
+    RatingModule  
   ]
 })
 export class ListPageModule { }

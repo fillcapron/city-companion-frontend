@@ -19,7 +19,7 @@ export interface RatingChange {
     providers: [RATING_VALUE_ACCESSOR],
     styleUrls: ['./rating.component.scss']
 })
-export class RatingComponent implements ControlValueAccessor{
+export class RatingComponent implements ControlValueAccessor {
     Array = Array;
 
     @Input() color!: string;
@@ -34,7 +34,7 @@ export class RatingComponent implements ControlValueAccessor{
         }
         return this._value;
     }
-    set value(num: number | null) {
+    set value(num: number | null | undefined) {
         if (num !== this._value) {
             let value = coerceNumberProperty(num);
 
@@ -92,7 +92,7 @@ export class RatingComponent implements ControlValueAccessor{
         return 'star_border';
     }
 
-    getStyle(){
+    getStyle() {
         const styles = {
             'transform': this.sizeIcons ? `scale(${this.sizeIcons})` : '',
             'color': this.color ? this.color : '#c2c2c2'
