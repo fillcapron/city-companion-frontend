@@ -10,10 +10,10 @@ import { AdminLayoutComponent } from './shared/components/layout/admin-layout.co
 import { AuthGuard } from './shared/guards/auth.guard';
 
 const childRoutes: Routes = [
-    { path: 'categories', component: TableGeneratedColumnsCategories },
-    { path: 'users', component: TableGeneratedColumnsUsers },
-    { path: 'places', component: TableGeneratedColumnsPlaces },
-    { path: 'address', component: TableGeneratedColumnsAddress }
+    { path: 'Категории', component: TableGeneratedColumnsCategories },
+    { path: 'Пользователи', component: TableGeneratedColumnsUsers },
+    { path: 'Места', component: TableGeneratedColumnsPlaces },
+    { path: 'Адреса', component: TableGeneratedColumnsAddress }
 ];
 
 const adminRoutes: Routes = [{

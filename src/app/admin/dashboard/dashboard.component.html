@@ -3,6 +3,20 @@
     <app-menu-list [menu]="menu"></app-menu-list>
   </mat-sidenav>
   <mat-sidenav-content class="container">
+    <ng-container *ngIf="hide">
+      <div class="info">
+        <div class="welcome">Добро пожаловать, <b>{{userName}}</b>!</div>
+        <div class="info_block">
+          <a *ngFor="let cat of totals" routerLink={{cat.name}}>
+          <mat-card class="category_card">
+            <mat-icon>{{cat.icon}}</mat-icon>
+            {{cat.name}}
+            <div class="total"> Всего: {{cat.total}}</div>
+          </mat-card>
+        </a>
+        </div>
+      </div>
+    </ng-container>
     <router-outlet>
     </router-outlet>
   </mat-sidenav-content>

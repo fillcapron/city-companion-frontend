@@ -3,7 +3,7 @@ import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 import { AUTH_API_URL } from "../../admin-injection-tokens";
-import { ApiResponse, AuthToken, User } from "../interface";
+import { AuthToken, User } from "../interface";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Router } from "@angular/router";
 
@@ -25,6 +25,7 @@ export class AuthService {
             tap(auth => {
                 if(auth.token){
                     localStorage.setItem(ACCESS_TOKEN_KEY, auth.token);
+                    localStorage.setItem('profile', auth.name);
                     return;
                 }
                 return auth.message;
@@ -44,6 +45,7 @@ export class AuthService {
 
     logout(): void {
         localStorage.removeItem(ACCESS_TOKEN_KEY);
+        localStorage.removeItem('profile');
         this.router.navigate(['/admin', 'login']);
     }
 }

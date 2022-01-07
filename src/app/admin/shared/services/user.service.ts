@@ -26,4 +26,8 @@ export class UserService {
     updateUser(user: User): Observable<ApiResponse> {
         return this.http.patch<ApiResponse>(this.url, user);
     }
+
+    totalUsers(): Observable<{users: number}> {
+        return this.http.get<{users: number}>(this.url + 'total/all');
+    }
 }

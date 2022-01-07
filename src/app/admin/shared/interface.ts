@@ -9,6 +9,7 @@ export interface User {
 
 export interface AuthToken {
     token: string,
+    name: string;
     message?: string
 }
 

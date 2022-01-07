@@ -27,4 +27,8 @@ export class CategoryService {
     updateCategory(dto: Categories): Observable<ApiResponse> {
         return this.http.patch<ApiResponse>(this.url, dto);
     }
+
+    totalCategories(): Observable<{categories: number}> {
+        return this.http.get<{categories: number}>(this.url + 'total/all');
+    }
 }

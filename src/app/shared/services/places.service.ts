@@ -47,4 +47,8 @@ export class PlaceService {
     popularPlaces(): Observable<Place[]> {
         return this.http.get<Place[]>(this.url + 'popular/all');
     }
+
+    totalPlaces(): Observable<{places: number}>{
+        return this.http.get<{places: number}>(this.url + 'total/all');
+    }
 }

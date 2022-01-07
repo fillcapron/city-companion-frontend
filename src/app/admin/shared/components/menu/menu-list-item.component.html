@@ -3,7 +3,6 @@
         <a mat-list-item
         *ngFor="let item of menu"
          [routerLink]="item.route"
-         routerLinkActive="active"
          >
            <mat-icon class="routeIcon">{{item.icon}}</mat-icon>
            <span class="nav-menu__text">{{item.name}}</span>

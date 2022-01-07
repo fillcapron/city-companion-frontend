@@ -31,4 +31,8 @@ export class AddressService {
     updateAddress(address: Address): Observable<ApiResponse>{
         return this.http.patch<ApiResponse>(this.url, address);
     }
+
+    totalAddress(): Observable<{address: number}>{
+        return this.http.get<{address: number}>(this.url + 'total/all');
+    }
 }
