@@ -91,7 +91,7 @@ export class ListPageComponent implements OnInit {
       tap((category) => this.categoryName = category.name),
       switchMap(param => this.placeService.getPlacesByCategory(param.name))
     ).subscribe(places => {
-      places.map(elem => this.placemarks.push(setPlaceMarks(elem, true)));
+      places.forEach(place => this.placemarks.push(setPlaceMarks(place, true)));
       this.places = places;
       this.copyPlaces = places.slice();
       this.titleService.setTitle(this.categoryName);

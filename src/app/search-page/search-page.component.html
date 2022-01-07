@@ -1,0 +1,33 @@
+<div class="search-result content">
+  <h1>Результат поиска по запросу «{{query}}» в Дзержинске</h1>
+  <ng-container *ngIf="categories.length">
+    <div class="categories">
+    <b>Найденные категории:</b>
+    <div class="categories_name">
+    <a *ngFor="let category of categories" (click)="onClick('/categories', category.name)"><q>{{category?.name}}</q></a>
+  </div>
+  </div>
+  </ng-container>
+
+  <div class="places">
+  <mat-card *ngFor="let place of places" class="card" (click)="onClick('/place', place.name)">
+    <ng-container *ngIf="place.images">
+      <img mat-card-image src={{place.images[0].url}}>
+    </ng-container>
+    <mat-card-header>
+    <mat-card-title>
+      {{place?.name}}
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{place.address?.city}}, {{place.address?.street}}, {{place.address?.house}}
+    </mat-card-subtitle>
+  </mat-card-header>
+    <mat-card-content>
+      {{place?.description}}
+    </mat-card-content>
+  </mat-card>
+</div>
+  <ng-container *ngIf="!categories.length || !places.length">
+    Ничего не найдено
+  </ng-container>
+</div>

@@ -9,7 +9,7 @@ import { CategoryService } from "../../services/category.service";
     styleUrls: ['./main-layout.component.scss']
 })
 export class MainLayoutComponent implements OnInit {
-    
+
     categories!: Categories[];
     showCategoriesList: boolean = false;
     constructor(private categoryService: CategoryService, private router: Router) { }
@@ -25,8 +25,7 @@ export class MainLayoutComponent implements OnInit {
     }
 
     onCloseModal(e: any): void {
-        console.log('click')
-        if(e.target.id === 'modal'){
+        if (e.target.id === 'modal') {
             this.showCategoriesList = !this.showCategoriesList;
         }
     }

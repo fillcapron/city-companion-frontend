@@ -20,7 +20,7 @@ export class PlaceService {
         return this.http.get<Place[]>(this.url);
     }
 
-    getPlace(id: number): Observable<Place> {
+    getPlace(id: string): Observable<Place> {
         return this.http.get<Place>(this.url + id);
     }
 

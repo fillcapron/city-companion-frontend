@@ -1,0 +1,39 @@
+.search-result {
+    & h1 {
+        margin-top: 20px;
+        font-weight: 500;
+    }
+
+    & .categories {
+        display: flex;
+        margin-bottom: 30px;
+        flex-direction: column;
+
+        &_name {
+            margin: 10px;
+            font-size: 16px;
+            color: gray;
+
+            &:hover {
+                color: brown;
+                cursor: pointer;
+            }
+        }
+    }
+
+    & .places {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        & .card {
+            flex-basis: 21%;
+            &:hover {
+                outline: 3px solid gold;
+            }
+        }
+        @media (max-width: 450px) {
+            flex-direction: column;
+        }
+    }
+}

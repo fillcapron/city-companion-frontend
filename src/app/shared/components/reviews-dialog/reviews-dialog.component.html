@@ -1,5 +1,6 @@
 <h1 mat-dialog-title>Отзывы "{{name | slice: 0:50}}"</h1>
-<reviews-list [reviewsArray]="reviews"></reviews-list>
+<mat-dialog-content><reviews-list [reviewsArray]="reviews"></reviews-list></mat-dialog-content>
+
 <div mat-dialog-actions>
   <button mat-button [mat-dialog-close]="" cdkFocusInitial>Ok</button>
 </div>

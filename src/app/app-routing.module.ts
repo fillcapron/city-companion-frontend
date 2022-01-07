@@ -4,6 +4,7 @@ import { MainComponent } from './main/main.component';
 import { InfoPageComponent } from './info-page/info-page.component';
 import { ListPageComponent } from './list-page/list-page.component';
 import { MainLayoutComponent } from './shared/components/layout/main-layout.component';
+import { SearchPageComponent } from './search-page/search-page.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,7 @@ const routes: Routes = [
       { path: '', component: MainComponent },
       { path: 'place/:id', component: InfoPageComponent },
       { path: 'categories/:name', component: ListPageComponent },
+      { path: 'search/:name', component: SearchPageComponent},
       { path: '**', redirectTo: '/' }
     ]
   },

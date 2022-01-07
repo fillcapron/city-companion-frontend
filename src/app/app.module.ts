@@ -18,6 +18,7 @@ import { ReviewsDialogModule } from './shared/components/reviews-dialog/reviews-
 import { LoaderModule } from './shared/components/loader/loader.module';
 import { RatingModule } from './shared/components/rating/rating.module';
 import { ReviewsListModule } from './shared/components/reviews-list/reviews-list.module';
+import { SearchPageModule } from './search-page/search-page.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ReviewsListModule } from './shared/components/reviews-list/reviews-list
     AngularYandexMapsModule,
     HttpClientModule,
     ListPageModule,
+    SearchPageModule,
     ReviewsDialogModule,
     LoaderModule,
     RatingModule,

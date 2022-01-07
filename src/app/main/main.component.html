@@ -14,7 +14,7 @@
         </mat-autocomplete>
         <mat-hint align="start"><strong>Например:</strong> Кинотеатры в Дзержинске</mat-hint>
       </mat-form-field>
-      <button mat-raised-button color="warn" class="search-button">Найти</button>
+      <button mat-raised-button color="warn" class="search-button" [routerLink]="['/search', input]">Найти</button>
     </div>
   </div>
   <div class="categories-block">
